@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MCF8316A1VRGFR
+D Motor / Motion / Ignition Controllers & Drivers 40-V max, 8-A peak, sensorless FOC control 3-phase BLDC motor driver
+K
+F https://www.ti.com/jp/lit/gpn/mcf8316a
+$ENDCMP
+#
+#End Doc Library
