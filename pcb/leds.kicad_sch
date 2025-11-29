@@ -1,0 +1,7834 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "60163077-be64-46e6-b0a7-41bdbc72cd82")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Connector:Conn_01x03_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x03_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:Conn_01x03_Socket"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03_Socket"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x03_Socket_1_1"
+				(polyline
+					(pts
+						(xy -1.27 2.54) (xy -0.508 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy -0.508 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy -0.508 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 2.032)
+					(mid -0.5058 2.54)
+					(end 0 3.048)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -0.508)
+					(mid -0.5058 0)
+					(end 0 0.508)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -3.048)
+					(mid -0.5058 -2.54)
+					(end 0 -2.032)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C_Small"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.254 1.778 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C_Small"
+				(at 0.254 -2.032 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Unpolarized capacitor, small symbol"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "capacitor cap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_Small_0_1"
+				(polyline
+					(pts
+						(xy -1.524 0.508) (xy 1.524 0.508)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 -0.508) (xy 1.524 -0.508)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_Small_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Logic_LevelTranslator:SN74LVC1T45DBV"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -6.35 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SN74LVC1T45DBV"
+				(at 3.81 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74lvc1t45.pdf"
+				(at -22.86 -16.51 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Single-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs, SOT-23-6"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Level-Shifter CMOS-TTL-Translation"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SN74LVC1T45DBV_0_1"
+				(rectangle
+					(start -7.62 7.62)
+					(end 7.62 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 0) (xy -2.54 1.016) (xy -0.762 1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 0) (xy -0.762 2.032) (xy 1.016 1.016) (xy -0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 -1.016) (xy -2.54 -1.016) (xy -2.54 0) (xy -4.572 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 1.016) (xy 2.794 1.016) (xy 2.794 0) (xy 4.064 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 1.016 -1.778) (xy 1.016 -2.032) (xy -0.762 -1.016) (xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 0) (xy 2.794 -1.016) (xy 1.016 -1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SN74LVC1T45DBV_1_1"
+				(pin bidirectional line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "DIR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 10.16 270)
+					(length 2.54)
+					(name "VCCA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 2.54 10.16 270)
+					(length 2.54)
+					(name "VCCB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "XL_WS2812B_1615:WS2812B"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 5.08 5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right bottom)
+				)
+			)
+			(property "Value" "WS2812B"
+				(at 1.27 -5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+				)
+			)
+			(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+				(at 1.27 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+				(at 2.54 -9.525 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Description" "RGB LED with integrated controller"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "RGB LED NeoPixel addressable"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "WS2812B_0_0"
+				(text "RGB"
+					(at 2.286 -4.191 0)
+					(effects
+						(font
+							(size 0.762 0.762)
+						)
+					)
+				)
+			)
+			(symbol "WS2812B_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 1.778 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -3.556) (xy 1.778 -3.556)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.286 -1.524) (xy 1.27 -2.54) (xy 1.27 -2.032)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.286 -2.54) (xy 1.27 -3.556) (xy 1.27 -3.048)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.683 -1.016) (xy 3.683 -3.556) (xy 3.683 -4.064)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.699 -1.524) (xy 2.667 -1.524) (xy 3.683 -3.556) (xy 4.699 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.699 -3.556) (xy 2.667 -3.556)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "WS2812B_1_1"
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "DIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "DOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GND"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(junction
+		(at 125.73 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "00bdb2c8-5ec6-4b23-8a48-34e138f1dc58")
+	)
+	(junction
+		(at 140.97 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0130157b-6594-47d8-9e2a-04ab465a146d")
+	)
+	(junction
+		(at 156.21 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0322e006-dd5c-4e3c-a3be-f378aebf3ca8")
+	)
+	(junction
+		(at 247.65 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0d6f0d77-faeb-4b02-9c0d-633459f23120")
+	)
+	(junction
+		(at 201.93 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0e2c38d3-c0e1-4deb-a748-295fe980c489")
+	)
+	(junction
+		(at 85.09 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "11f0caff-adb6-45fb-899d-2d22d4ccafc0")
+	)
+	(junction
+		(at 125.73 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1533acc3-793c-4e01-a5ff-c13df611ac47")
+	)
+	(junction
+		(at 247.65 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "179d1d3d-ee92-4757-8f66-f96e6048c49b")
+	)
+	(junction
+		(at 201.93 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1df0353e-9350-4b70-9634-f3e70238d8a9")
+	)
+	(junction
+		(at 140.97 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1e97e647-9346-4663-adc2-9e800410f3d0")
+	)
+	(junction
+		(at 186.69 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "218217a6-c425-4493-a4cb-fed3d9ccbb5d")
+	)
+	(junction
+		(at 201.93 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "24c3ee65-c535-4271-a729-5a99717dfa74")
+	)
+	(junction
+		(at 95.25 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "26ee4d5f-3954-4bc6-844e-16bacbfebac9")
+	)
+	(junction
+		(at 156.21 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2855c4d1-29de-4f7f-94a3-2c7b0d5faff2")
+	)
+	(junction
+		(at 232.41 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "328fb3ce-c2d0-4d87-9801-d75163d01fc2")
+	)
+	(junction
+		(at 54.61 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "33808ab6-1528-4fcb-9784-a78ce1976273")
+	)
+	(junction
+		(at 217.17 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3ce80aa7-6cab-4145-9bb0-2f34afc59185")
+	)
+	(junction
+		(at 54.61 31.75)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "40b090d1-679a-4844-8107-6698b3661ab8")
+	)
+	(junction
+		(at 232.41 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "411ecf33-c48c-4eb5-8a94-50cb1d24e778")
+	)
+	(junction
+		(at 110.49 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "427ffeb7-7f64-4447-8f11-7b6f02782bef")
+	)
+	(junction
+		(at 201.93 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "461e4c17-0eb4-45a8-bb34-5f867aa2cb16")
+	)
+	(junction
+		(at 110.49 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4a635b2f-c2fb-4893-9bde-5acdd261a17c")
+	)
+	(junction
+		(at 156.21 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4b58ebc1-95f8-48a0-bb4e-c6c938acc978")
+	)
+	(junction
+		(at 95.25 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4dc7d0d0-3631-48ec-b327-46d12bc0de66")
+	)
+	(junction
+		(at 110.49 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4eed2df7-d6a6-48e0-87ff-61a86ba7ec84")
+	)
+	(junction
+		(at 156.21 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ef5daaf-e797-4bd0-97a9-1a496e3814a3")
+	)
+	(junction
+		(at 140.97 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "51369117-0f6c-4629-9570-ff4c32e9f201")
+	)
+	(junction
+		(at 171.45 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5956b27e-9a99-4b4c-928a-eebecc7b117d")
+	)
+	(junction
+		(at 247.65 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5ce651a0-9a69-4936-92a7-c428fdb30697")
+	)
+	(junction
+		(at 217.17 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5ff437c0-d4e1-4f85-92c9-95b1f52f038d")
+	)
+	(junction
+		(at 217.17 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6088318a-0fb4-4041-af06-0af6290dfe20")
+	)
+	(junction
+		(at 140.97 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "67ad5d3e-3c45-4d84-bd94-42deb55c58cd")
+	)
+	(junction
+		(at 186.69 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6d1cf631-03e5-489d-bfd2-64ba0529e0af")
+	)
+	(junction
+		(at 43.18 31.75)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "713e16f1-ea6b-44d8-af76-7ccaf13ca7eb")
+	)
+	(junction
+		(at 186.69 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "717c64ec-9287-443e-8c07-2e28f87c67cc")
+	)
+	(junction
+		(at 125.73 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7204e34d-c4ea-478a-9f4d-1bd032a905ad")
+	)
+	(junction
+		(at 54.61 26.67)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "72280cac-d104-4581-8b29-7d4a70bf95ed")
+	)
+	(junction
+		(at 201.93 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "76a06a8c-f330-4ad1-8231-fb1fb02e55d9")
+	)
+	(junction
+		(at 110.49 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7cfa5311-0be7-44fa-b3cf-d6e724c13e86")
+	)
+	(junction
+		(at 262.89 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8511dbd9-a6d1-4b3e-82d1-59195b5c3177")
+	)
+	(junction
+		(at 232.41 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "85dea543-507d-45d6-b5ad-42cc77121276")
+	)
+	(junction
+		(at 125.73 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "88255886-6993-421f-bfbc-06aba58f765e")
+	)
+	(junction
+		(at 171.45 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8bf42355-68c0-4a3c-850f-16931c88d4f5")
+	)
+	(junction
+		(at 156.21 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8cfab654-b874-4c9d-82f1-6effe36faf2b")
+	)
+	(junction
+		(at 217.17 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8d30ded7-82c9-44b2-936c-8ae289590bee")
+	)
+	(junction
+		(at 232.41 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8db09334-2ebc-44a5-b0f7-cbb98f7dc377")
+	)
+	(junction
+		(at 186.69 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9ce08072-3339-44a3-afb3-8397f0e2e89b")
+	)
+	(junction
+		(at 43.18 26.67)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9e3411cf-8e2f-446e-b555-d1db6f856136")
+	)
+	(junction
+		(at 217.17 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a08a4593-7188-4fcd-a4d8-41b824391472")
+	)
+	(junction
+		(at 110.49 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a6a98e9e-d0bd-46f2-a1c5-6e1e38e2a28d")
+	)
+	(junction
+		(at 232.41 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a6be5894-d9d6-4d96-8090-0b1ea921a11d")
+	)
+	(junction
+		(at 140.97 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "acecf7b7-41bf-48ac-babe-d3e3df7b3660")
+	)
+	(junction
+		(at 201.93 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b26c29e4-a854-4eff-ac49-6b17270ca1bd")
+	)
+	(junction
+		(at 125.73 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b46bf9d0-8fd2-4870-bc8d-cc5f74674e36")
+	)
+	(junction
+		(at 247.65 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b58f0bd5-f6f4-4ccd-af82-918b06dac549")
+	)
+	(junction
+		(at 262.89 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bbc68023-1d99-41e2-959c-fc421137a726")
+	)
+	(junction
+		(at 171.45 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc988e37-9195-496a-9846-315858de02bb")
+	)
+	(junction
+		(at 43.18 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c35552e5-0f2a-4265-a961-c70a01acdf47")
+	)
+	(junction
+		(at 110.49 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cb51b40c-53cf-4d02-b3bb-15a5f5d310de")
+	)
+	(junction
+		(at 247.65 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ce738f29-1ce7-456b-a9cd-eac5bec57663")
+	)
+	(junction
+		(at 262.89 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cfc46e43-6eb1-4833-a9e7-ea61aef4fed3")
+	)
+	(junction
+		(at 125.73 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dd874983-99f8-496d-9941-9db0d43aeca1")
+	)
+	(junction
+		(at 140.97 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e5e4ce42-376d-4dfd-b2cb-0ad3c58de35f")
+	)
+	(junction
+		(at 171.45 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e870ae79-8e40-4baa-8f48-a1f87ffd2e32")
+	)
+	(junction
+		(at 247.65 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee157333-bad4-4534-955b-51cd1f4e4c00")
+	)
+	(junction
+		(at 186.69 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee85263b-de42-4a26-8d4a-773780558d92")
+	)
+	(junction
+		(at 232.41 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "efcf8899-9cf4-49d3-b909-36eb9bbd6fcb")
+	)
+	(junction
+		(at 186.69 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f1317b0d-1d86-4e86-8931-9254f73666af")
+	)
+	(junction
+		(at 83.82 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f1c0a8ba-f772-4128-be83-0ddd0ed5aa0c")
+	)
+	(junction
+		(at 171.45 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f1f6f330-cd4e-4105-869c-d65a4909b9aa")
+	)
+	(junction
+		(at 95.25 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f6eb0544-7371-4097-9374-183323f2bb16")
+	)
+	(junction
+		(at 95.25 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f7092838-8c63-4efe-aeda-e9eff0d5cc5a")
+	)
+	(junction
+		(at 171.45 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fbcb55bf-e316-4365-b858-ce9805bcd018")
+	)
+	(junction
+		(at 156.21 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fcb5b416-9029-43e0-991e-aa6a27a2a3f7")
+	)
+	(junction
+		(at 217.17 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fd035d85-c5e1-463c-959f-d22e57ce8471")
+	)
+	(junction
+		(at 262.89 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fdfc1d74-cdb0-4177-961c-53724541d9d9")
+	)
+	(wire
+		(pts
+			(xy 54.61 29.21) (xy 85.09 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00d1aef1-5eaf-451a-bb7e-a5c2264ddae5")
+	)
+	(wire
+		(pts
+			(xy 217.17 74.93) (xy 232.41 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0365c57e-0c5d-4973-9afd-31848a4c2671")
+	)
+	(wire
+		(pts
+			(xy 156.21 74.93) (xy 171.45 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03a119f5-b342-4c64-9c44-60ba28eacf17")
+	)
+	(wire
+		(pts
+			(xy 140.97 90.17) (xy 156.21 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03f14ac3-b805-466b-8fae-89590c5f3b29")
+	)
+	(wire
+		(pts
+			(xy 201.93 63.5) (xy 217.17 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0598881a-d100-4b4f-895c-aa221ab85a69")
+	)
+	(wire
+		(pts
+			(xy 83.82 36.83) (xy 95.25 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "108dd2f3-f602-4295-9262-78dc48242b55")
+	)
+	(wire
+		(pts
+			(xy 140.97 36.83) (xy 156.21 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "117e8a0d-a52a-47ec-b5e6-f64e966ba6ba")
+	)
+	(wire
+		(pts
+			(xy 156.21 48.26) (xy 171.45 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "168ade93-4121-41fd-9961-8a5b4150aec2")
+	)
+	(wire
+		(pts
+			(xy 31.75 52.07) (xy 31.75 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1811289d-31c7-44c0-a7e5-9e6b519e295d")
+	)
+	(wire
+		(pts
+			(xy 110.49 48.26) (xy 125.73 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "188a669b-04d1-423b-86eb-1a5bdcfdb9be")
+	)
+	(wire
+		(pts
+			(xy 201.93 74.93) (xy 217.17 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bf4242f-2b5b-4d09-b44e-9aa5fc98c76b")
+	)
+	(wire
+		(pts
+			(xy 36.83 52.07) (xy 36.83 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21a1ed09-2550-4474-b7f3-92a84a5a5b7e")
+	)
+	(wire
+		(pts
+			(xy 262.89 74.93) (xy 274.32 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21cf705a-c881-4bc5-92c6-76da3bf51047")
+	)
+	(wire
+		(pts
+			(xy 54.61 31.75) (xy 81.28 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2299c8ba-1c7e-43b1-88e2-430d76c7e057")
+	)
+	(wire
+		(pts
+			(xy 186.69 90.17) (xy 201.93 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23a75377-0437-431e-9cad-a4c9937403e1")
+	)
+	(wire
+		(pts
+			(xy 54.61 26.67) (xy 69.85 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24504f7d-bff2-403b-ab37-9490cbc6ed0e")
+	)
+	(wire
+		(pts
+			(xy 140.97 48.26) (xy 156.21 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c254e5b-d380-4200-9e6f-cccd672f4476")
+	)
+	(wire
+		(pts
+			(xy 125.73 48.26) (xy 140.97 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30444461-2078-4cf2-a14b-850671f9f1bb")
+	)
+	(wire
+		(pts
+			(xy 247.65 48.26) (xy 262.89 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "324db3a5-ee0e-49de-883a-74f8747ff2f0")
+	)
+	(wire
+		(pts
+			(xy 156.21 21.59) (xy 171.45 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32deea68-cc66-4434-b222-b09e7dd13e21")
+	)
+	(wire
+		(pts
+			(xy 69.85 26.67) (xy 69.85 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36ef9264-426d-4018-88b6-df024c0f4fb6")
+	)
+	(wire
+		(pts
+			(xy 171.45 21.59) (xy 186.69 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36fdda2a-4301-4d7e-886e-036ec5f88ef2")
+	)
+	(wire
+		(pts
+			(xy 85.09 29.21) (xy 87.63 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3885d8fd-8217-4c28-9491-65170a32710c")
+	)
+	(wire
+		(pts
+			(xy 39.37 26.67) (xy 43.18 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "395ad25f-72b4-424c-8ede-6b4be79a2332")
+	)
+	(wire
+		(pts
+			(xy 217.17 36.83) (xy 232.41 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3dab8964-4fb4-4f6e-bbf9-2726a6e58c22")
+	)
+	(wire
+		(pts
+			(xy 69.85 74.93) (xy 95.25 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40352e78-35c2-4b16-bf90-374ad32a6c44")
+	)
+	(wire
+		(pts
+			(xy 24.13 40.64) (xy 20.32 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "418b3030-5021-4bed-9af8-4a4f6b65abda")
+	)
+	(wire
+		(pts
+			(xy 140.97 74.93) (xy 156.21 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41d9f543-22e8-45b6-986f-7a66510c8e1f")
+	)
+	(wire
+		(pts
+			(xy 262.89 90.17) (xy 273.05 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4201ef85-9a24-4a9f-a467-51b370032baa")
+	)
+	(wire
+		(pts
+			(xy 110.49 21.59) (xy 125.73 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "496ff7b1-3eca-4041-890f-cb347786877c")
+	)
+	(wire
+		(pts
+			(xy 186.69 21.59) (xy 201.93 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49745e47-60aa-4913-82fa-2bb035612ed9")
+	)
+	(wire
+		(pts
+			(xy 201.93 48.26) (xy 217.17 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a7ef0c2-b53e-432d-b0ee-657b2036967c")
+	)
+	(wire
+		(pts
+			(xy 110.49 90.17) (xy 125.73 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4bedce2e-2490-46a2-95ea-36bcada89c4f")
+	)
+	(wire
+		(pts
+			(xy 95.25 48.26) (xy 110.49 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5048162f-0d6d-4e1f-8553-33261c3f0e58")
+	)
+	(wire
+		(pts
+			(xy 201.93 36.83) (xy 217.17 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53d4785a-63a7-478f-9c9b-284959257db7")
+	)
+	(wire
+		(pts
+			(xy 232.41 63.5) (xy 247.65 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5564a967-ee38-4639-9524-1332cb080566")
+	)
+	(wire
+		(pts
+			(xy 125.73 63.5) (xy 140.97 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57318c89-b8b7-4273-aad5-82c1bb831357")
+	)
+	(wire
+		(pts
+			(xy 186.69 74.93) (xy 201.93 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f6cf85a-2c04-4e47-b8e9-ba55933cf63e")
+	)
+	(wire
+		(pts
+			(xy 39.37 29.21) (xy 43.18 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f78510c-9b6d-4b53-b635-eea4c31f0430")
+	)
+	(wire
+		(pts
+			(xy 232.41 74.93) (xy 247.65 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66effc92-7e93-4bd0-a3b3-3c973c5037e8")
+	)
+	(wire
+		(pts
+			(xy 69.85 48.26) (xy 95.25 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "675c8dd5-13c7-4f66-9c46-c3e111faf754")
+	)
+	(wire
+		(pts
+			(xy 95.25 90.17) (xy 110.49 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68a77865-f196-4c7e-bd94-89599f4e9f73")
+	)
+	(wire
+		(pts
+			(xy 217.17 63.5) (xy 232.41 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b04a1ca-c4bf-4fdb-8efc-8424c23fb859")
+	)
+	(wire
+		(pts
+			(xy 125.73 36.83) (xy 140.97 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6cf55062-d4a2-4b21-8f31-2f337459c8ca")
+	)
+	(wire
+		(pts
+			(xy 20.32 38.1) (xy 24.13 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d647834-f667-49b6-a4a0-9e5f8a10fdc8")
+	)
+	(wire
+		(pts
+			(xy 232.41 48.26) (xy 247.65 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "756eb766-9dd5-40cb-bd0e-70179640d128")
+	)
+	(wire
+		(pts
+			(xy 125.73 21.59) (xy 140.97 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77a91623-846d-4e28-801d-4affaec6fc56")
+	)
+	(wire
+		(pts
+			(xy 186.69 48.26) (xy 201.93 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77ff42a9-8aac-4e12-bae3-63899059d818")
+	)
+	(wire
+		(pts
+			(xy 171.45 63.5) (xy 186.69 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78082b45-c105-4389-b139-ff6f628dc633")
+	)
+	(wire
+		(pts
+			(xy 95.25 36.83) (xy 110.49 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "796eb61f-6b69-495e-bc11-4ce6a01074db")
+	)
+	(wire
+		(pts
+			(xy 156.21 36.83) (xy 171.45 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a7e354e-56f3-42df-817f-033133abc451")
+	)
+	(wire
+		(pts
+			(xy 171.45 36.83) (xy 186.69 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7de1c5a2-1b91-4880-a7b8-2dccd9626e88")
+	)
+	(wire
+		(pts
+			(xy 44.45 63.5) (xy 48.26 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f189f4d-aa4f-4461-a67b-014cd5d619b8")
+	)
+	(wire
+		(pts
+			(xy 201.93 21.59) (xy 217.17 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f8ff75e-2c79-4062-b484-7106a8b77c34")
+	)
+	(wire
+		(pts
+			(xy 186.69 36.83) (xy 201.93 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ff86537-d4f7-47e4-b877-a0f6c01f2a3c")
+	)
+	(wire
+		(pts
+			(xy 39.37 31.75) (xy 43.18 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80887b8e-0007-4330-b186-456718aefba1")
+	)
+	(wire
+		(pts
+			(xy 43.18 29.21) (xy 54.61 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85ac2788-2b86-4e53-8d4f-718a6800cc64")
+	)
+	(wire
+		(pts
+			(xy 247.65 90.17) (xy 262.89 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a4833da-188e-4483-a2f3-ffc3c42aab2d")
+	)
+	(wire
+		(pts
+			(xy 232.41 90.17) (xy 247.65 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90b59c23-c65b-488f-903b-811513d2b341")
+	)
+	(wire
+		(pts
+			(xy 171.45 90.17) (xy 186.69 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9146a092-d90d-497f-a728-97ce20bd7bc4")
+	)
+	(wire
+		(pts
+			(xy 43.18 26.67) (xy 54.61 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "961629ac-4094-4bb0-81ea-f39a47a0881a")
+	)
+	(wire
+		(pts
+			(xy 43.18 31.75) (xy 54.61 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cacadbc-16e3-4c1f-806e-f3af36eee632")
+	)
+	(wire
+		(pts
+			(xy 201.93 90.17) (xy 217.17 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1438f4f-c9f0-45c2-ba15-27c2b0faa095")
+	)
+	(wire
+		(pts
+			(xy 217.17 48.26) (xy 232.41 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a42db2bf-73c5-4bbc-acf5-67ce20119077")
+	)
+	(wire
+		(pts
+			(xy 156.21 90.17) (xy 171.45 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abef2c3f-a914-4e6a-b81b-88b494f2e03a")
+	)
+	(wire
+		(pts
+			(xy 125.73 90.17) (xy 140.97 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af8e7ecd-9056-4708-8309-5097f6e26327")
+	)
+	(wire
+		(pts
+			(xy 171.45 48.26) (xy 186.69 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1a8e410-ed0c-4c93-a3e4-453f67402261")
+	)
+	(wire
+		(pts
+			(xy 262.89 48.26) (xy 274.32 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4cca974-5c90-4ef6-959a-598c45a4e3b0")
+	)
+	(wire
+		(pts
+			(xy 81.28 31.75) (xy 81.28 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b731d1dc-4240-454f-9ef5-af83d9dea2c3")
+	)
+	(wire
+		(pts
+			(xy 110.49 63.5) (xy 125.73 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7ce349a-f72c-4aba-a7f0-a8c462fd021b")
+	)
+	(wire
+		(pts
+			(xy 110.49 74.93) (xy 125.73 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8e22bbd-b41a-4527-8d6e-8b0a2b7e982f")
+	)
+	(wire
+		(pts
+			(xy 247.65 21.59) (xy 262.89 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b99e0391-fca9-4f02-87de-a45195901b67")
+	)
+	(wire
+		(pts
+			(xy 247.65 36.83) (xy 262.89 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9fecaa6-8a02-4bef-8bb5-4cab5794403a")
+	)
+	(wire
+		(pts
+			(xy 140.97 21.59) (xy 156.21 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bffdfbd0-843e-4d5a-a50e-6eae3a0f1418")
+	)
+	(wire
+		(pts
+			(xy 247.65 63.5) (xy 262.89 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c13e09e6-8079-4535-b8fc-496b0a86fec8")
+	)
+	(wire
+		(pts
+			(xy 217.17 90.17) (xy 232.41 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c63e4fb8-977b-4100-a77e-010c6f0387df")
+	)
+	(wire
+		(pts
+			(xy 21.59 63.5) (xy 24.13 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7761392-bb63-4a0c-904f-b42b1cd0a80d")
+	)
+	(wire
+		(pts
+			(xy 110.49 36.83) (xy 125.73 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c779208b-c005-4adb-8a8f-462b2a352d41")
+	)
+	(wire
+		(pts
+			(xy 95.25 74.93) (xy 110.49 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4f6c21c-9af6-4aa8-95a0-7e04501fcedd")
+	)
+	(wire
+		(pts
+			(xy 232.41 36.83) (xy 247.65 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dae5ed93-6b1a-4cd8-8e2e-d83ed2bd88c5")
+	)
+	(wire
+		(pts
+			(xy 232.41 21.59) (xy 247.65 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ddd328f8-55fd-4b7f-8a5d-39a813bdaec8")
+	)
+	(wire
+		(pts
+			(xy 81.28 36.83) (xy 83.82 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de4647d4-6b21-4aae-bd8f-72b7ea93a1a7")
+	)
+	(wire
+		(pts
+			(xy 140.97 63.5) (xy 156.21 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df258d17-1a6d-4877-86ba-a0063ac33cc9")
+	)
+	(wire
+		(pts
+			(xy 20.32 43.18) (xy 24.13 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e0ce82b2-b051-4c65-82ad-a2413d677cdc")
+	)
+	(wire
+		(pts
+			(xy 262.89 63.5) (xy 273.05 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3bba50c-aca9-420a-8f26-b6cb47ed6f8d")
+	)
+	(wire
+		(pts
+			(xy 186.69 63.5) (xy 201.93 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8fa0362-3e47-4c03-b559-8e6f706674bf")
+	)
+	(wire
+		(pts
+			(xy 171.45 74.93) (xy 186.69 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e916ce48-f8be-4248-a34f-21a5b206d898")
+	)
+	(wire
+		(pts
+			(xy 21.59 68.58) (xy 24.13 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eec06ada-545b-4bbe-b6c3-6ee7eba8d17a")
+	)
+	(wire
+		(pts
+			(xy 125.73 74.93) (xy 140.97 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4096af6-d9c4-4008-9436-f9cb13c7373f")
+	)
+	(wire
+		(pts
+			(xy 69.85 21.59) (xy 95.25 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f415dd0e-f9a5-4451-a99f-439b9bf01f46")
+	)
+	(wire
+		(pts
+			(xy 95.25 21.59) (xy 110.49 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f47bc661-50d2-442f-89ad-5c9020392301")
+	)
+	(wire
+		(pts
+			(xy 95.25 63.5) (xy 110.49 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f592df64-2b55-41ae-b0f2-35dee645828e")
+	)
+	(wire
+		(pts
+			(xy 156.21 63.5) (xy 171.45 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7093972-bcf6-41f3-b53e-6489ce91f737")
+	)
+	(wire
+		(pts
+			(xy 217.17 21.59) (xy 232.41 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f762d9ff-fb78-41cb-9000-66bb13e68982")
+	)
+	(wire
+		(pts
+			(xy 247.65 74.93) (xy 262.89 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9a9cd9c-8929-41d5-b47f-43205991bc25")
+	)
+	(label "DIN"
+		(at 21.59 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1808081e-e259-4996-b482-7824c26a43c2")
+	)
+	(label "LEDEXT_5V"
+		(at 73.66 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2819368e-9a7c-455c-952f-7fd029482ce3")
+	)
+	(label "3V3"
+		(at 24.13 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2da34623-d6e4-4b0a-97ca-615f4af87efe")
+	)
+	(label "O1"
+		(at 270.51 29.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3cf53b88-e04a-41f6-97ba-49c5a7971d74")
+	)
+	(label "LEDEXT_GND"
+		(at 273.05 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "42f16517-4c29-4e24-a150-961309fda867")
+	)
+	(label "LEDEXT_5V"
+		(at 274.32 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4ff92249-3140-4852-afcb-d39d18dfd553")
+	)
+	(label "3V3"
+		(at 21.59 68.58 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5266513a-b426-4da2-a3cf-22f37f4313aa")
+	)
+	(label "LEDEXT_GND"
+		(at 63.5 31.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "54f5ebd7-2ae3-47b8-8ae6-eb78a562c1ad")
+	)
+	(label "5V"
+		(at 39.37 26.67 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6a52c282-a38b-4123-978a-b6cad57c3852")
+	)
+	(label "DIN_5V"
+		(at 48.26 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8665c18e-f12a-45e9-b3aa-39ab2cf331e8")
+	)
+	(label "DIN"
+		(at 24.13 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8aa286da-ebf2-49f0-9f26-cc05fa4a15c9")
+	)
+	(label "O1"
+		(at 87.63 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "92f1b536-ff78-4b2a-8330-42e3c3f84ca2")
+	)
+	(label "DIN_5V"
+		(at 39.37 29.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a25ba23c-d6a8-4ed5-8a78-2ebb65abceff")
+	)
+	(label "3V3"
+		(at 31.75 52.07 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b3ba1c45-cb82-4dd2-a8b8-f2f8d562b0f8")
+	)
+	(label "LEDEXT_5V"
+		(at 274.32 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c116d1a0-82a8-4bb5-9707-dd343b9a1656")
+	)
+	(label "LEDEXT_5V"
+		(at 71.12 48.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c4cf36bb-5885-4227-8f63-17cb930d7b00")
+	)
+	(label "O2"
+		(at 87.63 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c8ea97d2-1e46-47f5-adf6-9da8245377a4")
+	)
+	(label "LEDEXT_GND"
+		(at 273.05 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c9847b46-7d30-4c3e-9721-f4d7707ce018")
+	)
+	(label "5V"
+		(at 24.13 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ccfd5038-260a-4e16-b9a7-0c6e449c416f")
+	)
+	(label "LEDEXT_5V"
+		(at 57.15 26.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cd42a796-ddda-4e68-9f0b-26f3316172ae")
+	)
+	(label "5V"
+		(at 36.83 52.07 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e1d4dfc2-b188-46b9-b764-5b880eed620e")
+	)
+	(label "O2"
+		(at 270.51 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eba627b3-b8fa-485d-bb00-6520e9497b20")
+	)
+	(hierarchical_label "DIN"
+		(shape input)
+		(at 20.32 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7b042203-8a25-4d75-96c3-a0b92d16de24")
+	)
+	(hierarchical_label "5V"
+		(shape input)
+		(at 20.32 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c84cfdaa-04f8-45cc-abcb-3596be45158c")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 20.32 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ef618836-b603-4420-bbf5-0bfbf15dff32")
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 95.25 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "02e61294-43a6-45e8-948b-d6b807616265")
+		(property "Reference" "D13"
+			(at 98.298 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 106.68 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 96.52 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 97.79 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 95.25 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8d8dcd3a-8eb7-48f9-9382-608a8cec5ea8")
+		)
+		(pin "2"
+			(uuid "40bb0495-c61a-4b82-aa83-e0c795427617")
+		)
+		(pin "1"
+			(uuid "669e22b9-da52-411c-9ba1-d36124e38737")
+		)
+		(pin "4"
+			(uuid "8ee9f4c9-62c8-456f-81a9-f6e888162967")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 186.69 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "05f19794-e2ea-45f9-b4fb-6dc2579766e5")
+		(property "Reference" "D7"
+			(at 189.738 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 198.12 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 187.96 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 189.23 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 186.69 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d179e40e-188a-4c84-b51f-2838598d019c")
+		)
+		(pin "2"
+			(uuid "032a4d9e-178c-4452-b7a6-68cd3f027ba5")
+		)
+		(pin "1"
+			(uuid "9b4eb82f-5125-4841-a19f-41a8cdbcecea")
+		)
+		(pin "4"
+			(uuid "a1805392-4feb-4557-89f4-732eabcc0d34")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 95.25 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "096a2601-091d-48eb-9ce1-641b6fe3f4ea")
+		(property "Reference" "D1"
+			(at 98.298 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 106.68 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 96.52 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 97.79 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 95.25 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "201d00b4-2106-4844-b70a-7500857e7aca")
+		)
+		(pin "2"
+			(uuid "aeac97b6-4ff2-4fa4-9c73-71bd6008c948")
+		)
+		(pin "1"
+			(uuid "dd75c55d-6c73-426d-b859-d51df9d34861")
+		)
+		(pin "4"
+			(uuid "d1f14836-c976-48cf-9bb9-b67cd638a7af")
+		)
+		(instances
+			(project ""
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 140.97 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "09b70001-ddee-4923-bb2e-8b9f41541255")
+		(property "Reference" "D28"
+			(at 144.018 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 152.4 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 142.24 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 143.51 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 140.97 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "9bba5953-5d97-4d7e-86d1-a339a85b8436")
+		)
+		(pin "2"
+			(uuid "cb43ab72-4f6a-48a3-b4e1-4372e2f94716")
+		)
+		(pin "1"
+			(uuid "ffcbe6f6-30ed-4e3b-b734-32e9032a1b74")
+		)
+		(pin "4"
+			(uuid "ce7005cf-1e67-4dad-acd7-4d519d4e0fec")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D28")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 232.41 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0af7e6c5-089c-4605-b575-6abccd42a18e")
+		(property "Reference" "D22"
+			(at 235.458 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 243.84 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 233.68 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 234.95 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 232.41 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "2bf66157-a25d-4994-aeeb-19bb78254cff")
+		)
+		(pin "2"
+			(uuid "96f8aa05-ba60-4e9f-91f8-379f121ad73c")
+		)
+		(pin "1"
+			(uuid "bd36fc86-b415-452c-9a82-2aae365cd120")
+		)
+		(pin "4"
+			(uuid "adf5c360-c4ca-4665-b886-6aab9908116c")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 186.69 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0df713b4-b60f-4f67-84fd-7485e6ba36e5")
+		(property "Reference" "C49"
+			(at 189.23 71.1262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 189.23 73.6662 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 186.69 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 186.69 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "730917cb-fb89-43ad-8ad4-22c519dd3716")
+		)
+		(pin "2"
+			(uuid "c8993581-fcbb-496d-9a6d-a24395003cf2")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 140.97 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "12ca756c-9b8d-49bc-aec8-e7bba618ad50")
+		(property "Reference" "C41"
+			(at 143.51 44.4562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 143.51 46.9962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 140.97 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 140.97 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 140.97 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "19e6efe2-33ad-45de-a81f-802c176c8d52")
+		)
+		(pin "2"
+			(uuid "f9fcfdb3-8e7a-42fb-81dd-69437b48177e")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 247.65 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "12fe988f-6595-4956-b259-28b7e8a0bc2e")
+		(property "Reference" "D35"
+			(at 250.698 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 259.08 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 248.92 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 250.19 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 247.65 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "066fb65a-5616-4acc-a030-c2eba6deedfa")
+		)
+		(pin "2"
+			(uuid "5b065236-9752-4e82-a90c-96f395f1b306")
+		)
+		(pin "1"
+			(uuid "3ad803da-4662-4d65-bcb3-0f4fba23ea3c")
+		)
+		(pin "4"
+			(uuid "c49d7a74-89b7-46f1-bbec-2b88a2a82a46")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 95.25 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "139eb018-c915-4ff0-9662-f3f3b4ec7b4f")
+		(property "Reference" "C46"
+			(at 97.79 71.1262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 97.79 73.6662 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 95.25 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 95.25 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 95.25 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "43825f4f-6baf-40a9-9909-25ce32c91633")
+		)
+		(pin "2"
+			(uuid "a29409d5-4ba5-43ea-8a88-5de24811ce64")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C46")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 95.25 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "14961442-016a-4285-9654-d34450763550")
+		(property "Reference" "D25"
+			(at 98.298 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 106.68 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 96.52 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 97.79 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 95.25 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8eb64428-d996-4c9b-b7a4-5f2cf0808235")
+		)
+		(pin "2"
+			(uuid "8a52ebaf-ba24-4276-aa68-f81c22577c9f")
+		)
+		(pin "1"
+			(uuid "fcbe7d99-a076-45b4-b62d-d850ed60a935")
+		)
+		(pin "4"
+			(uuid "f5f8e371-9950-4542-8fdc-f16c9b817bcf")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 140.97 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "166836d7-aff0-49c7-9615-554c7761824a")
+		(property "Reference" "C47"
+			(at 143.51 71.1262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 143.51 73.6662 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 140.97 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 140.97 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 140.97 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5b2a1739-be19-4f0f-a6e4-604bec1e4892")
+		)
+		(pin "2"
+			(uuid "1f0d83cb-237c-4ad6-925b-8c1d7de6fa4c")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C47")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 95.25 69.85 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "223ee54e-bc3e-4cd9-8547-c3f132e1a75c")
+		(property "Reference" "#PWR084"
+			(at 88.9 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 91.44 69.8499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 95.25 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 95.25 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b54ceb3c-b83f-40d6-ac3b-139896d8bd40")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR084")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 85.09 29.21 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2993d5ab-762e-4b2d-84e5-d4d3cd571ee7")
+		(property "Reference" "TP16"
+			(at 86.868 28.448 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 82.55 27.1779 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 80.01 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 80.01 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 85.09 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a699af04-0277-4a2a-85ac-fbfb97042586")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "TP16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 140.97 43.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2a41bc76-5997-4999-83ae-cc1911924904")
+		(property "Reference" "#PWR044"
+			(at 134.62 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 137.16 43.1799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 140.97 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 140.97 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e4d2620f-ea53-4935-bc29-bfcc26036603")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR044")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 217.17 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "31df8bc4-d7f0-437c-91ca-4dccfe5a7e34")
+		(property "Reference" "D21"
+			(at 220.218 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 228.6 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 218.44 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 219.71 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 217.17 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "b438f370-1b62-4420-a890-1851b7f1673d")
+		)
+		(pin "2"
+			(uuid "2a675298-d6c0-4314-baec-01cd9c9fe640")
+		)
+		(pin "1"
+			(uuid "e8400c2a-88e6-47bb-90aa-0ef07ccc8847")
+		)
+		(pin "4"
+			(uuid "d282052c-f465-45d8-ac7e-2c97cb29dfca")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 201.93 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "36145942-1c0b-48ee-bf10-7c2e37c25dfc")
+		(property "Reference" "D20"
+			(at 204.978 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 213.36 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 203.2 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 204.47 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 201.93 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "758feff9-909f-4a6e-96a6-ac485eeede73")
+		)
+		(pin "2"
+			(uuid "1ec94dba-d7be-419c-b29e-979948060f76")
+		)
+		(pin "1"
+			(uuid "0d4f0f82-dae8-433b-af85-29d05bd4a3d1")
+		)
+		(pin "4"
+			(uuid "95b3ba7a-5425-4f9d-827d-21b9e2687ed3")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 171.45 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3958ace9-7132-4128-ab9f-3d1cff6f67a9")
+		(property "Reference" "D30"
+			(at 174.498 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 182.88 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 172.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 173.99 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 171.45 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "5ed60b01-12c2-4093-af3b-363330d19150")
+		)
+		(pin "2"
+			(uuid "298ded61-9478-4c10-b9b9-84d4ffcbe52d")
+		)
+		(pin "1"
+			(uuid "6706d885-3ed2-4167-923d-5810c6404c16")
+		)
+		(pin "4"
+			(uuid "52e2be5a-1696-47d1-a1e4-168a75b50384")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 125.73 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3f436b21-1fbe-4e0d-88e5-d600b2e5c5db")
+		(property "Reference" "D3"
+			(at 128.778 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 137.16 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 127 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 128.27 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 125.73 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "2f2030a1-9dbd-4acc-ae20-162e00d1e949")
+		)
+		(pin "2"
+			(uuid "e0064de1-95a1-403b-993b-e6dc289255fe")
+		)
+		(pin "1"
+			(uuid "bde07f52-5bd6-4fde-887b-df895294f8d3")
+		)
+		(pin "4"
+			(uuid "ca4e9842-7da5-4552-b462-d5d5c7c2ae5a")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 39.37 31.75 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "46178f65-4492-4559-b8ae-643e5bdcb249")
+		(property "Reference" "#PWR0100"
+			(at 33.02 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 34.29 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 39.37 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "087c3431-6fb2-4914-a8c6-be85bb1a642b")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR0100")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 95.25 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4bb37e29-ca6d-44ee-bcc4-fc9bbddf5180")
+		(property "Reference" "C39"
+			(at 97.79 17.7862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 97.79 20.3262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 95.25 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 95.25 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 95.25 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "322dbd7c-f3a5-4cdd-b867-05fd9f163b6a")
+		)
+		(pin "2"
+			(uuid "d4e4f392-5fef-46d6-8208-1e100db2c6e6")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 156.21 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "51e28e06-d5ae-499e-b7a3-77b328cdbb4a")
+		(property "Reference" "D29"
+			(at 159.258 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 167.64 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 157.48 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 158.75 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 156.21 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "067b30af-1006-413e-a1f1-761067b2cf54")
+		)
+		(pin "2"
+			(uuid "79027622-3fe0-411e-83d6-47d7687b8136")
+		)
+		(pin "1"
+			(uuid "ce036d2f-66d2-4423-b661-2e5a33761b24")
+		)
+		(pin "4"
+			(uuid "fe4acfc9-277e-46f7-b8d4-19ceae6f5496")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Logic_LevelTranslator:SN74LVC1T45DBV")
+		(at 34.29 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5228d760-69b2-40bb-9c5b-0b62aa3bbfd5")
+		(property "Reference" "U2"
+			(at 52.07 57.0798 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SN74LVC1T45DBV"
+			(at 52.07 59.6198 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+			(at 34.29 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74lvc1t45.pdf"
+			(at 11.43 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs, SOT-23-6"
+			(at 34.29 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "0e8ef310-03e2-4fe9-99d0-68c0e1b391b9")
+		)
+		(pin "1"
+			(uuid "a0cb8070-bfde-4b14-ab17-09eb59546233")
+		)
+		(pin "4"
+			(uuid "33dd96a5-ba69-4510-94b0-7d60bb773a7e")
+		)
+		(pin "3"
+			(uuid "766e7c27-e715-4e93-a1a9-f7ed80538b8e")
+		)
+		(pin "6"
+			(uuid "b590df05-5923-44fa-9b62-ec997ee8be3d")
+		)
+		(pin "2"
+			(uuid "02fa49ab-7690-4290-85ee-1ce426479984")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 171.45 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5ba2ede1-eb10-403d-81a1-3a352d2b3168")
+		(property "Reference" "D18"
+			(at 174.498 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 182.88 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 172.72 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 173.99 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 171.45 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "4986555d-16ed-4bbb-b9c1-ea9a3920507b")
+		)
+		(pin "2"
+			(uuid "d3e3b9ce-705e-42bb-83f9-d8360c6fbc5e")
+		)
+		(pin "1"
+			(uuid "f19b1b51-9a76-4543-afde-9566613ecf9d")
+		)
+		(pin "4"
+			(uuid "488c9940-ed9e-41e1-88eb-0d884b222bcf")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 110.49 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5e60b28c-b026-439c-9d27-10addc7ec42e")
+		(property "Reference" "D2"
+			(at 113.538 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 121.92 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 111.76 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 113.03 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 110.49 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "445b1c4c-0d5d-4ae3-b579-08cd610c4b09")
+		)
+		(pin "2"
+			(uuid "1728047a-0009-4e84-95a2-76c712d8d451")
+		)
+		(pin "1"
+			(uuid "f9498f77-5340-4334-9bc1-e04444461b5d")
+		)
+		(pin "4"
+			(uuid "3c717f9a-e787-43a9-b1ef-842d76e116c0")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 156.21 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "62b8c67b-1ac2-4907-9a57-678f8f392717")
+		(property "Reference" "D17"
+			(at 159.258 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 167.64 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 157.48 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 158.75 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 156.21 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "c4c005a4-69d7-4691-8d11-625e01297f59")
+		)
+		(pin "2"
+			(uuid "2e4cc4c8-3e9a-4f58-b480-ac60a8232d65")
+		)
+		(pin "1"
+			(uuid "02b31dcc-cbe6-4d85-b156-59972f9cb153")
+		)
+		(pin "4"
+			(uuid "86e885d2-e583-477c-96f6-b7dccbab4561")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 140.97 16.51 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "66d86b80-500d-4c17-af48-b288200b1b75")
+		(property "Reference" "#PWR045"
+			(at 134.62 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 137.16 16.5099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 140.97 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 140.97 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4a67881d-077f-4e9d-9955-829f87c53a55")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR045")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 186.69 43.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "67f52e19-cc0a-447f-bacf-556cd3563de7")
+		(property "Reference" "#PWR046"
+			(at 180.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 182.88 43.1799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 186.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "585d2429-bb6f-4b84-a79d-aec0d71b42ca")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR046")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 232.41 69.85 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "68636ebe-0675-43b2-a594-bfc91f281565")
+		(property "Reference" "#PWR087"
+			(at 226.06 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 228.6 69.8499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 232.41 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 232.41 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 232.41 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "28814cf2-8372-4cb0-a2d3-9ef70b31c4d6")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR087")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 95.25 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "69ddb3e1-f0b7-4a05-85e2-df0aa76f0c89")
+		(property "Reference" "C40"
+			(at 97.79 44.4562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 97.79 46.9962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 95.25 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 95.25 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 95.25 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a55a0a53-533f-4f06-aef1-b2c2728623d7")
+		)
+		(pin "2"
+			(uuid "a0d5f316-dc23-42d9-9360-b2135025ae23")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C40")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 110.49 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6a85bf7c-9e69-49e3-9b0c-61a1bc0a45d3")
+		(property "Reference" "D26"
+			(at 113.538 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 121.92 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 111.76 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 113.03 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 110.49 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d43acad4-bb11-4fa3-ad9b-0a1c5372c3a6")
+		)
+		(pin "2"
+			(uuid "67f0dbad-02c3-41ac-a015-2ef1423be5f6")
+		)
+		(pin "1"
+			(uuid "2ebc1c15-698e-405e-ad89-8094ff53c5f3")
+		)
+		(pin "4"
+			(uuid "30fe7ba2-00f8-4017-817a-cc5e8c772a6a")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D26")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 110.49 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "761eef0f-8c3c-462a-ad18-3c64605b8c8c")
+		(property "Reference" "D14"
+			(at 113.538 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 121.92 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 111.76 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 113.03 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 110.49 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "55ac78f4-5582-4e41-b520-ef42de9d5a34")
+		)
+		(pin "2"
+			(uuid "64ab7e0d-885e-4472-ac36-23151b5dae05")
+		)
+		(pin "1"
+			(uuid "67c12683-a515-428f-a686-6f8957d9e925")
+		)
+		(pin "4"
+			(uuid "b023df59-7742-4ccf-ac59-88a6eae62e0c")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 171.45 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7c5b45a4-9861-463f-85af-f5e0dd2aec4c")
+		(property "Reference" "D6"
+			(at 174.498 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 182.88 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 172.72 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 173.99 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 171.45 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "fc33f044-fa9a-409e-a17d-729fb597d24d")
+		)
+		(pin "2"
+			(uuid "601b4f93-8dd5-4b07-8bc3-edcc1f3b43d4")
+		)
+		(pin "1"
+			(uuid "a8446121-77ed-495a-94f2-495d5c5b819b")
+		)
+		(pin "4"
+			(uuid "57505111-fc6f-4bb9-b72d-25ab49e8c1e8")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 262.89 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f17bb17-7a5b-4bd3-90e9-a8ca536476ef")
+		(property "Reference" "D24"
+			(at 265.938 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 274.32 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 264.16 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 265.43 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 262.89 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "9b61d099-c291-463b-acc1-ffc269c0e799")
+		)
+		(pin "2"
+			(uuid "1906725e-17c9-4441-9958-122e7589dc75")
+		)
+		(pin "1"
+			(uuid "3bfd1541-4937-4426-801f-eb084e032e09")
+		)
+		(pin "4"
+			(uuid "9dafe433-ce69-4529-9fc4-cfccee71b439")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 247.65 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "846fa440-344f-43ea-95ca-7c79d5372578")
+		(property "Reference" "D23"
+			(at 250.698 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 259.08 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 248.92 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 250.19 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 247.65 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "a3139bc1-b23a-4126-93b1-0781edc71a85")
+		)
+		(pin "2"
+			(uuid "ea593105-ab9c-444c-9be6-2722a5306ae7")
+		)
+		(pin "1"
+			(uuid "a6cba150-8ac2-4a8b-8aaa-fa5fa4616ac2")
+		)
+		(pin "4"
+			(uuid "da6ceac3-db0b-4616-94d3-b50da7f6d5bc")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 83.82 36.83 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "84ef590c-d027-4850-8f87-f0dde9f94c6c")
+		(property "Reference" "TP8"
+			(at 85.852 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 81.28 34.7979 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 78.74 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 78.74 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 83.82 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f677c925-78f2-45a9-a018-d1ff2c917440")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "TP8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 232.41 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8649a441-be4e-41ed-9b5f-430cec220cae")
+		(property "Reference" "C48"
+			(at 234.95 17.7862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 234.95 20.3262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 232.41 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 232.41 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 232.41 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b7a0d468-dd20-4fec-9b86-68b6d9bb078c")
+		)
+		(pin "2"
+			(uuid "5968aa50-de0a-4dda-94fd-b00722c2a90a")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 262.89 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "87ef3f1a-2bad-48d5-9ff1-acebde49d5bb")
+		(property "Reference" "D12"
+			(at 265.938 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 274.32 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 264.16 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 265.43 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 262.89 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "69dc9dba-cc44-4f34-bdad-33d5015f4f67")
+		)
+		(pin "2"
+			(uuid "de830d61-e9a7-4849-aed8-13b5c36314ba")
+		)
+		(pin "1"
+			(uuid "422ee7c5-a382-4acf-9be3-b3fd621b5b6b")
+		)
+		(pin "4"
+			(uuid "e57237b7-16c6-409d-aaa1-8770bac052db")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 232.41 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8d504367-1793-48a0-ac3c-db25763fe117")
+		(property "Reference" "D34"
+			(at 235.458 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 243.84 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 233.68 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 234.95 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 232.41 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8a107f59-10e8-46ff-bd03-63df0517ba7a")
+		)
+		(pin "2"
+			(uuid "3d230213-ec89-4b08-99b8-bd0b47d70a75")
+		)
+		(pin "1"
+			(uuid "7336e655-1d00-4b10-97d7-de90bb23aa98")
+		)
+		(pin "4"
+			(uuid "4d12374f-197d-4ad4-b28d-af58158eb8a6")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 156.21 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8f3119e4-b23f-46c1-b2d9-32341b178bab")
+		(property "Reference" "D5"
+			(at 159.258 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 167.64 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 157.48 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 158.75 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 156.21 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "a60edb93-a541-4836-8f86-2a07fb03b2a0")
+		)
+		(pin "2"
+			(uuid "ffe1c1ae-4139-445e-8a23-c2085f1c7740")
+		)
+		(pin "1"
+			(uuid "c53135c3-c4fb-421f-81a1-669acbe772cd")
+		)
+		(pin "4"
+			(uuid "9380aeb2-8d0e-4036-9d9b-e48882dc7255")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 125.73 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "921bdb13-ffbc-4482-84d2-521d3ee4a4da")
+		(property "Reference" "D15"
+			(at 128.778 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 137.16 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 127 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 128.27 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 125.73 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "a3403c6c-6599-461a-81f3-dab5cb3b4ac5")
+		)
+		(pin "2"
+			(uuid "91f2fe64-8cf1-477b-9af7-73913f5bf8d4")
+		)
+		(pin "1"
+			(uuid "8ac850e7-1029-4476-b4bc-8bc033b9aaa7")
+		)
+		(pin "4"
+			(uuid "165b99bb-6b34-47e5-8760-a51551da38e7")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 140.97 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94a34cd5-b4b4-49c7-8f9c-363eebcfde21")
+		(property "Reference" "D4"
+			(at 144.018 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 152.4 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 142.24 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 143.51 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 140.97 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "f575c1be-0379-4590-aa90-a395c5a18bea")
+		)
+		(pin "2"
+			(uuid "1910e027-d25e-4b42-bba2-daf8f2d1aba6")
+		)
+		(pin "1"
+			(uuid "cad31aea-6df5-42b2-a95a-1f4d30f04c37")
+		)
+		(pin "4"
+			(uuid "56e4ce52-8096-4ced-827f-2742269e9183")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 186.69 16.51 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94b6f5c5-6afd-499d-acb4-fbaf5a8a38c4")
+		(property "Reference" "#PWR048"
+			(at 180.34 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 182.88 16.5099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.69 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 186.69 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9a006882-d13a-429a-9712-3a9474d4e637")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 247.65 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "99a171f7-49cc-488f-b01b-f6525b9740c2")
+		(property "Reference" "D11"
+			(at 250.698 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 259.08 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 248.92 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 250.19 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 247.65 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "c69eac20-925b-497d-b3cf-bb816cacf83a")
+		)
+		(pin "2"
+			(uuid "5d842e04-f169-4246-851c-1f9b8d398e4b")
+		)
+		(pin "1"
+			(uuid "b4ec3f5b-c30e-4e0b-a39e-8b6d2dc7c0b7")
+		)
+		(pin "4"
+			(uuid "53a13ed6-fe54-4733-ac9a-cf37dd1c132a")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 48.26 29.21 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a05fe29b-7b8e-4cd8-a1b1-c5c30aba909f")
+		(property "Reference" "J5"
+			(at 49.53 27.9399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 49.53 30.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical"
+			(at 48.26 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 48.26 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 48.26 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "fdab728f-a110-4ec4-8d09-93772c333f3b")
+		)
+		(pin "1"
+			(uuid "e77a325a-8936-4ed3-85bc-cf0147fefacc")
+		)
+		(pin "3"
+			(uuid "92629075-040f-4c95-b90c-e7deadc4f858")
+		)
+		(instances
+			(project ""
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 201.93 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a0a3b8e8-8a00-42cb-b6c7-89b8eba9ee18")
+		(property "Reference" "D32"
+			(at 204.978 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 213.36 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 203.2 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 204.47 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 201.93 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d270761b-f031-4fc0-84ac-21efb5776adf")
+		)
+		(pin "2"
+			(uuid "fcc9f7eb-64e2-4830-bf89-53fd8e34484a")
+		)
+		(pin "1"
+			(uuid "2787e5de-1aa8-4ed3-b28b-3c349238facb")
+		)
+		(pin "4"
+			(uuid "ab4623a5-f29e-40c9-8e6f-b554404bed7a")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Socket")
+		(at 49.53 29.21 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a3b68f74-f838-4feb-9b9e-69cb8890f277")
+		(property "Reference" "J6"
+			(at 50.165 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Conn_01x03_Socket"
+			(at 50.165 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical"
+			(at 49.53 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 49.53 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 49.53 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "48d82842-3fe5-4472-aceb-9a11fae57088")
+		)
+		(pin "1"
+			(uuid "1de2f6a2-71fd-4a70-8848-54287751167f")
+		)
+		(pin "2"
+			(uuid "184a6c90-292b-42ad-8bf3-534c983164b7")
+		)
+		(instances
+			(project ""
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 140.97 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a984d929-3875-439d-a42a-e3b39ad7ba40")
+		(property "Reference" "C42"
+			(at 143.51 17.7862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 143.51 20.3262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 140.97 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 140.97 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 140.97 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a3f80cb6-80a2-4dec-95f7-eca4baf14fc7")
+		)
+		(pin "2"
+			(uuid "d54acff4-8567-4981-b82b-d2aef7dad16b")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 186.69 69.85 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aab83abe-292a-489c-8708-7da4992dbbc7")
+		(property "Reference" "#PWR086"
+			(at 180.34 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 182.88 69.8499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.69 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 186.69 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a7d891c0-3c7f-4e30-ad00-7c2e8a3875ab")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR086")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 262.89 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab3fb7b6-db83-4696-9e14-48fa97231307")
+		(property "Reference" "D36"
+			(at 265.938 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 274.32 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 264.16 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 265.43 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 262.89 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "9f9764d6-8ca7-40eb-b0cf-136f39300961")
+		)
+		(pin "2"
+			(uuid "e33df02f-76d4-4e31-ac1e-54a344f3a95c")
+		)
+		(pin "1"
+			(uuid "d5d88a2f-1ba6-418e-8cd2-5d7446893e22")
+		)
+		(pin "4"
+			(uuid "ff8b6d3c-49a3-4ee0-9f7d-49b03f19b116")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 95.25 43.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "acae6cfb-1585-4024-97e5-b4039c80fb54")
+		(property "Reference" "#PWR043"
+			(at 88.9 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 91.44 43.1799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 95.25 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 95.25 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "47ff1390-ba73-4cee-9f59-90d6e5bbefe5")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 232.41 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "af370aba-c767-4ddd-b47d-a26cb18aafab")
+		(property "Reference" "D10"
+			(at 235.458 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 243.84 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 233.68 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 234.95 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 232.41 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "1da6caa7-feda-42bb-ade9-20fe47828d29")
+		)
+		(pin "2"
+			(uuid "50f5dcd5-d084-4ca1-8f4f-ac4b8256cd52")
+		)
+		(pin "1"
+			(uuid "06a58975-9bb9-45d2-b9a3-762af7d61d1d")
+		)
+		(pin "4"
+			(uuid "b1ecc913-2065-4e37-bafe-e2af52fe631b")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 140.97 69.85 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b56aee3c-3c73-44ac-aeb1-8f267374a54a")
+		(property "Reference" "#PWR085"
+			(at 134.62 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 137.16 69.8499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 140.97 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 140.97 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "646c9a56-ef76-482a-845b-c0deaf883ba9")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR085")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 95.25 16.51 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b6fc90d6-b14d-4ac9-866d-e6b02c60d435")
+		(property "Reference" "#PWR042"
+			(at 88.9 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 91.44 16.5099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 95.25 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 95.25 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dbff4098-4c78-4226-bba5-2a55a1933a86")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR042")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 34.29 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b7578e07-1c98-4ee2-bf1a-683de2e66906")
+		(property "Reference" "#PWR066"
+			(at 34.29 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 34.29 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 34.29 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "700aea4a-a95b-439f-b67d-2c45f86911d3")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR066")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 232.41 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bce24694-1a7d-4f2b-99c4-5b8f1392fbdf")
+		(property "Reference" "C50"
+			(at 234.95 71.1262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 234.95 73.6662 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 232.41 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 232.41 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 232.41 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bf316377-b074-44aa-90c0-225dc5c9addc")
+		)
+		(pin "2"
+			(uuid "5182dd22-c4e8-4f19-9c2b-09a8c84196bb")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 186.69 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c74d801d-a528-408f-842f-20ec04a800f5")
+		(property "Reference" "C43"
+			(at 189.23 44.4562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 189.23 46.9962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 186.69 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 186.69 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09e751de-93ca-4316-b8df-c095014e61f4")
+		)
+		(pin "2"
+			(uuid "d1be5f14-332a-4433-af82-3826f6b1d453")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 232.41 43.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca4fd281-5f3c-489d-9b82-87b85d1ffe39")
+		(property "Reference" "#PWR047"
+			(at 226.06 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 228.6 43.1799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 232.41 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 232.41 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 232.41 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4afd8fa6-bf3d-41b2-b79d-e0c52e22b24d")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR047")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 186.69 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca5e76be-20c9-4f9b-8618-e607a7f48002")
+		(property "Reference" "C45"
+			(at 189.23 17.7862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 189.23 20.3262 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 186.69 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 186.69 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8b49b697-0877-481e-8263-f37eddb14b58")
+		)
+		(pin "2"
+			(uuid "7035effd-46a3-4997-bcbb-a9fde093ec98")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 186.69 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d11a083c-d5ad-4caf-a245-7c3b52d949a0")
+		(property "Reference" "D19"
+			(at 189.738 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 198.12 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 187.96 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 189.23 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 186.69 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8a080ebe-f706-4633-b99a-ca5470b2665e")
+		)
+		(pin "2"
+			(uuid "7d39873c-e7b6-495a-b599-035e006bbb43")
+		)
+		(pin "1"
+			(uuid "4a14a057-0bcb-415a-afd7-7c0b5903b9f5")
+		)
+		(pin "4"
+			(uuid "2368f394-b565-4df2-afe0-59867c94f469")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 217.17 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "df75434a-a9ef-4483-93c3-94db9e5a4ee0")
+		(property "Reference" "D33"
+			(at 220.218 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 228.6 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 218.44 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 219.71 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 217.17 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "e7a3b121-1260-4bdd-bbc4-c5dc699ba759")
+		)
+		(pin "2"
+			(uuid "eeb977c3-2f79-4657-8190-49f72913c0a2")
+		)
+		(pin "1"
+			(uuid "7bdb5f87-ac3e-4a06-bd8e-d2eb0ba01306")
+		)
+		(pin "4"
+			(uuid "73ae261e-609a-4c89-a74d-af81ae7d12de")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 201.93 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e45ac119-bba1-4148-a036-7c47475a08cb")
+		(property "Reference" "D8"
+			(at 204.978 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 213.36 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 203.2 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 204.47 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 201.93 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "2274e028-68b0-414a-9c8a-6a561d272677")
+		)
+		(pin "2"
+			(uuid "8c7546e0-20b1-44e5-a912-513c4afc8acd")
+		)
+		(pin "1"
+			(uuid "9d7b61cd-0d28-449d-b996-635f9304f16d")
+		)
+		(pin "4"
+			(uuid "c4ca9dea-9223-49b1-b0bb-781137544312")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 186.69 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e506a5bf-cdfa-4dd0-a683-5a3a4f9a2a9e")
+		(property "Reference" "D31"
+			(at 189.738 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 198.12 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 187.96 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 189.23 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 186.69 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "02f376fb-52f7-486e-a07d-00749e6336b6")
+		)
+		(pin "2"
+			(uuid "d5bf7a05-e468-4356-b791-6ae5d1cbb2e1")
+		)
+		(pin "1"
+			(uuid "8868c060-28d0-4514-ac79-7381d0a748ad")
+		)
+		(pin "4"
+			(uuid "3b64481e-73ff-4d02-a27d-3522a895f6f5")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D31")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 140.97 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e5a8f24b-bee2-4a38-bd7b-96b6faac77db")
+		(property "Reference" "D16"
+			(at 144.018 49.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 152.4 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 142.24 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 143.51 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 140.97 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "6c1c80ae-0dec-4b93-9a69-8965b3de5572")
+		)
+		(pin "2"
+			(uuid "9b384114-c36b-4bc9-b7ee-03a5666cb254")
+		)
+		(pin "1"
+			(uuid "3f03296d-243d-47f9-a9ec-b8bc327be483")
+		)
+		(pin "4"
+			(uuid "c81f3ce2-f1a2-43f7-abeb-f23383202d57")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 217.17 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e67f64f7-22e6-458d-8fcd-f74c5cb7b341")
+		(property "Reference" "D9"
+			(at 220.218 23.114 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 228.6 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 218.44 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 219.71 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 217.17 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8b2a5b06-ff18-47e0-a0a3-17715e5227e1")
+		)
+		(pin "2"
+			(uuid "7ba535c4-bb89-4d67-acd8-e6a0e34ba04f")
+		)
+		(pin "1"
+			(uuid "d8783feb-57da-43dc-a4ed-6e4d698a6dcf")
+		)
+		(pin "4"
+			(uuid "02cac49c-155b-41c9-8d69-3e1459c1ec16")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 125.73 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f3b127f3-073b-43eb-8b16-ad9e5f46b5be")
+		(property "Reference" "D27"
+			(at 128.778 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 137.16 78.6698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+			(at 127 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 128.27 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 125.73 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d5418e66-cc3b-4792-b151-325cac1c7a6c")
+		)
+		(pin "2"
+			(uuid "611a89e5-070f-47a8-a685-b9e81c18fcea")
+		)
+		(pin "1"
+			(uuid "9753ac13-e5ca-4253-b96a-5887b13de290")
+		)
+		(pin "4"
+			(uuid "73a3b95d-b3de-4541-b954-d5cf5db15a33")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D27")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 232.41 16.51 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f64a7f08-939f-4908-a730-d003bc600296")
+		(property "Reference" "#PWR051"
+			(at 226.06 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 228.6 16.5099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 232.41 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 232.41 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 232.41 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "95e3dca5-1435-4d73-b12f-422feb1aba5e")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "#PWR051")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 232.41 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ff0b5582-1391-4022-acab-2d12e70044dc")
+		(property "Reference" "C44"
+			(at 234.95 44.4562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 234.95 46.9962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 232.41 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 232.41 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 232.41 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8eaa64eb-d751-4b72-9883-b1e4adaff63d")
+		)
+		(pin "2"
+			(uuid "80345c1d-6f69-4dc6-9d0e-8a6812941108")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "C44")
+					(unit 1)
+				)
+			)
+		)
+	)
+)
