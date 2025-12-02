@@ -1835,16 +1835,6 @@
 		)
 		(uuid "264c8f42-a077-4edf-bf28-673309e42947")
 	)
-	(label "SW"
-		(at 77.47 109.22 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "280c221a-8999-4365-a3eb-379818dcfb43")
-	)
 	(label "Vbat"
 		(at 121.92 99.06 0)
 		(effects
@@ -1865,7 +1855,7 @@
 		)
 		(uuid "66f1078e-7c31-473b-a234-ecd0a9de60d4")
 	)
-	(label "SW"
+	(label "SW5V"
 		(at 113.03 133.35 0)
 		(effects
 			(font
@@ -1875,7 +1865,7 @@
 		)
 		(uuid "7085cd13-eae7-4efa-afa2-75501b2d4adf")
 	)
-	(label "SW"
+	(label "SW3V3"
 		(at 113.03 96.52 0)
 		(effects
 			(font
@@ -1925,15 +1915,25 @@
 		)
 		(uuid "afec8314-baf4-46f6-aa15-5cc0a9fef3a2")
 	)
-	(label "SW"
-		(at 77.47 146.05 180)
+	(label "SW5V"
+		(at 77.47 146.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "bca0fac2-72e3-43bc-b721-4a89b23bceea")
+		(uuid "b5b0b43e-3162-4696-ac73-0502d42d3c86")
+	)
+	(label "SW3V3"
+		(at 77.47 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b958e12f-406f-4e3e-a272-16be65b62528")
 	)
 	(label "Vbat"
 		(at 121.92 135.89 0)
@@ -2049,15 +2049,15 @@
 	(symbol
 		(lib_id "Device:C_Small")
 		(at 83.82 128.27 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "11c53669-4121-4edb-bdd8-018a6ea514ac")
 		(property "Reference" "C35"
-			(at 86.36 127.0062 0)
+			(at 81.28 127.0062 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2066,7 +2066,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 86.36 129.5462 0)
+			(at 81.28 129.5462 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3559,7 +3559,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical"
+		(property "Footprint" "Connector_AMASS:AMASS_XT60PW-M_1x02_P7.20mm_Horizontal"
 			(at 38.1 64.77 0)
 			(effects
 				(font
