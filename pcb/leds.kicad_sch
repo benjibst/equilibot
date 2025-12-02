@@ -719,7 +719,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "XL_WS2812B_1615:WS2812B"
+		(symbol "WS2812B_1"
 			(pin_names
 				(offset 0.254)
 			)
@@ -765,7 +765,7 @@
 				)
 			)
 			(property "Description" "RGB LED with integrated controller"
-				(at 0 0 0)
+				(at 0.762 9.906 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -791,7 +791,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "WS2812B_0_0"
+			(symbol "WS2812B_1_0_0"
 				(text "RGB"
 					(at 2.286 -4.191 0)
 					(effects
@@ -801,7 +801,7 @@
 					)
 				)
 			)
-			(symbol "WS2812B_0_1"
+			(symbol "WS2812B_1_0_1"
 				(rectangle
 					(start -5.08 5.08)
 					(end 5.08 -5.08)
@@ -898,7 +898,7 @@
 					)
 				)
 			)
-			(symbol "WS2812B_1_1"
+			(symbol "WS2812B_1_1_1"
 				(pin input line
 					(at -7.62 0 0)
 					(length 2.54)
@@ -909,7 +909,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -927,7 +927,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -945,7 +945,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -963,7 +963,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1077,46 +1077,46 @@
 		)
 	)
 	(junction
-		(at 125.73 63.5)
+		(at 125.73 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "00bdb2c8-5ec6-4b23-8a48-34e138f1dc58")
+		(uuid "0228c10c-d11c-4b93-bbd9-37b81730062e")
 	)
 	(junction
-		(at 140.97 36.83)
+		(at 125.73 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0130157b-6594-47d8-9e2a-04ab465a146d")
+		(uuid "04da5289-e1fb-4cc9-a3ad-916041f7a9a3")
 	)
 	(junction
-		(at 156.21 21.59)
+		(at 186.69 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0322e006-dd5c-4e3c-a3be-f378aebf3ca8")
+		(uuid "0d526747-5071-43e6-b7f7-657df3b4297f")
 	)
 	(junction
-		(at 201.93 21.59)
+		(at 110.49 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0e2c38d3-c0e1-4deb-a748-295fe980c489")
+		(uuid "0f17e267-c153-4482-ae85-491af4fc72c8")
 	)
 	(junction
-		(at 125.73 36.83)
+		(at 156.21 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1533acc3-793c-4e01-a5ff-c13df611ac47")
+		(uuid "0fb7f7dc-a7df-4683-94c8-93f6a1519233")
 	)
 	(junction
-		(at 247.65 21.59)
+		(at 110.49 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "179d1d3d-ee92-4757-8f66-f96e6048c49b")
+		(uuid "107ee49d-1f5e-4c9f-b74e-dd4701565164")
 	)
 	(junction
-		(at 201.93 63.5)
+		(at 217.17 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1df0353e-9350-4b70-9634-f3e70238d8a9")
+		(uuid "1e88409c-8688-4b78-bf5b-e1f67643fdba")
 	)
 	(junction
 		(at 140.97 48.26)
@@ -1125,10 +1125,16 @@
 		(uuid "1e97e647-9346-4663-adc2-9e800410f3d0")
 	)
 	(junction
-		(at 186.69 90.17)
+		(at 247.65 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "218217a6-c425-4493-a4cb-fed3d9ccbb5d")
+		(uuid "1fb0bca7-2b4c-48c0-b649-3a1256979006")
+	)
+	(junction
+		(at 110.49 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "22b8ad5a-b85c-4832-bd4c-a620861e76df")
 	)
 	(junction
 		(at 52.07 26.67)
@@ -1137,16 +1143,28 @@
 		(uuid "230e0177-41ce-43fd-9bc2-cd0479afe4ef")
 	)
 	(junction
-		(at 95.25 21.59)
+		(at 201.93 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "26ee4d5f-3954-4bc6-844e-16bacbfebac9")
+		(uuid "256706cb-309c-471e-a5fd-1cc29a51d642")
 	)
 	(junction
-		(at 156.21 36.83)
+		(at 186.69 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "2855c4d1-29de-4f7f-94a3-2c7b0d5faff2")
+		(uuid "29358f85-f41b-4a68-8ce1-53370be62f3e")
+	)
+	(junction
+		(at 171.45 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2caea2e2-a2ff-4f22-bb00-1cf392ac7258")
+	)
+	(junction
+		(at 156.21 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2e89b2e8-5985-4fcb-bb4a-2c27f1dff9af")
 	)
 	(junction
 		(at 232.41 48.26)
@@ -1155,82 +1173,100 @@
 		(uuid "328fb3ce-c2d0-4d87-9801-d75163d01fc2")
 	)
 	(junction
-		(at 110.49 48.26)
+		(at 186.69 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "427ffeb7-7f64-4447-8f11-7b6f02782bef")
-	)
-	(junction
-		(at 201.93 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "461e4c17-0eb4-45a8-bb34-5f867aa2cb16")
-	)
-	(junction
-		(at 110.49 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4a635b2f-c2fb-4893-9bde-5acdd261a17c")
-	)
-	(junction
-		(at 156.21 63.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4b58ebc1-95f8-48a0-bb4e-c6c938acc978")
-	)
-	(junction
-		(at 95.25 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4dc7d0d0-3631-48ec-b327-46d12bc0de66")
-	)
-	(junction
-		(at 110.49 63.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4eed2df7-d6a6-48e0-87ff-61a86ba7ec84")
-	)
-	(junction
-		(at 156.21 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4ef5daaf-e797-4bd0-97a9-1a496e3814a3")
-	)
-	(junction
-		(at 140.97 90.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "51369117-0f6c-4629-9570-ff4c32e9f201")
-	)
-	(junction
-		(at 171.45 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5956b27e-9a99-4b4c-928a-eebecc7b117d")
-	)
-	(junction
-		(at 247.65 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5ce651a0-9a69-4936-92a7-c428fdb30697")
-	)
-	(junction
-		(at 217.17 63.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6088318a-0fb4-4041-af06-0af6290dfe20")
+		(uuid "3348df0e-058b-4fdd-b076-fb33050fa7d2")
 	)
 	(junction
 		(at 140.97 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "67ad5d3e-3c45-4d84-bd94-42deb55c58cd")
+		(uuid "35840cc3-abc3-4317-83d5-918702ba2e4e")
+	)
+	(junction
+		(at 156.21 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4093013d-dabe-4e98-98c1-f1c2b1c35726")
+	)
+	(junction
+		(at 110.49 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "446131a7-7e35-4695-b9e2-9b3fe2b6f950")
 	)
 	(junction
 		(at 186.69 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6d1cf631-03e5-489d-bfd2-64ba0529e0af")
+		(uuid "4495fc97-06aa-4bac-8364-91552b262383")
+	)
+	(junction
+		(at 201.93 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "450d3d12-22d4-44d6-9588-50d97925ddc2")
+	)
+	(junction
+		(at 95.25 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "47cab9e8-517d-4f80-8336-daf50011916a")
+	)
+	(junction
+		(at 171.45 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "51495b19-cc46-4594-843d-b9c99ee53e53")
+	)
+	(junction
+		(at 95.25 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5ac21f4a-55ea-4dd1-ba0a-484ea2e15afd")
+	)
+	(junction
+		(at 95.25 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "61527519-f0a3-4397-8f85-a3d38f964ef7")
+	)
+	(junction
+		(at 247.65 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "669977b6-c36c-482f-918a-37ea6ecca3c9")
+	)
+	(junction
+		(at 140.97 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "68e400cf-25e5-4bc0-a45b-c86a88d506dc")
+	)
+	(junction
+		(at 186.69 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6b0c6430-61d7-495d-b5eb-2fccedbdc722")
+	)
+	(junction
+		(at 156.21 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6b32300d-18af-4405-ab20-213fc0eedfa4")
+	)
+	(junction
+		(at 171.45 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6e525880-f172-4d9b-adb5-173ac8daa9f0")
+	)
+	(junction
+		(at 217.17 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "702d3675-fdbf-47f8-b259-af3c9f596c48")
 	)
 	(junction
 		(at 61.0383 31.75)
@@ -1245,64 +1281,52 @@
 		(uuid "713e16f1-ea6b-44d8-af76-7ccaf13ca7eb")
 	)
 	(junction
-		(at 186.69 63.5)
+		(at 247.65 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "717c64ec-9287-443e-8c07-2e28f87c67cc")
+		(uuid "740390fe-398a-49b2-a2f0-d7a8f4ea1163")
 	)
 	(junction
-		(at 125.73 90.17)
+		(at 201.93 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7204e34d-c4ea-478a-9f4d-1bd032a905ad")
+		(uuid "765290fe-08b3-4a3c-aca0-1f21feb213cc")
 	)
 	(junction
-		(at 110.49 90.17)
+		(at 171.45 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7cfa5311-0be7-44fa-b3cf-d6e724c13e86")
-	)
-	(junction
-		(at 232.41 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "85dea543-507d-45d6-b5ad-42cc77121276")
-	)
-	(junction
-		(at 125.73 21.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "88255886-6993-421f-bfbc-06aba58f765e")
-	)
-	(junction
-		(at 171.45 90.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8bf42355-68c0-4a3c-850f-16931c88d4f5")
-	)
-	(junction
-		(at 156.21 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8cfab654-b874-4c9d-82f1-6effe36faf2b")
-	)
-	(junction
-		(at 217.17 21.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8d30ded7-82c9-44b2-936c-8ae289590bee")
+		(uuid "766ea0a4-4a68-424f-a999-74174e535748")
 	)
 	(junction
 		(at 232.41 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8db09334-2ebc-44a5-b0f7-cbb98f7dc377")
+		(uuid "7c6b6501-1cb4-49a1-8899-586b486a6141")
 	)
 	(junction
-		(at 186.69 48.26)
+		(at 140.97 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9ce08072-3339-44a3-afb3-8397f0e2e89b")
+		(uuid "7cd25aa7-f333-49c7-a5a1-2e4f7b26a4d1")
+	)
+	(junction
+		(at 232.41 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "82012f84-d24b-4f68-ad4e-50d536dfba79")
+	)
+	(junction
+		(at 125.73 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9118d241-84b3-452e-8463-9a62f4ebc7f4")
+	)
+	(junction
+		(at 156.21 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9e202b96-2bed-4446-87e2-07e75107a080")
 	)
 	(junction
 		(at 43.18 26.67)
@@ -1311,16 +1335,16 @@
 		(uuid "9e3411cf-8e2f-446e-b555-d1db6f856136")
 	)
 	(junction
-		(at 217.17 36.83)
+		(at 217.17 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a08a4593-7188-4fcd-a4d8-41b824391472")
+		(uuid "a3bafc1b-bdba-4582-81a8-4f456980fd8d")
 	)
 	(junction
-		(at 110.49 74.93)
+		(at 110.49 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a6a98e9e-d0bd-46f2-a1c5-6e1e38e2a28d")
+		(uuid "a45f507d-713d-4366-b3db-a014b997bca5")
 	)
 	(junction
 		(at 57.1841 29.21)
@@ -1329,40 +1353,34 @@
 		(uuid "a855eda8-bb78-4a9d-b440-29f7cd37a9ea")
 	)
 	(junction
+		(at 156.21 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ace14da3-22f5-4044-9f87-f402af96bc53")
+	)
+	(junction
 		(at 140.97 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "acecf7b7-41bf-48ac-babe-d3e3df7b3660")
 	)
 	(junction
-		(at 201.93 48.26)
+		(at 171.45 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b26c29e4-a854-4eff-ac49-6b17270ca1bd")
+		(uuid "bd3c7ff3-e04a-4909-8780-31f2938d7cd1")
 	)
 	(junction
-		(at 125.73 74.93)
+		(at 201.93 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b46bf9d0-8fd2-4870-bc8d-cc5f74674e36")
+		(uuid "bec04223-5c0e-4b26-bffb-e9131ea37474")
 	)
 	(junction
-		(at 247.65 63.5)
+		(at 217.17 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b58f0bd5-f6f4-4ccd-af82-918b06dac549")
-	)
-	(junction
-		(at 262.89 63.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bbc68023-1d99-41e2-959c-fc421137a726")
-	)
-	(junction
-		(at 171.45 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bc988e37-9195-496a-9846-315858de02bb")
+		(uuid "c2b61453-49b0-4857-a4ac-8a4e37801bbf")
 	)
 	(junction
 		(at 43.18 29.21)
@@ -1371,34 +1389,40 @@
 		(uuid "c35552e5-0f2a-4265-a961-c70a01acdf47")
 	)
 	(junction
-		(at 110.49 21.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cb51b40c-53cf-4d02-b3bb-15a5f5d310de")
-	)
-	(junction
 		(at 140.97 43.18)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ccf6ecfb-cebc-41b6-8391-7e52c4301c90")
 	)
 	(junction
+		(at 186.69 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cf19d79c-7e3b-4c71-b722-8e899b8a69f0")
+	)
+	(junction
+		(at 125.73 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d45999aa-3c70-4840-92d6-9a0454c77b98")
+	)
+	(junction
+		(at 95.25 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d85b84b8-e847-4f64-9117-0dd40a0b41ee")
+	)
+	(junction
+		(at 125.73 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e1993a49-51d2-42a3-b821-4a8174d189b9")
+	)
+	(junction
 		(at 247.65 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ce738f29-1ce7-456b-a9cd-eac5bec57663")
-	)
-	(junction
-		(at 262.89 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cfc46e43-6eb1-4833-a9e7-ea61aef4fed3")
-	)
-	(junction
-		(at 125.73 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "dd874983-99f8-496d-9941-9db0d43aeca1")
+		(uuid "e27e57c8-99c4-402e-8147-dd6c24b72dd2")
 	)
 	(junction
 		(at 140.97 16.51)
@@ -1413,16 +1437,16 @@
 		(uuid "e5e4ce42-376d-4dfd-b2cb-0ad3c58de35f")
 	)
 	(junction
-		(at 171.45 21.59)
+		(at 110.49 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e870ae79-8e40-4baa-8f48-a1f87ffd2e32")
+		(uuid "ebccde49-863f-4d85-9a7d-5f5793f2dad1")
 	)
 	(junction
-		(at 186.69 21.59)
+		(at 262.89 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ee85263b-de42-4a26-8d4a-773780558d92")
+		(uuid "edac49cc-087f-4be0-8393-0a7deb8b42e8")
 	)
 	(junction
 		(at 232.41 21.59)
@@ -1431,70 +1455,36 @@
 		(uuid "efcf8899-9cf4-49d3-b909-36eb9bbd6fcb")
 	)
 	(junction
-		(at 186.69 74.93)
+		(at 125.73 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f1317b0d-1d86-4e86-8931-9254f73666af")
+		(uuid "f545aaf3-b61c-4c70-96ff-29bb2a3201f9")
+	)
+	(junction
+		(at 262.89 63.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f687abcc-37d0-4098-8ef9-c5a8cd3b2e1d")
 	)
 	(junction
 		(at 171.45 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f1f6f330-cd4e-4105-869c-d65a4909b9aa")
-	)
-	(junction
-		(at 95.25 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f6eb0544-7371-4097-9374-183323f2bb16")
-	)
-	(junction
-		(at 95.25 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f7092838-8c63-4efe-aeda-e9eff0d5cc5a")
-	)
-	(junction
-		(at 171.45 63.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fbcb55bf-e316-4365-b858-ce9805bcd018")
-	)
-	(junction
-		(at 156.21 90.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fcb5b416-9029-43e0-991e-aa6a27a2a3f7")
-	)
-	(junction
-		(at 217.17 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fd035d85-c5e1-463c-959f-d22e57ce8471")
+		(uuid "ff66972a-0756-4c9c-aca9-33bb1a5b02e0")
 	)
 	(wire
 		(pts
-			(xy 156.21 74.93) (xy 171.45 74.93)
+			(xy 110.49 90.17) (xy 125.73 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "03a119f5-b342-4c64-9c44-60ba28eacf17")
+		(uuid "022835f4-f572-46e2-9dcb-bbf3c77c6849")
 	)
 	(wire
 		(pts
-			(xy 140.97 90.17) (xy 156.21 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03f14ac3-b805-466b-8fae-89590c5f3b29")
-	)
-	(wire
-		(pts
-			(xy 201.93 63.5) (xy 217.17 63.5)
+			(xy 95.25 63.5) (xy 110.49 63.5)
 		)
 		(stroke
 			(width 0)
@@ -1504,33 +1494,33 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 36.83) (xy 95.25 36.83)
+			(xy 201.93 36.83) (xy 217.17 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "108dd2f3-f602-4295-9262-78dc48242b55")
+		(uuid "0d33bd12-044f-41f4-a4e6-94a9267f049e")
 	)
 	(wire
 		(pts
-			(xy 140.97 36.83) (xy 156.21 36.83)
+			(xy 247.65 36.83) (xy 262.89 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "117e8a0d-a52a-47ec-b5e6-f64e966ba6ba")
+		(uuid "12f64b6f-6a3a-40f7-9f0b-bff7e51e33b6")
 	)
 	(wire
 		(pts
-			(xy 156.21 48.26) (xy 171.45 48.26)
+			(xy 110.49 48.26) (xy 125.73 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "168ade93-4121-41fd-9961-8a5b4150aec2")
+		(uuid "12fef439-9d83-4796-a18f-f1138f8d86ac")
 	)
 	(wire
 		(pts
@@ -1544,7 +1534,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 48.26) (xy 125.73 48.26)
+			(xy 69.85 48.26) (xy 95.25 48.26)
 		)
 		(stroke
 			(width 0)
@@ -1564,6 +1554,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 74.93) (xy 186.69 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20255109-5a7f-4562-ab87-f8cee166beab")
+	)
+	(wire
+		(pts
 			(xy 36.83 52.07) (xy 36.83 53.34)
 		)
 		(stroke
@@ -1574,6 +1574,16 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 63.5) (xy 201.93 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2220a02c-6e02-48c3-85cc-63119c70c33d")
+	)
+	(wire
+		(pts
 			(xy 43.18 31.75) (xy 61.0383 31.75)
 		)
 		(stroke
@@ -1581,16 +1591,6 @@
 			(type default)
 		)
 		(uuid "2299c8ba-1c7e-43b1-88e2-430d76c7e057")
-	)
-	(wire
-		(pts
-			(xy 186.69 90.17) (xy 273.05 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "23a75377-0437-431e-9cad-a4c9937403e1")
 	)
 	(wire
 		(pts
@@ -1614,43 +1614,23 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 48.26) (xy 156.21 48.26)
+			(xy 171.45 36.83) (xy 186.69 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2c254e5b-d380-4200-9e6f-cccd672f4476")
+		(uuid "33746cb6-4e07-4592-980f-ec855e6c94d9")
 	)
 	(wire
 		(pts
-			(xy 125.73 48.26) (xy 140.97 48.26)
+			(xy 217.17 36.83) (xy 232.41 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "30444461-2078-4cf2-a14b-850671f9f1bb")
-	)
-	(wire
-		(pts
-			(xy 247.65 48.26) (xy 262.89 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "324db3a5-ee0e-49de-883a-74f8747ff2f0")
-	)
-	(wire
-		(pts
-			(xy 156.21 21.59) (xy 171.45 21.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "32deea68-cc66-4434-b222-b09e7dd13e21")
+		(uuid "3572b712-aa4b-4b54-9b7d-88d228e9a1fe")
 	)
 	(wire
 		(pts
@@ -1664,13 +1644,13 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 21.59) (xy 186.69 21.59)
+			(xy 186.69 36.83) (xy 201.93 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "36fdda2a-4301-4d7e-886e-036ec5f88ef2")
+		(uuid "374453d7-55c2-4095-8dcd-05d70c3e35f5")
 	)
 	(wire
 		(pts
@@ -1694,23 +1674,43 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 36.83) (xy 232.41 36.83)
+			(xy 247.65 48.26) (xy 262.89 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3dab8964-4fb4-4f6e-bbf9-2726a6e58c22")
+		(uuid "3cc30c15-9aa3-45ba-917b-bbaa6e8b417c")
 	)
 	(wire
 		(pts
-			(xy 69.85 74.93) (xy 95.25 74.93)
+			(xy 156.21 48.26) (xy 171.45 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "40352e78-35c2-4b16-bf90-374ad32a6c44")
+		(uuid "3d2b636b-c586-48d2-ad99-0f46aa317707")
+	)
+	(wire
+		(pts
+			(xy 125.73 36.83) (xy 140.97 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fb3c22c-ec99-4f94-9271-44f4c594c0be")
+	)
+	(wire
+		(pts
+			(xy 217.17 21.59) (xy 232.41 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "414a3d24-862d-4680-afb8-b661b7f22c7e")
 	)
 	(wire
 		(pts
@@ -1724,17 +1724,17 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 74.93) (xy 156.21 74.93)
+			(xy 140.97 36.83) (xy 156.21 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "41d9f543-22e8-45b6-986f-7a66510c8e1f")
+		(uuid "43245edf-ba07-4f6a-85d8-0b40bbbc9b6e")
 	)
 	(wire
 		(pts
-			(xy 110.49 21.59) (xy 125.73 21.59)
+			(xy 69.85 21.59) (xy 95.25 21.59)
 		)
 		(stroke
 			(width 0)
@@ -1744,17 +1744,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 21.59) (xy 201.93 21.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "49745e47-60aa-4913-82fa-2bb035612ed9")
-	)
-	(wire
-		(pts
-			(xy 201.93 48.26) (xy 217.17 48.26)
+			(xy 140.97 48.26) (xy 156.21 48.26)
 		)
 		(stroke
 			(width 0)
@@ -1764,7 +1754,17 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 90.17) (xy 125.73 90.17)
+			(xy 156.21 21.59) (xy 171.45 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4bac4ee0-1153-487d-b1b9-f89484d4db6f")
+	)
+	(wire
+		(pts
+			(xy 95.25 90.17) (xy 110.49 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1774,17 +1774,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 48.26) (xy 110.49 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5048162f-0d6d-4e1f-8553-33261c3f0e58")
-	)
-	(wire
-		(pts
-			(xy 201.93 36.83) (xy 217.17 36.83)
+			(xy 81.28 36.83) (xy 95.25 36.83)
 		)
 		(stroke
 			(width 0)
@@ -1794,27 +1784,27 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 63.5) (xy 247.65 63.5)
+			(xy 262.89 63.5) (xy 273.05 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5564a967-ee38-4639-9524-1332cb080566")
+		(uuid "5512971a-a5b8-4dfa-8150-8fae071ba7c1")
 	)
 	(wire
 		(pts
-			(xy 125.73 63.5) (xy 140.97 63.5)
+			(xy 156.21 63.5) (xy 171.45 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "57318c89-b8b7-4273-aad5-82c1bb831357")
+		(uuid "56701825-1cd8-40a3-817e-337149ad65e0")
 	)
 	(wire
 		(pts
-			(xy 186.69 74.93) (xy 274.32 74.93)
+			(xy 140.97 74.93) (xy 156.21 74.93)
 		)
 		(stroke
 			(width 0)
@@ -1834,33 +1824,33 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 48.26) (xy 95.25 48.26)
+			(xy 156.21 36.83) (xy 171.45 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "675c8dd5-13c7-4f66-9c46-c3e111faf754")
+		(uuid "5fe58aff-7401-465b-98ff-1666f7a6bf78")
 	)
 	(wire
 		(pts
-			(xy 95.25 90.17) (xy 110.49 90.17)
+			(xy 140.97 63.5) (xy 156.21 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "68a77865-f196-4c7e-bd94-89599f4e9f73")
+		(uuid "64f87118-7d26-4041-bdbc-a755f95dd8a8")
 	)
 	(wire
 		(pts
-			(xy 217.17 63.5) (xy 232.41 63.5)
+			(xy 262.89 48.26) (xy 274.32 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6b04a1ca-c4bf-4fdb-8efc-8424c23fb859")
+		(uuid "66b8c6ca-405f-46aa-99bd-dcf7cc229d69")
 	)
 	(wire
 		(pts
@@ -1874,16 +1864,6 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 36.83) (xy 140.97 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6cf55062-d4a2-4b21-8f31-2f337459c8ca")
-	)
-	(wire
-		(pts
 			(xy 20.32 38.1) (xy 24.13 38.1)
 		)
 		(stroke
@@ -1891,6 +1871,26 @@
 			(type default)
 		)
 		(uuid "6d647834-f667-49b6-a4a0-9e5f8a10fdc8")
+	)
+	(wire
+		(pts
+			(xy 186.69 48.26) (xy 201.93 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6da81358-34df-4271-a8bd-660756b83c38")
+	)
+	(wire
+		(pts
+			(xy 156.21 90.17) (xy 171.45 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72539e82-0bcd-43b9-81cb-6bd985449375")
 	)
 	(wire
 		(pts
@@ -1914,63 +1914,33 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 21.59) (xy 140.97 21.59)
+			(xy 110.49 63.5) (xy 125.73 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "77a91623-846d-4e28-801d-4affaec6fc56")
+		(uuid "792dcef2-e177-4fd1-8dd9-2c5b2567342b")
 	)
 	(wire
 		(pts
-			(xy 186.69 48.26) (xy 201.93 48.26)
+			(xy 140.97 90.17) (xy 156.21 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "77ff42a9-8aac-4e12-bae3-63899059d818")
+		(uuid "7a416433-ca5b-457d-8ad1-76330a55cfbe")
 	)
 	(wire
 		(pts
-			(xy 171.45 63.5) (xy 186.69 63.5)
+			(xy 186.69 74.93) (xy 274.32 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "78082b45-c105-4389-b139-ff6f628dc633")
-	)
-	(wire
-		(pts
-			(xy 95.25 36.83) (xy 110.49 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "796eb61f-6b69-495e-bc11-4ce6a01074db")
-	)
-	(wire
-		(pts
-			(xy 156.21 36.83) (xy 171.45 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7a7e354e-56f3-42df-817f-033133abc451")
-	)
-	(wire
-		(pts
-			(xy 171.45 36.83) (xy 186.69 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7de1c5a2-1b91-4880-a7b8-2dccd9626e88")
+		(uuid "7ea4e469-f882-4f4c-b4bc-5b5e4186a18b")
 	)
 	(wire
 		(pts
@@ -1984,26 +1954,6 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 21.59) (xy 217.17 21.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7f8ff75e-2c79-4062-b484-7106a8b77c34")
-	)
-	(wire
-		(pts
-			(xy 186.69 36.83) (xy 201.93 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7ff86537-d4f7-47e4-b877-a0f6c01f2a3c")
-	)
-	(wire
-		(pts
 			(xy 39.37 31.75) (xy 43.18 31.75)
 		)
 		(stroke
@@ -2011,6 +1961,16 @@
 			(type default)
 		)
 		(uuid "80887b8e-0007-4330-b186-456718aefba1")
+	)
+	(wire
+		(pts
+			(xy 232.41 63.5) (xy 247.65 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "815a978e-3d3d-4fc0-99a9-1aba53201aee")
 	)
 	(wire
 		(pts
@@ -2024,13 +1984,43 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 90.17) (xy 186.69 90.17)
+			(xy 95.25 74.93) (xy 110.49 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9146a092-d90d-497f-a728-97ce20bd7bc4")
+		(uuid "8bc1368b-12ff-4b06-8433-a048fdbe57ce")
+	)
+	(wire
+		(pts
+			(xy 95.25 48.26) (xy 110.49 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d1a28e3-bbf7-41b6-ae56-07d5c8fbd819")
+	)
+	(wire
+		(pts
+			(xy 201.93 63.5) (xy 217.17 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d383fa4-7c22-4b35-85a2-4528aa4cc174")
+	)
+	(wire
+		(pts
+			(xy 247.65 21.59) (xy 262.89 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a229465f-a260-4f39-8f7c-46a28f8d2936")
 	)
 	(wire
 		(pts
@@ -2044,53 +2034,43 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 48.26) (xy 232.41 48.26)
+			(xy 171.45 21.59) (xy 186.69 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a42db2bf-73c5-4bbc-acf5-67ce20119077")
+		(uuid "a4334e4a-490c-4c82-84e0-28483080e3fb")
 	)
 	(wire
 		(pts
-			(xy 156.21 90.17) (xy 171.45 90.17)
+			(xy 156.21 74.93) (xy 171.45 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "abef2c3f-a914-4e6a-b81b-88b494f2e03a")
+		(uuid "a7eec7c5-86e3-4cd8-b5ea-1a511c9e9b0b")
 	)
 	(wire
 		(pts
-			(xy 125.73 90.17) (xy 140.97 90.17)
+			(xy 110.49 74.93) (xy 125.73 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "af8e7ecd-9056-4708-8309-5097f6e26327")
+		(uuid "ad0edac2-160e-42cc-9b6b-8ee52e0afc4c")
 	)
 	(wire
 		(pts
-			(xy 171.45 48.26) (xy 186.69 48.26)
+			(xy 186.69 90.17) (xy 273.05 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b1a8e410-ed0c-4c93-a3e4-453f67402261")
-	)
-	(wire
-		(pts
-			(xy 262.89 48.26) (xy 274.32 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4cca974-5c90-4ef6-959a-598c45a4e3b0")
+		(uuid "af48b2ff-bbc5-4c36-bc09-82a20a5fea8b")
 	)
 	(wire
 		(pts
@@ -2104,27 +2084,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 63.5) (xy 125.73 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b7ce349a-f72c-4aba-a7f0-a8c462fd021b")
-	)
-	(wire
-		(pts
-			(xy 110.49 74.93) (xy 125.73 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b8e22bbd-b41a-4527-8d6e-8b0a2b7e982f")
-	)
-	(wire
-		(pts
-			(xy 247.65 21.59) (xy 262.89 21.59)
+			(xy 232.41 21.59) (xy 247.65 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2134,33 +2094,43 @@
 	)
 	(wire
 		(pts
-			(xy 247.65 36.83) (xy 262.89 36.83)
+			(xy 201.93 21.59) (xy 217.17 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b9fecaa6-8a02-4bef-8bb5-4cab5794403a")
+		(uuid "b9ebea3e-4be4-4ff8-9b3d-8b91d60d0ff3")
 	)
 	(wire
 		(pts
-			(xy 140.97 21.59) (xy 156.21 21.59)
+			(xy 171.45 48.26) (xy 186.69 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bffdfbd0-843e-4d5a-a50e-6eae3a0f1418")
+		(uuid "bd7448f6-12b6-4b0b-9481-1e97d5da0912")
 	)
 	(wire
 		(pts
-			(xy 247.65 63.5) (xy 262.89 63.5)
+			(xy 125.73 48.26) (xy 140.97 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c13e09e6-8079-4535-b8fc-496b0a86fec8")
+		(uuid "c1bdd223-096b-4d9b-a10a-ccd069676a6b")
+	)
+	(wire
+		(pts
+			(xy 110.49 36.83) (xy 125.73 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6055c29-46cc-41d7-a1ca-f330ab1ab22e")
 	)
 	(wire
 		(pts
@@ -2174,16 +2144,6 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 36.83) (xy 125.73 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c779208b-c005-4adb-8a8f-462b2a352d41")
-	)
-	(wire
-		(pts
 			(xy 140.97 43.18) (xy 232.41 43.18)
 		)
 		(stroke
@@ -2194,43 +2154,83 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 74.93) (xy 110.49 74.93)
+			(xy 95.25 36.83) (xy 110.49 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d4f6c21c-9af6-4aa8-95a0-7e04501fcedd")
+		(uuid "d0eb6bbe-2e93-42c1-87e7-4916d763fee3")
 	)
 	(wire
 		(pts
-			(xy 232.41 36.83) (xy 247.65 36.83)
+			(xy 247.65 63.5) (xy 262.89 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dae5ed93-6b1a-4cd8-8e2e-d83ed2bd88c5")
+		(uuid "d3902233-7f25-4ce1-8f36-a0202685a2fa")
 	)
 	(wire
 		(pts
-			(xy 232.41 21.59) (xy 247.65 21.59)
+			(xy 110.49 21.59) (xy 125.73 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ddd328f8-55fd-4b7f-8a5d-39a813bdaec8")
+		(uuid "d7d559c3-47cc-4f29-830d-9ce9e6edbc11")
 	)
 	(wire
 		(pts
-			(xy 140.97 63.5) (xy 156.21 63.5)
+			(xy 171.45 90.17) (xy 186.69 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "df258d17-1a6d-4877-86ba-a0063ac33cc9")
+		(uuid "da41b69d-002e-4a8f-993b-58fae6fb2b4b")
+	)
+	(wire
+		(pts
+			(xy 201.93 48.26) (xy 217.17 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dabecb5c-1768-47bb-887f-170dd5435faa")
+	)
+	(wire
+		(pts
+			(xy 125.73 90.17) (xy 140.97 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc602e1e-9ef0-4093-a813-343f4def9b2a")
+	)
+	(wire
+		(pts
+			(xy 95.25 21.59) (xy 110.49 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd13cd7c-f3d6-4f29-a833-6bf9a9e78e4e")
+	)
+	(wire
+		(pts
+			(xy 125.73 74.93) (xy 140.97 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e01992a2-4776-4c71-86ff-587a7dac661c")
 	)
 	(wire
 		(pts
@@ -2244,33 +2244,43 @@
 	)
 	(wire
 		(pts
-			(xy 262.89 63.5) (xy 273.05 63.5)
+			(xy 217.17 48.26) (xy 232.41 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e3bba50c-aca9-420a-8f26-b6cb47ed6f8d")
+		(uuid "e4662fd6-74eb-4bf8-a0ff-f74271e44e71")
 	)
 	(wire
 		(pts
-			(xy 186.69 63.5) (xy 201.93 63.5)
+			(xy 171.45 63.5) (xy 186.69 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e8fa0362-3e47-4c03-b559-8e6f706674bf")
+		(uuid "e704e315-e4b1-44a4-870b-c42905ffac88")
 	)
 	(wire
 		(pts
-			(xy 171.45 74.93) (xy 186.69 74.93)
+			(xy 125.73 63.5) (xy 140.97 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e916ce48-f8be-4248-a34f-21a5b206d898")
+		(uuid "ee24c4b4-45e6-4418-9f25-e3c8473a435b")
+	)
+	(wire
+		(pts
+			(xy 125.73 21.59) (xy 140.97 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee8784d5-767d-4532-ab4c-30e7879bbe5c")
 	)
 	(wire
 		(pts
@@ -2294,7 +2304,17 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 74.93) (xy 140.97 74.93)
+			(xy 186.69 21.59) (xy 201.93 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f34abb57-d656-447c-a0b5-884d98c02868")
+	)
+	(wire
+		(pts
+			(xy 69.85 74.93) (xy 95.25 74.93)
 		)
 		(stroke
 			(width 0)
@@ -2304,53 +2324,33 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 21.59) (xy 95.25 21.59)
+			(xy 217.17 63.5) (xy 232.41 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f415dd0e-f9a5-4451-a99f-439b9bf01f46")
+		(uuid "f71a8c4c-e569-4da5-af87-5435f5897917")
 	)
 	(wire
 		(pts
-			(xy 95.25 21.59) (xy 110.49 21.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f47bc661-50d2-442f-89ad-5c9020392301")
-	)
-	(wire
-		(pts
-			(xy 95.25 63.5) (xy 110.49 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f592df64-2b55-41ae-b0f2-35dee645828e")
-	)
-	(wire
-		(pts
-			(xy 156.21 63.5) (xy 171.45 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f7093972-bcf6-41f3-b53e-6489ce91f737")
-	)
-	(wire
-		(pts
-			(xy 217.17 21.59) (xy 232.41 21.59)
+			(xy 140.97 21.59) (xy 156.21 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "f762d9ff-fb78-41cb-9000-66bb13e68982")
+	)
+	(wire
+		(pts
+			(xy 232.41 36.83) (xy 247.65 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc4f6937-ba8e-4ae1-a961-123f821c6900")
 	)
 	(label "DIN"
 		(at 21.59 63.5 180)
@@ -2636,16 +2636,18 @@
 		(uuid "ef618836-b603-4420-bbf5-0bfbf15dff32")
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 95.25 55.88 0)
+		(at 217.17 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "02e61294-43a6-45e8-948b-d6b807616265")
-		(property "Reference" "D13"
-			(at 98.298 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "0d6c2dc3-7df9-4fae-b0c4-3d644acc04a0")
+		(property "Reference" "D9"
+			(at 228.6 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2653,16 +2655,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 106.68 51.9998 0)
+			(at 228.6 25.3298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 96.52 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 218.44 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2672,7 +2673,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 97.79 65.405 0)
+			(at 219.71 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2682,7 +2683,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 95.25 55.88 0)
+			(at 217.932 19.304 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2690,402 +2691,31 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "8d8dcd3a-8eb7-48f9-9382-608a8cec5ea8")
-		)
-		(pin "2"
-			(uuid "40bb0495-c61a-4b82-aa83-e0c795427617")
+		(property "JLCPCB Part" "C3646929"
+			(at 217.17 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "669e22b9-da52-411c-9ba1-d36124e38737")
+			(uuid "aef421d6-1055-4851-af6f-a45cd14b9f24")
 		)
 		(pin "4"
-			(uuid "8ee9f4c9-62c8-456f-81a9-f6e888162967")
+			(uuid "a5a76fe3-0398-45b1-bd96-ce6aee8c1566")
+		)
+		(pin "3"
+			(uuid "3994f6d4-3ecf-4a82-8968-18e40379e165")
+		)
+		(pin "2"
+			(uuid "290a740f-9310-4e58-b713-2abb76176f0b")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 186.69 29.21 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "05f19794-e2ea-45f9-b4fb-6dc2579766e5")
-		(property "Reference" "D7"
-			(at 189.738 23.114 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 198.12 25.3298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 187.96 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 189.23 38.735 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 186.69 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "d179e40e-188a-4c84-b51f-2838598d019c")
-		)
-		(pin "2"
-			(uuid "032a4d9e-178c-4452-b7a6-68cd3f027ba5")
-		)
-		(pin "1"
-			(uuid "9b4eb82f-5125-4841-a19f-41a8cdbcecea")
-		)
-		(pin "4"
-			(uuid "a1805392-4feb-4557-89f4-732eabcc0d34")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 95.25 29.21 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "096a2601-091d-48eb-9ce1-641b6fe3f4ea")
-		(property "Reference" "D1"
-			(at 98.298 23.114 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 106.68 25.3298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 96.52 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 97.79 38.735 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 95.25 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "201d00b4-2106-4844-b70a-7500857e7aca")
-		)
-		(pin "2"
-			(uuid "aeac97b6-4ff2-4fa4-9c73-71bd6008c948")
-		)
-		(pin "1"
-			(uuid "dd75c55d-6c73-426d-b859-d51df9d34861")
-		)
-		(pin "4"
-			(uuid "d1f14836-c976-48cf-9bb9-b67cd638a7af")
-		)
-		(instances
-			(project ""
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 140.97 82.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "09b70001-ddee-4923-bb2e-8b9f41541255")
-		(property "Reference" "D28"
-			(at 144.018 76.454 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 152.4 78.6698 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 142.24 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 143.51 92.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 140.97 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "9bba5953-5d97-4d7e-86d1-a339a85b8436")
-		)
-		(pin "2"
-			(uuid "cb43ab72-4f6a-48a3-b4e1-4372e2f94716")
-		)
-		(pin "1"
-			(uuid "ffcbe6f6-30ed-4e3b-b734-32e9032a1b74")
-		)
-		(pin "4"
-			(uuid "ce7005cf-1e67-4dad-acd7-4d519d4e0fec")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D28")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 232.41 55.88 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0af7e6c5-089c-4605-b575-6abccd42a18e")
-		(property "Reference" "D22"
-			(at 235.458 49.784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 243.84 51.9998 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 233.68 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 234.95 65.405 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 232.41 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "2bf66157-a25d-4994-aeeb-19bb78254cff")
-		)
-		(pin "2"
-			(uuid "96f8aa05-ba60-4e9f-91f8-379f121ad73c")
-		)
-		(pin "1"
-			(uuid "bd36fc86-b415-452c-9a82-2aae365cd120")
-		)
-		(pin "4"
-			(uuid "adf5c360-c4ca-4665-b886-6aab9908116c")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D22")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 95.25 82.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "14961442-016a-4285-9654-d34450763550")
-		(property "Reference" "D25"
-			(at 98.298 76.454 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 106.68 78.6698 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 96.52 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 97.79 92.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 95.25 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "8eb64428-d996-4c9b-b7a4-5f2cf0808235")
-		)
-		(pin "2"
-			(uuid "8a52ebaf-ba24-4276-aa68-f81c22577c9f")
-		)
-		(pin "1"
-			(uuid "fcbe7d99-a076-45b4-b62d-d850ed60a935")
-		)
-		(pin "4"
-			(uuid "f5f8e371-9950-4542-8fdc-f16c9b817bcf")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D25")
+					(reference "D9")
 					(unit 1)
 				)
 			)
@@ -3146,6 +2776,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" "C14663"
+			(at 140.97 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ebb04236-7fad-4303-ac49-8cb9fdbb478f")
 		)
@@ -3162,6 +2801,92 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 125.73 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "262f6bf4-449e-402a-9659-59ed177701b6")
+		(property "Reference" "D15"
+			(at 137.16 49.4598 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 137.16 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 127 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 128.27 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 126.492 45.974 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 125.73 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c1769a09-b33c-4b2d-85e2-b56e3a42a70f")
+		)
+		(pin "4"
+			(uuid "23176e60-a0fb-497c-a9f6-507b0baaf32d")
+		)
+		(pin "3"
+			(uuid "18238375-4fee-424a-831d-f3f9dca2d852")
+		)
+		(pin "2"
+			(uuid "132e52ce-65ff-43be-b265-e747c700bb85")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 57.1841 29.21 0)
 		(mirror y)
@@ -3169,7 +2894,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "2993d5ab-762e-4b2d-84e5-d4d3cd571ee7")
 		(property "Reference" "TP16"
 			(at 58.9621 28.448 90)
@@ -3217,6 +2942,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" ""
+			(at 57.1841 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a699af04-0277-4a2a-85ac-fbfb97042586")
 		)
@@ -3237,7 +2971,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "2f4924b8-aee5-4df8-b67c-4a2c35afcd9b")
 		(property "Reference" "TP11"
 			(at 53.848 25.908 90)
@@ -3285,6 +3019,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" ""
+			(at 52.07 26.67 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "cd2c418f-fa8a-4b3a-9ed3-9708186172de")
 		)
@@ -3298,16 +3041,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 217.17 55.88 0)
+		(at 186.69 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "31df8bc4-d7f0-437c-91ca-4dccfe5a7e34")
-		(property "Reference" "D21"
-			(at 220.218 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "3004632b-1543-47cc-9729-0afd7f731122")
+		(property "Reference" "D7"
+			(at 198.12 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3315,16 +3060,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 228.6 51.9998 0)
+			(at 198.12 25.3298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 218.44 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 187.96 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3334,7 +3078,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 219.71 65.405 0)
+			(at 189.23 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3344,7 +3088,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 217.17 55.88 0)
+			(at 187.452 19.304 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3352,38 +3096,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "b438f370-1b62-4420-a890-1851b7f1673d")
-		)
-		(pin "2"
-			(uuid "2a675298-d6c0-4314-baec-01cd9c9fe640")
+		(property "JLCPCB Part" "C3646929"
+			(at 186.69 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "e8400c2a-88e6-47bb-90aa-0ef07ccc8847")
+			(uuid "562e70ad-abb8-4bc6-82d7-49f8ba26dd92")
 		)
 		(pin "4"
-			(uuid "d282052c-f465-45d8-ac7e-2c97cb29dfca")
+			(uuid "dbb582e2-e446-404a-8c33-fad5ed7be44b")
+		)
+		(pin "3"
+			(uuid "1d04e3ee-bcf1-4482-b022-47300bf96f70")
+		)
+		(pin "2"
+			(uuid "4e761e75-34f2-470c-a20e-9d14a585a264")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D21")
+					(reference "D7")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 201.93 55.88 0)
+		(at 262.89 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "36145942-1c0b-48ee-bf10-7c2e37c25dfc")
-		(property "Reference" "D20"
-			(at 204.978 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "314465b9-999d-4e1d-8e11-bf43dc7208a8")
+		(property "Reference" "D24"
+			(at 274.32 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3391,16 +3146,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 213.36 51.9998 0)
+			(at 274.32 51.9998 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 203.2 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 264.16 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3410,7 +3164,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 204.47 65.405 0)
+			(at 265.43 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3420,7 +3174,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 201.93 55.88 0)
+			(at 263.652 45.974 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3428,38 +3182,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "758feff9-909f-4a6e-96a6-ac485eeede73")
-		)
-		(pin "2"
-			(uuid "1ec94dba-d7be-419c-b29e-979948060f76")
+		(property "JLCPCB Part" "C3646929"
+			(at 262.89 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "0d4f0f82-dae8-433b-af85-29d05bd4a3d1")
+			(uuid "7dc6f36f-2d33-40f3-9ebe-a0593b8b4802")
 		)
 		(pin "4"
-			(uuid "95b3ba7a-5425-4f9d-827d-21b9e2687ed3")
+			(uuid "2f40a838-b730-4180-a645-850752aecb46")
+		)
+		(pin "3"
+			(uuid "4da03c16-a03f-428b-80d7-907bba76a690")
+		)
+		(pin "2"
+			(uuid "4aa38991-2ae2-4593-b7d0-5715cffdbc3b")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D20")
+					(reference "D24")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 171.45 82.55 0)
+		(at 95.25 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3958ace9-7132-4128-ab9f-3d1cff6f67a9")
-		(property "Reference" "D30"
-			(at 174.498 76.454 0)
+		(fields_autoplaced yes)
+		(uuid "39268f2b-b4ab-42c1-a687-0266844faf78")
+		(property "Reference" "D25"
+			(at 106.68 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3467,16 +3232,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 182.88 78.6698 0)
+			(at 106.68 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 172.72 90.17 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 96.52 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3486,7 +3250,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 173.99 92.075 0)
+			(at 97.79 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3496,7 +3260,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 171.45 82.55 0)
+			(at 96.012 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3504,38 +3268,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "5ed60b01-12c2-4093-af3b-363330d19150")
-		)
-		(pin "2"
-			(uuid "298ded61-9478-4c10-b9b9-84d4ffcbe52d")
+		(property "JLCPCB Part" "C3646929"
+			(at 95.25 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "6706d885-3ed2-4167-923d-5810c6404c16")
+			(uuid "86270d54-02d9-4f71-a801-9ec8eacfc5f9")
 		)
 		(pin "4"
-			(uuid "52e2be5a-1696-47d1-a1e4-168a75b50384")
+			(uuid "87b5f039-51e8-4d6e-97ec-c473cb108a6a")
+		)
+		(pin "3"
+			(uuid "7ae14036-5149-4eaa-8a91-0fee336b0a09")
+		)
+		(pin "2"
+			(uuid "e34af40d-bc6f-417f-b530-8c32d27f9ecd")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D30")
+					(reference "D25")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 125.73 29.21 0)
+		(at 232.41 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3f436b21-1fbe-4e0d-88e5-d600b2e5c5db")
-		(property "Reference" "D3"
-			(at 128.778 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "427b7851-6cfb-4efa-94a5-1c9194862dbc")
+		(property "Reference" "D22"
+			(at 243.84 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3543,16 +3318,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 137.16 25.3298 0)
+			(at 243.84 51.9998 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 127 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 233.68 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3562,7 +3336,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 128.27 38.735 0)
+			(at 234.95 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3572,7 +3346,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 125.73 29.21 0)
+			(at 233.172 45.974 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3580,22 +3354,117 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "2f2030a1-9dbd-4acc-ae20-162e00d1e949")
-		)
-		(pin "2"
-			(uuid "e0064de1-95a1-403b-993b-e6dc289255fe")
+		(property "JLCPCB Part" "C3646929"
+			(at 232.41 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "bde07f52-5bd6-4fde-887b-df895294f8d3")
+			(uuid "3a4257a3-c934-4057-96ac-5e58293f19b4")
 		)
 		(pin "4"
-			(uuid "ca4e9842-7da5-4552-b462-d5d5c7c2ae5a")
+			(uuid "c4efdff9-bbb9-4f93-9974-2cdc9ca77ec6")
+		)
+		(pin "3"
+			(uuid "6a66266d-7f21-40a0-b9da-29c2e95aeeb0")
+		)
+		(pin "2"
+			(uuid "03d771cf-be67-4abe-ba18-ff81fabaac8e")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D3")
+					(reference "D22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 247.65 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "42b21c9d-b668-497f-a8e4-1153b0e7f133")
+		(property "Reference" "D11"
+			(at 259.08 22.7898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 259.08 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 248.92 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 250.19 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 248.412 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 247.65 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6c88a6f0-db9f-436b-8d75-51e95eb3676d")
+		)
+		(pin "4"
+			(uuid "82a00c07-35de-4d37-86cf-350432c097ab")
+		)
+		(pin "3"
+			(uuid "5c30763b-d7b9-4760-ad8d-a4749656f09f")
+		)
+		(pin "2"
+			(uuid "e3a860ad-78a6-4671-83bb-847c0916916b")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D11")
 					(unit 1)
 				)
 			)
@@ -3669,16 +3538,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 156.21 82.55 0)
+		(at 125.73 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "51e28e06-d5ae-499e-b7a3-77b328cdbb4a")
-		(property "Reference" "D29"
-			(at 159.258 76.454 0)
+		(fields_autoplaced yes)
+		(uuid "51f70bfe-a69c-4656-8b94-8a7d03b890c3")
+		(property "Reference" "D27"
+			(at 137.16 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3686,16 +3557,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 167.64 78.6698 0)
+			(at 137.16 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 157.48 90.17 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 127 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3705,7 +3575,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 158.75 92.075 0)
+			(at 128.27 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3715,7 +3585,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 156.21 82.55 0)
+			(at 126.492 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3723,22 +3593,31 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "067b30af-1006-413e-a1f1-761067b2cf54")
-		)
-		(pin "2"
-			(uuid "79027622-3fe0-411e-83d6-47d7687b8136")
+		(property "JLCPCB Part" "C3646929"
+			(at 125.73 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "ce036d2f-66d2-4423-b661-2e5a33761b24")
+			(uuid "4abf94b8-e604-4027-b5f8-788d103e6b77")
 		)
 		(pin "4"
-			(uuid "fe4acfc9-277e-46f7-b8d4-19ceae6f5496")
+			(uuid "c0aeed51-bfed-44bb-968d-cc4fec7b310d")
+		)
+		(pin "3"
+			(uuid "2e8427b3-b2d4-46ef-8893-b1a1a55094a2")
+		)
+		(pin "2"
+			(uuid "36c7a3b9-3b28-4552-948a-61c90e40d49f")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D29")
+					(reference "D27")
 					(unit 1)
 				)
 			)
@@ -3751,7 +3630,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "5228d760-69b2-40bb-9c5b-0b62aa3bbfd5")
 		(property "Reference" "U2"
@@ -3797,6 +3676,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" "C7843"
+			(at 34.29 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "0e8ef310-03e2-4fe9-99d0-68c0e1b391b9")
 		)
@@ -3825,310 +3713,7 @@
 		)
 	)
 	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 171.45 55.88 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5ba2ede1-eb10-403d-81a1-3a352d2b3168")
-		(property "Reference" "D18"
-			(at 174.498 49.784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 182.88 51.9998 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 172.72 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 173.99 65.405 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 171.45 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "4986555d-16ed-4bbb-b9c1-ea9a3920507b")
-		)
-		(pin "2"
-			(uuid "d3e3b9ce-705e-42bb-83f9-d8360c6fbc5e")
-		)
-		(pin "1"
-			(uuid "f19b1b51-9a76-4543-afde-9566613ecf9d")
-		)
-		(pin "4"
-			(uuid "488c9940-ed9e-41e1-88eb-0d884b222bcf")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 110.49 29.21 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5e60b28c-b026-439c-9d27-10addc7ec42e")
-		(property "Reference" "D2"
-			(at 113.538 23.114 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 121.92 25.3298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 111.76 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 113.03 38.735 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 110.49 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "445b1c4c-0d5d-4ae3-b579-08cd610c4b09")
-		)
-		(pin "2"
-			(uuid "1728047a-0009-4e84-95a2-76c712d8d451")
-		)
-		(pin "1"
-			(uuid "f9498f77-5340-4334-9bc1-e04444461b5d")
-		)
-		(pin "4"
-			(uuid "3c717f9a-e787-43a9-b1ef-842d76e116c0")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 156.21 55.88 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "62b8c67b-1ac2-4907-9a57-678f8f392717")
-		(property "Reference" "D17"
-			(at 159.258 49.784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 167.64 51.9998 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 157.48 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 158.75 65.405 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 156.21 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "c4c005a4-69d7-4691-8d11-625e01297f59")
-		)
-		(pin "2"
-			(uuid "2e4cc4c8-3e9a-4f58-b480-ac60a8232d65")
-		)
-		(pin "1"
-			(uuid "02b31dcc-cbe6-4d85-b156-59972f9cb153")
-		)
-		(pin "4"
-			(uuid "86e885d2-e583-477c-96f6-b7dccbab4561")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 110.49 82.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "6a85bf7c-9e69-49e3-9b0c-61a1bc0a45d3")
-		(property "Reference" "D26"
-			(at 113.538 76.454 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WS2812B"
-			(at 121.92 78.6698 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 111.76 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 113.03 92.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 110.49 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "d43acad4-bb11-4fa3-ad9b-0a1c5372c3a6")
-		)
-		(pin "2"
-			(uuid "67f0dbad-02c3-41ac-a015-2ef1423be5f6")
-		)
-		(pin "1"
-			(uuid "2ebc1c15-698e-405e-ad89-8094ff53c5f3")
-		)
-		(pin "4"
-			(uuid "30fe7ba2-00f8-4017-817a-cc5e8c772a6a")
-		)
-		(instances
-			(project "equilibot"
-				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D26")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
 		(at 110.49 55.88 0)
 		(unit 1)
@@ -4136,9 +3721,10 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "761eef0f-8c3c-462a-ad18-3c64605b8c8c")
+		(fields_autoplaced yes)
+		(uuid "540b2fe1-a08e-47cf-8f7f-6d797ac4b733")
 		(property "Reference" "D14"
-			(at 113.538 49.784 0)
+			(at 121.92 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4151,10 +3737,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
 			(at 111.76 63.5 0)
 			(effects
 				(font
@@ -4175,6 +3760,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 111.252 45.974 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
 			(at 110.49 55.88 0)
 			(effects
 				(font
@@ -4183,17 +3777,17 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "55ac78f4-5582-4e41-b520-ef42de9d5a34")
-		)
-		(pin "2"
-			(uuid "64ab7e0d-885e-4472-ac36-23151b5dae05")
-		)
 		(pin "1"
-			(uuid "67c12683-a515-428f-a686-6f8957d9e925")
+			(uuid "b38a77da-b056-4eca-b5c4-8a63cd86cf7a")
 		)
 		(pin "4"
-			(uuid "b023df59-7742-4ccf-ac59-88a6eae62e0c")
+			(uuid "27241a90-91f0-4bcd-b8da-d9d9005ad26c")
+		)
+		(pin "3"
+			(uuid "26d305d1-6231-4326-835a-73ff1defb6e7")
+		)
+		(pin "2"
+			(uuid "dd9db863-bb52-4c0f-8e81-74cfd40639e9")
 		)
 		(instances
 			(project "equilibot"
@@ -4205,6 +3799,7 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
 		(at 171.45 29.21 0)
 		(unit 1)
@@ -4212,9 +3807,10 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7c5b45a4-9861-463f-85af-f5e0dd2aec4c")
+		(fields_autoplaced yes)
+		(uuid "5e26e735-8c77-45d7-9309-b1af0c97405d")
 		(property "Reference" "D6"
-			(at 174.498 23.114 0)
+			(at 182.88 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4227,10 +3823,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
 			(at 172.72 36.83 0)
 			(effects
 				(font
@@ -4251,6 +3846,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 172.212 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
 			(at 171.45 29.21 0)
 			(effects
 				(font
@@ -4259,17 +3863,17 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "fc33f044-fa9a-409e-a17d-729fb597d24d")
-		)
-		(pin "2"
-			(uuid "601b4f93-8dd5-4b07-8bc3-edcc1f3b43d4")
-		)
 		(pin "1"
-			(uuid "a8446121-77ed-495a-94f2-495d5c5b819b")
+			(uuid "d0a21ea6-b28d-4060-8ec6-3e11290d76cf")
 		)
 		(pin "4"
-			(uuid "57505111-fc6f-4bb9-b72d-25ab49e8c1e8")
+			(uuid "ae8ab45e-8cc2-4906-aee2-93601954476c")
+		)
+		(pin "3"
+			(uuid "45592de2-467a-4df5-8e48-a6f8206e961d")
+		)
+		(pin "2"
+			(uuid "05a77dbc-5364-4b88-8846-1158c8ecbaa8")
 		)
 		(instances
 			(project "equilibot"
@@ -4281,16 +3885,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 262.89 55.88 0)
+		(at 110.49 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7f17bb17-7a5b-4bd3-90e9-a8ca536476ef")
-		(property "Reference" "D24"
-			(at 265.938 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "6549c0f3-4e5e-4963-9d8c-a20a3b31adff")
+		(property "Reference" "D26"
+			(at 121.92 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4298,16 +3904,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 274.32 51.9998 0)
+			(at 121.92 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 264.16 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 111.76 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4317,7 +3922,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 265.43 65.405 0)
+			(at 113.03 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4327,7 +3932,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 262.89 55.88 0)
+			(at 111.252 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4335,38 +3940,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "9b61d099-c291-463b-acc1-ffc269c0e799")
-		)
-		(pin "2"
-			(uuid "1906725e-17c9-4441-9958-122e7589dc75")
+		(property "JLCPCB Part" "C3646929"
+			(at 110.49 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "3bfd1541-4937-4426-801f-eb084e032e09")
+			(uuid "2046ee37-a860-4942-9e32-edd00470a83d")
 		)
 		(pin "4"
-			(uuid "9dafe433-ce69-4529-9fc4-cfccee71b439")
+			(uuid "6718d95f-ca6c-480b-abcb-205d338063f2")
+		)
+		(pin "3"
+			(uuid "12b2f94b-ede2-4bb1-a75a-20c2f9c1cb5d")
+		)
+		(pin "2"
+			(uuid "af220ec6-6472-4bfb-8c3f-8aa1d87cc288")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D24")
+					(reference "D26")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 247.65 55.88 0)
+		(at 232.41 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "846fa440-344f-43ea-95ca-7c79d5372578")
-		(property "Reference" "D23"
-			(at 250.698 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "6783c1de-0f33-443d-81f0-5712cb4d02d3")
+		(property "Reference" "D10"
+			(at 243.84 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4374,16 +3990,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 259.08 51.9998 0)
+			(at 243.84 25.3298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 248.92 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 233.68 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4393,7 +4008,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 250.19 65.405 0)
+			(at 234.95 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4403,7 +4018,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 247.65 55.88 0)
+			(at 233.172 19.304 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4411,22 +4026,117 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "a3139bc1-b23a-4126-93b1-0781edc71a85")
-		)
-		(pin "2"
-			(uuid "ea593105-ab9c-444c-9be6-2722a5306ae7")
+		(property "JLCPCB Part" "C3646929"
+			(at 232.41 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "a6cba150-8ac2-4a8b-8aaa-fa5fa4616ac2")
+			(uuid "5a81a824-b1c2-47c7-8136-18521dae58cf")
 		)
 		(pin "4"
-			(uuid "da6ceac3-db0b-4616-94d3-b50da7f6d5bc")
+			(uuid "92fe1615-463b-4db0-a6ee-5ab69d382fb4")
+		)
+		(pin "3"
+			(uuid "d2dbd0e0-8f57-4582-b231-82a5ab569580")
+		)
+		(pin "2"
+			(uuid "abced8e9-4186-4210-a5c3-be9811c49664")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D23")
+					(reference "D10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 201.93 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7281ba01-e5a8-4146-be0f-d40ba945bd1e")
+		(property "Reference" "D8"
+			(at 213.36 22.7898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 213.36 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 203.2 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 204.47 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 202.692 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 201.93 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f2c00a36-cdb6-446c-bc0b-2a41d78caf81")
+		)
+		(pin "4"
+			(uuid "302243d3-4597-454c-8e58-5161c948ce89")
+		)
+		(pin "3"
+			(uuid "f50e0c54-5730-4292-a782-d583c40b3150")
+		)
+		(pin "2"
+			(uuid "5362808e-a9e0-454e-a8db-baccd9723a55")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D8")
 					(unit 1)
 				)
 			)
@@ -4487,6 +4197,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" "C14663"
+			(at 232.41 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b7a0d468-dd20-4fec-9b86-68b6d9bb078c")
 		)
@@ -4503,16 +4222,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 262.89 29.21 0)
+		(at 95.25 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "87ef3f1a-2bad-48d5-9ff1-acebde49d5bb")
-		(property "Reference" "D12"
-			(at 265.938 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "8864491a-b219-4598-9991-3e7de00a5cea")
+		(property "Reference" "D1"
+			(at 106.68 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4520,16 +4241,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 274.32 25.3298 0)
+			(at 106.68 25.3298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 264.16 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 96.52 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4539,7 +4259,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 265.43 38.735 0)
+			(at 97.79 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4549,7 +4269,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 262.89 29.21 0)
+			(at 96.012 19.304 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4557,38 +4277,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "69dc9dba-cc44-4f34-bdad-33d5015f4f67")
-		)
-		(pin "2"
-			(uuid "de830d61-e9a7-4849-aed8-13b5c36314ba")
+		(property "JLCPCB Part" "C3646929"
+			(at 95.25 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "422ee7c5-a382-4acf-9be3-b3fd621b5b6b")
+			(uuid "8ff1334b-8781-479c-9739-3f44243ab361")
 		)
 		(pin "4"
-			(uuid "e57237b7-16c6-409d-aaa1-8770bac052db")
+			(uuid "7faccd7c-9f23-4707-bef1-a3ccd21736d6")
+		)
+		(pin "3"
+			(uuid "e8c4e3a9-9dd3-4349-9b74-6600606ac1e7")
+		)
+		(pin "2"
+			(uuid "6aadd9f6-ab62-442d-8ef4-4c4395f326a7")
 		)
 		(instances
-			(project "equilibot"
+			(project ""
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D12")
+					(reference "D1")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 156.21 29.21 0)
+		(at 171.45 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8f3119e4-b23f-46c1-b2d9-32341b178bab")
-		(property "Reference" "D5"
-			(at 159.258 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "8969efa5-ff31-42de-8d7a-1fc5439cb27d")
+		(property "Reference" "D18"
+			(at 182.88 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4596,16 +4327,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 167.64 25.3298 0)
+			(at 182.88 51.9998 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 157.48 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 172.72 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4615,7 +4345,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 158.75 38.735 0)
+			(at 173.99 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4625,7 +4355,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 156.21 29.21 0)
+			(at 172.212 45.974 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4633,38 +4363,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "a60edb93-a541-4836-8f86-2a07fb03b2a0")
-		)
-		(pin "2"
-			(uuid "ffe1c1ae-4139-445e-8a23-c2085f1c7740")
+		(property "JLCPCB Part" "C3646929"
+			(at 171.45 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "c53135c3-c4fb-421f-81a1-669acbe772cd")
+			(uuid "67de3e21-e4a2-4b0a-83df-d59150b508dc")
 		)
 		(pin "4"
-			(uuid "9380aeb2-8d0e-4036-9d9b-e48882dc7255")
+			(uuid "9f5ae4f1-7a82-4e23-a6d8-347f3ffda5b0")
+		)
+		(pin "3"
+			(uuid "ecde76c5-692a-4386-aa7f-3dde0cb16b67")
+		)
+		(pin "2"
+			(uuid "d92c0834-47ff-48d2-90f4-5a22754a6269")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D5")
+					(reference "D18")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 125.73 55.88 0)
+		(at 186.69 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "921bdb13-ffbc-4482-84d2-521d3ee4a4da")
-		(property "Reference" "D15"
-			(at 128.778 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "8bdeb4a4-3c34-4156-9937-4e69e93dc6a5")
+		(property "Reference" "D31"
+			(at 198.12 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4672,16 +4413,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 137.16 51.9998 0)
+			(at 198.12 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 127 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 187.96 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4691,7 +4431,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 128.27 65.405 0)
+			(at 189.23 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4701,7 +4441,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 125.73 55.88 0)
+			(at 187.452 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4709,28 +4449,38 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "a3403c6c-6599-461a-81f3-dab5cb3b4ac5")
-		)
-		(pin "2"
-			(uuid "91f2fe64-8cf1-477b-9af7-73913f5bf8d4")
+		(property "JLCPCB Part" "C3646929"
+			(at 186.69 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "8ac850e7-1029-4476-b4bc-8bc033b9aaa7")
+			(uuid "402cb954-b5b7-4a1f-9c3b-0eae59193506")
 		)
 		(pin "4"
-			(uuid "165b99bb-6b34-47e5-8760-a51551da38e7")
+			(uuid "2728d15e-864d-4ff1-bb8f-0ea53e4050b6")
+		)
+		(pin "3"
+			(uuid "29e8c3ff-5901-4b8f-8541-d3086364e5a1")
+		)
+		(pin "2"
+			(uuid "a4f4dd5f-3a86-423c-ac71-69fcfdd745f1")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D15")
+					(reference "D31")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
 		(at 140.97 29.21 0)
 		(unit 1)
@@ -4738,9 +4488,10 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94a34cd5-b4b4-49c7-8f9c-363eebcfde21")
+		(fields_autoplaced yes)
+		(uuid "94ed5426-88b7-40d3-948c-9f37cdd1df18")
 		(property "Reference" "D4"
-			(at 144.018 23.114 0)
+			(at 152.4 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4753,10 +4504,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
 			(at 142.24 36.83 0)
 			(effects
 				(font
@@ -4777,6 +4527,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 141.732 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
 			(at 140.97 29.21 0)
 			(effects
 				(font
@@ -4785,17 +4544,17 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "f575c1be-0379-4590-aa90-a395c5a18bea")
-		)
-		(pin "2"
-			(uuid "1910e027-d25e-4b42-bba2-daf8f2d1aba6")
-		)
 		(pin "1"
-			(uuid "cad31aea-6df5-42b2-a95a-1f4d30f04c37")
+			(uuid "7c636515-c2eb-42d4-9f3f-ccc30cbe6ebb")
 		)
 		(pin "4"
-			(uuid "56e4ce52-8096-4ced-827f-2742269e9183")
+			(uuid "7206ed1e-6e58-4c3e-8450-c84753df2a42")
+		)
+		(pin "3"
+			(uuid "7b514a9d-e73e-447f-b21f-d0e7cd0b3548")
+		)
+		(pin "2"
+			(uuid "1715008b-2c3f-4b7d-b023-962c1ad21ef4")
 		)
 		(instances
 			(project "equilibot"
@@ -4807,16 +4566,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 247.65 29.21 0)
+		(at 140.97 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "99a171f7-49cc-488f-b01b-f6525b9740c2")
-		(property "Reference" "D11"
-			(at 250.698 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "976ae527-4a09-4142-8b37-54a42a1f3aa1")
+		(property "Reference" "D28"
+			(at 152.4 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4824,16 +4585,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 259.08 25.3298 0)
+			(at 152.4 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 248.92 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 142.24 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4843,7 +4603,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 250.19 38.735 0)
+			(at 143.51 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4853,7 +4613,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 247.65 29.21 0)
+			(at 141.732 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4861,22 +4621,31 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "c69eac20-925b-497d-b3cf-bb816cacf83a")
-		)
-		(pin "2"
-			(uuid "5d842e04-f169-4246-851c-1f9b8d398e4b")
+		(property "JLCPCB Part" "C3646929"
+			(at 140.97 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "b4ec3f5b-c30e-4e0b-a39e-8b6d2dc7c0b7")
+			(uuid "81d5cbac-0d28-46b5-bbd9-ac9c03e6d233")
 		)
 		(pin "4"
-			(uuid "53a13ed6-fe54-4733-ac9a-cf37dd1c132a")
+			(uuid "b05cd258-04c3-4758-9ef5-81fad927e724")
+		)
+		(pin "3"
+			(uuid "7b030990-50cb-41fb-b61f-04b96e6cef07")
+		)
+		(pin "2"
+			(uuid "91d8f125-af5f-42ec-ac93-789850b50975")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D11")
+					(reference "D28")
 					(unit 1)
 				)
 			)
@@ -4889,7 +4658,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a05fe29b-7b8e-4cd8-a1b1-c5c30aba909f")
 		(property "Reference" "J5"
@@ -4939,6 +4708,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" ""
+			(at 48.26 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fdab728f-a110-4ec4-8d09-93772c333f3b")
 		)
@@ -4952,6 +4730,178 @@
 			(project ""
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
 					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 262.89 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a184e953-6c54-4a7f-8570-b533e5df1776")
+		(property "Reference" "D12"
+			(at 274.32 22.7898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 274.32 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 264.16 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 265.43 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 263.652 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 262.89 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "12cc07df-1fcf-4b69-9925-fd7c1699533a")
+		)
+		(pin "4"
+			(uuid "ffc70afe-969c-4e66-93fb-ec816d558ccc")
+		)
+		(pin "3"
+			(uuid "1a7e4be9-6032-4761-bd3b-429c66581053")
+		)
+		(pin "2"
+			(uuid "52b00602-22e6-4042-8ad5-5db634261d9d")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 156.21 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a78a68f2-5f6e-45b0-83b9-cdb4ddd153e9")
+		(property "Reference" "D5"
+			(at 167.64 22.7898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 167.64 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 157.48 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 158.75 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 156.972 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 156.21 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6367099a-8d30-4e3f-b322-66a9b4ed589b")
+		)
+		(pin "4"
+			(uuid "63fae16d-67ed-4f86-81fa-05cebe613b67")
+		)
+		(pin "3"
+			(uuid "be4346b2-a5f2-4127-a153-a4cef29140c6")
+		)
+		(pin "2"
+			(uuid "350c32ed-968a-4f43-8135-26aa3d02de09")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -5012,6 +4962,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" "C14663"
+			(at 140.97 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a3f80cb6-80a2-4dec-95f7-eca4baf14fc7")
 		)
@@ -5028,16 +4987,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 232.41 29.21 0)
+		(at 201.93 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "af370aba-c767-4ddd-b47d-a26cb18aafab")
-		(property "Reference" "D10"
-			(at 235.458 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "a98fbc4e-41dc-481c-bc08-aa6a4626647b")
+		(property "Reference" "D20"
+			(at 213.36 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5045,16 +5006,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 243.84 25.3298 0)
+			(at 213.36 51.9998 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 233.68 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 203.2 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5064,7 +5024,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 234.95 38.735 0)
+			(at 204.47 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5074,7 +5034,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 232.41 29.21 0)
+			(at 202.692 45.974 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5082,22 +5042,31 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "1da6caa7-feda-42bb-ade9-20fe47828d29")
-		)
-		(pin "2"
-			(uuid "50f5dcd5-d084-4ca1-8f4f-ac4b8256cd52")
+		(property "JLCPCB Part" "C3646929"
+			(at 201.93 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "06a58975-9bb9-45d2-b9a3-762af7d61d1d")
+			(uuid "269c57c8-1973-4523-9834-ca85a2aba7d4")
 		)
 		(pin "4"
-			(uuid "b1ecc913-2065-4e37-bafe-e2af52fe631b")
+			(uuid "aeb5f3f3-bda4-42c7-a38f-2838c60fd1cf")
+		)
+		(pin "3"
+			(uuid "c19b9889-b2e3-461e-85b2-d0caaa3b6406")
+		)
+		(pin "2"
+			(uuid "ab90f8d7-e41e-40c9-bac8-113897c4c384")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D10")
+					(reference "D20")
 					(unit 1)
 				)
 			)
@@ -5158,6 +5127,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" "C14663"
+			(at 140.97 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4bc0aceb-f3fc-4fb2-8132-5cc24379b461")
 		)
@@ -5168,6 +5146,178 @@
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
 					(reference "C41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 217.17 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b4ca0f28-b4af-4d02-a8d0-d0b2362f46c2")
+		(property "Reference" "D21"
+			(at 228.6 49.4598 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 228.6 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 218.44 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 219.71 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 217.932 45.974 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 217.17 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "04d8d0a9-8c01-4807-b6ce-6a524508cb71")
+		)
+		(pin "4"
+			(uuid "b45aa784-0349-4090-a4a3-e5749e79a153")
+		)
+		(pin "3"
+			(uuid "b502b651-dc53-45e8-b6b6-13df8de742f6")
+		)
+		(pin "2"
+			(uuid "81503558-58b4-4b85-b377-fa548ef64b99")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 156.21 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b600f711-4342-43e3-9c4a-f2cfb752d985")
+		(property "Reference" "D17"
+			(at 167.64 49.4598 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 167.64 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 157.48 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 158.75 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 156.972 45.974 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 156.21 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3a1c5a17-735a-4a19-abc0-ce2286cceada")
+		)
+		(pin "4"
+			(uuid "a3763adc-b1c6-4bbf-9687-7d27e57d81e7")
+		)
+		(pin "3"
+			(uuid "598ca772-bf79-45a5-b77d-6c248bb23329")
+		)
+		(pin "2"
+			(uuid "2878d2dc-f299-41ad-b5c2-042df145091a")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D17")
 					(unit 1)
 				)
 			)
@@ -5240,16 +5390,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 186.69 55.88 0)
+		(at 110.49 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d11a083c-d5ad-4caf-a245-7c3b52d949a0")
-		(property "Reference" "D19"
-			(at 189.738 49.784 0)
+		(fields_autoplaced yes)
+		(uuid "bb26e2fd-0827-4097-a4d5-8e64c84ad573")
+		(property "Reference" "D2"
+			(at 121.92 22.7898 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5257,16 +5409,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 198.12 51.9998 0)
+			(at 121.92 25.3298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 187.96 63.5 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 111.76 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5276,7 +5427,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 189.23 65.405 0)
+			(at 113.03 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5286,7 +5437,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 186.69 55.88 0)
+			(at 111.252 19.304 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5294,22 +5445,117 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "8a080ebe-f706-4633-b99a-ca5470b2665e")
-		)
-		(pin "2"
-			(uuid "7d39873c-e7b6-495a-b599-035e006bbb43")
+		(property "JLCPCB Part" "C3646929"
+			(at 110.49 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "4a14a057-0bcb-415a-afd7-7c0b5903b9f5")
+			(uuid "6a5bcc17-719c-4bba-81d3-e70a450db2f3")
 		)
 		(pin "4"
-			(uuid "2368f394-b565-4df2-afe0-59867c94f469")
+			(uuid "ec2835a6-db41-4554-b845-a94376dc2cd4")
+		)
+		(pin "3"
+			(uuid "bf12fc2a-fee8-41dc-bed9-73991581c4d1")
+		)
+		(pin "2"
+			(uuid "b2c1a9b2-122e-45d8-baf4-9b109cd8ccef")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D19")
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 125.73 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cf474645-3e61-498d-9a18-e4aca9ddc95d")
+		(property "Reference" "D3"
+			(at 137.16 22.7898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 137.16 25.3298 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 127 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 128.27 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 126.492 19.304 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 125.73 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f3afac8a-8228-47d8-8fc1-f66012e6b734")
+		)
+		(pin "4"
+			(uuid "24382af4-b294-4698-a238-6287aba8b06a")
+		)
+		(pin "3"
+			(uuid "acc5c8f0-efd0-4ab2-b9a0-93742276d91d")
+		)
+		(pin "2"
+			(uuid "39661d75-1010-4e3d-a840-45f527fdf5f9")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -5323,7 +5569,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "d4e03fd9-5ddb-410e-af7a-4ebf89d176b7")
 		(property "Reference" "TP8"
 			(at 62.8163 30.988 90)
@@ -5371,6 +5617,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" ""
+			(at 61.0383 31.75 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3ba7c346-e303-49f1-b49d-8061a70361b2")
 		)
@@ -5378,6 +5633,92 @@
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
 					(reference "TP8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "WS2812B_1")
+		(lib_id "XL_WS2812B_1615:WS2812B")
+		(at 186.69 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d7877e18-098b-4332-9b96-9925b9776b9d")
+		(property "Reference" "D19"
+			(at 198.12 49.4598 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2812B"
+			(at 198.12 51.9998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 187.96 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
+			(at 189.23 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 187.452 45.974 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
+			(at 186.69 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "641eaf84-3329-4e6b-a926-a3e6f8d9af4b")
+		)
+		(pin "4"
+			(uuid "50d4609c-eeda-468b-8c89-f340da8ba911")
+		)
+		(pin "3"
+			(uuid "2957c258-a5cb-4c62-9e33-08484c6bad4a")
+		)
+		(pin "2"
+			(uuid "2185b672-6ddf-483a-9894-08997512febe")
+		)
+		(instances
+			(project "equilibot"
+				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
+					(reference "D19")
 					(unit 1)
 				)
 			)
@@ -5438,6 +5779,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part" "C14663"
+			(at 232.41 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c2601383-10f0-479a-a486-720fa6c59c6f")
 		)
@@ -5454,16 +5804,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 201.93 29.21 0)
+		(at 171.45 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e45ac119-bba1-4148-a036-7c47475a08cb")
-		(property "Reference" "D8"
-			(at 204.978 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "df231b4a-1c57-4527-9c2d-b64bb2f99903")
+		(property "Reference" "D30"
+			(at 182.88 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5471,16 +5823,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 213.36 25.3298 0)
+			(at 182.88 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 203.2 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 172.72 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5490,7 +5841,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 204.47 38.735 0)
+			(at 173.99 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5500,7 +5851,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 201.93 29.21 0)
+			(at 172.212 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5508,38 +5859,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "2274e028-68b0-414a-9c8a-6a561d272677")
-		)
-		(pin "2"
-			(uuid "8c7546e0-20b1-44e5-a912-513c4afc8acd")
+		(property "JLCPCB Part" "C3646929"
+			(at 171.45 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "9d7b61cd-0d28-449d-b996-635f9304f16d")
+			(uuid "0cef32bd-c53c-45a4-a1a6-f7d9673a2985")
 		)
 		(pin "4"
-			(uuid "c4ca9dea-9223-49b1-b0bb-781137544312")
+			(uuid "3ddc3bff-e982-49b2-a7e7-9ed9bc16d1ee")
+		)
+		(pin "3"
+			(uuid "d1ca641a-2279-455c-bf20-c945a2567cc8")
+		)
+		(pin "2"
+			(uuid "ee225b68-a6aa-4499-95c0-190d71a615d3")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D8")
+					(reference "D30")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 186.69 82.55 0)
+		(at 95.25 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e506a5bf-cdfa-4dd0-a683-5a3a4f9a2a9e")
-		(property "Reference" "D31"
-			(at 189.738 76.454 0)
+		(fields_autoplaced yes)
+		(uuid "df5027f1-3688-45d8-9041-6b2db3ce6e65")
+		(property "Reference" "D13"
+			(at 106.68 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5547,16 +5909,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 198.12 78.6698 0)
+			(at 106.68 51.9998 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 187.96 90.17 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 96.52 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5566,7 +5927,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 189.23 92.075 0)
+			(at 97.79 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5576,7 +5937,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 186.69 82.55 0)
+			(at 96.012 45.974 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5584,28 +5945,38 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "02f376fb-52f7-486e-a07d-00749e6336b6")
-		)
-		(pin "2"
-			(uuid "d5bf7a05-e468-4356-b791-6ae5d1cbb2e1")
+		(property "JLCPCB Part" "C3646929"
+			(at 95.25 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "8868c060-28d0-4514-ac79-7381d0a748ad")
+			(uuid "49ccdf54-db52-4328-bbc5-aea96aee43f7")
 		)
 		(pin "4"
-			(uuid "3b64481e-73ff-4d02-a27d-3522a895f6f5")
+			(uuid "58964068-1a94-4f28-8ffc-3995ee9ebf9f")
+		)
+		(pin "3"
+			(uuid "201a80f9-6153-4c9f-b713-34c66fdb61e3")
+		)
+		(pin "2"
+			(uuid "2cd969a5-45df-49fa-b4d5-f524acef7ecf")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D31")
+					(reference "D13")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
 		(at 140.97 55.88 0)
 		(unit 1)
@@ -5613,9 +5984,10 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e5a8f24b-bee2-4a38-bd7b-96b6faac77db")
+		(fields_autoplaced yes)
+		(uuid "e5aaf7df-095e-496b-b8f6-9e279f5c7b87")
 		(property "Reference" "D16"
-			(at 144.018 49.784 0)
+			(at 152.4 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5628,10 +6000,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
 			(at 142.24 63.5 0)
 			(effects
 				(font
@@ -5652,6 +6023,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 141.732 45.974 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part" "C3646929"
 			(at 140.97 55.88 0)
 			(effects
 				(font
@@ -5660,17 +6040,17 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "6c1c80ae-0dec-4b93-9a69-8965b3de5572")
-		)
-		(pin "2"
-			(uuid "9b384114-c36b-4bc9-b7ee-03a5666cb254")
-		)
 		(pin "1"
-			(uuid "3f03296d-243d-47f9-a9ec-b8bc327be483")
+			(uuid "a227ac70-367d-43f6-aa76-f6a3e9ce585c")
 		)
 		(pin "4"
-			(uuid "c81f3ce2-f1a2-43f7-abeb-f23383202d57")
+			(uuid "c5873ecb-b69b-44e9-a382-7e01035091db")
+		)
+		(pin "3"
+			(uuid "a2852b98-10d3-4641-a5e6-88ad9484492e")
+		)
+		(pin "2"
+			(uuid "5186a774-c3a6-4ff1-9f82-276ae54d6ec5")
 		)
 		(instances
 			(project "equilibot"
@@ -5682,16 +6062,18 @@
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 217.17 29.21 0)
+		(at 156.21 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e67f64f7-22e6-458d-8fcd-f74c5cb7b341")
-		(property "Reference" "D9"
-			(at 220.218 23.114 0)
+		(fields_autoplaced yes)
+		(uuid "e666995f-2ce0-4953-a43d-cea52d26f7a2")
+		(property "Reference" "D29"
+			(at 167.64 76.1298 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5699,16 +6081,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 228.6 25.3298 0)
+			(at 167.64 78.6698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 218.44 36.83 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 157.48 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5718,7 +6099,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 219.71 38.735 0)
+			(at 158.75 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5728,7 +6109,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 217.17 29.21 0)
+			(at 156.972 72.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5736,38 +6117,49 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "8b2a5b06-ff18-47e0-a0a3-17715e5227e1")
-		)
-		(pin "2"
-			(uuid "7ba535c4-bb89-4d67-acd8-e6a0e34ba04f")
+		(property "JLCPCB Part" "C3646929"
+			(at 156.21 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "d8783feb-57da-43dc-a4ed-6e4d698a6dcf")
+			(uuid "f878ac74-f131-4674-aefa-96265ce13462")
 		)
 		(pin "4"
-			(uuid "02cac49c-155b-41c9-8d69-3e1459c1ec16")
+			(uuid "69485ac3-d3d2-4e5a-9314-004790707df0")
+		)
+		(pin "3"
+			(uuid "966b2fd8-475f-4e03-ac3d-489fe1ea931d")
+		)
+		(pin "2"
+			(uuid "000d41b1-9dd1-47ed-98e7-9efacdd48f5a")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D9")
+					(reference "D29")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
+		(lib_name "WS2812B_1")
 		(lib_id "XL_WS2812B_1615:WS2812B")
-		(at 125.73 82.55 0)
+		(at 247.65 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f3b127f3-073b-43eb-8b16-ad9e5f46b5be")
-		(property "Reference" "D27"
-			(at 128.778 76.454 0)
+		(fields_autoplaced yes)
+		(uuid "ec65e000-2bf2-4e9d-80b1-b069c5d4f28b")
+		(property "Reference" "D23"
+			(at 259.08 49.4598 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5775,16 +6167,15 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 137.16 78.6698 0)
+			(at 259.08 51.9998 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" "Equilibot:XL_WS2812B_1615"
-			(at 127 90.17 0)
+		(property "Footprint" "Equilibot:XL_WS2812B_0807"
+			(at 248.92 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5794,7 +6185,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf"
-			(at 128.27 92.075 0)
+			(at 250.19 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5804,7 +6195,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 125.73 82.55 0)
+			(at 248.412 45.974 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5812,22 +6203,31 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "d5418e66-cc3b-4792-b151-325cac1c7a6c")
-		)
-		(pin "2"
-			(uuid "611a89e5-070f-47a8-a685-b9e81c18fcea")
+		(property "JLCPCB Part" "C3646929"
+			(at 247.65 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "9753ac13-e5ca-4253-b96a-5887b13de290")
+			(uuid "50c69a7a-e69d-4464-a005-65b2b17696db")
 		)
 		(pin "4"
-			(uuid "73a3b95d-b3de-4541-b954-d5cf5db15a33")
+			(uuid "2323c27d-3586-40d2-986e-5bdc755bdf43")
+		)
+		(pin "3"
+			(uuid "0bf1ea89-485d-47a7-aa58-75b7e8dd0b5d")
+		)
+		(pin "2"
+			(uuid "d60bc99a-405e-4aa0-950d-8e245d3789d6")
 		)
 		(instances
 			(project "equilibot"
 				(path "/89173e08-b1dc-4af0-8ecb-15e7dd0ab67e/494b3b4d-670b-4bdd-962d-1e2d85f28e40"
-					(reference "D27")
+					(reference "D23")
 					(unit 1)
 				)
 			)

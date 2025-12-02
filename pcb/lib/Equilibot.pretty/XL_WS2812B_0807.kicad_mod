@@ -1,0 +1,121 @@
+(footprint "XL_WS2812B_0807"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0.45 -0.975 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "ab6699b6-7197-4b60-8275-a3f1d111bc8a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "XL_WS2812B_0807"
+		(at 0.45 0.525 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "5f189892-deb3-43c1-b3a4-e87ba59477ce")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0.45 -0.475 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8af2bff2-0280-4a40-9402-b32b86188279")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0.45 -0.475 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1c0a69d0-7b31-4d88-b725-3929911d24dc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_rect
+		(start -1 -0.9)
+		(end 1 0.9)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "ccea86cd-c401-4bfa-a31c-97ecd6e20b13")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.45 2.025 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "55180eb2-f7a6-423e-bbad-5e1dc13a840a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -0.75 -0.45)
+		(size 0.6 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "38bf3047-cad4-4906-948e-f784e4e8a04f")
+	)
+	(pad "2" smd roundrect
+		(at -0.75 0.45)
+		(size 0.6 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "4714052f-56ac-446c-b1e3-053f1abff2de")
+	)
+	(pad "3" smd roundrect
+		(at 0.75 0.45)
+		(size 0.6 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "889d333e-e90e-428d-99df-2cc72fd056c7")
+	)
+	(pad "4" smd roundrect
+		(at 0.75 -0.45)
+		(size 0.6 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "b35365cb-996a-4122-a687-1774b2b7f5ed")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/Equilibot.pretty/WS2812-0807.STEP"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
+)
