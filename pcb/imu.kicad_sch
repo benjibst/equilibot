@@ -2951,7 +2951,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e75a3b7b-0981-4d7b-a536-d2f0a20ac89e")
 		(property "Reference" "MT1"

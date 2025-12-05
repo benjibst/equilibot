@@ -1,4 +1,4 @@
-26398032531868188
+26399797555995447
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59682,6 +59682,13 @@ One digit LED 7 segment SA39-11 SC39-11 SA39-12 SC39-12
 10
 10
 Equilibot
+AMASS_XT60PW-M_1x02_P7.20mm_Horizontal
+Connector XT60 Horizontal PCB Female, https://www.tme.eu/Document/b13629717d44ae038681dba08d18c0b6/XT60PW-M.pdf
+RC Connector XT60
+0
+4
+2
+Equilibot
 ESP32-S3-WROOM-1
 2.4 GHz Wi-Fi and Bluetooth module  https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf
 2.4 GHz Wi-Fi and Bluetooth module
@@ -61033,7 +61040,7 @@ heatsink
 0
 0
 ICM-42670-P
-XDCR_ICM-42670-P
+XDCR_ICM-42670-P_old
 
 
 0
