@@ -671,6 +671,14 @@
 		(zone_connect 2)
 		(uuid "a039598d-b4bf-41c9-bb5d-5731a11b0e9a")
 	)
+	(pad "41" smd rect
+		(at -1.5 2.46 270)
+		(size 3.9 3.9)
+		(property pad_prop_heatsink)
+		(layers "B.Cu" "B.Mask")
+		(zone_connect 2)
+		(uuid "2878b666-f4ef-4f20-bfda-392190dc0df2")
+	)
 	(pad "41" thru_hole oval
 		(at -1.5 2.5)
 		(size 0.5 0.5)
