@@ -1,3 +1,4 @@
+#include "led_strip_example.hpp"
 #include "driver/i2c_master.h"
 #include "driver/gpio.h"
 #include "esp_err.h"
@@ -6,7 +7,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "icm42670.h"
-
 namespace
 {
 
@@ -166,6 +166,7 @@ uint64_t us_avg = 0;
 uint64_t cnt = 0;
 extern "C" void app_main(void)
 {
+    run_led_strip();
     bool spi = true; // Set to true to test SPI interface instead of I2C
     esp_err_t ret = init_icm42670(spi);
     if (ret != ESP_OK)
