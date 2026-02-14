@@ -3,6 +3,12 @@
         {
             "name": "ESP-IDF",
             "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/esp-bsp/components/icm42670",
+                    "/opt/esp-idf/components/esp_driver_spi/include/"
+                ]
+            },
             "cStandard": "c23",
             "cppStandard": "c++23",
             "intelliSenseMode": "linux-gcc-x64"

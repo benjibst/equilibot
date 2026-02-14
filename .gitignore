@@ -3,3 +3,4 @@ src/managed_components/
 ~*.lck
 \#*#
 *.lock
+*.old
