@@ -2,3 +2,4 @@ src/build/
 src/managed_components/
 ~*.lck
 \#*#
+*.lock
