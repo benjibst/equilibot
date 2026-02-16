@@ -1,18 +1,18 @@
 {
-    "configurations": [
-        {
-            "name": "ESP-IDF",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
-            "browse": {
-                "path": [
-                    "${workspaceFolder}/esp-bsp/components/icm42670",
-                    "/opt/esp-idf/components/esp_driver_spi/include/"
-                ]
-            },
-            "cStandard": "c23",
-            "cppStandard": "c++23",
-            "intelliSenseMode": "linux-gcc-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "ESP-IDF",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "browse": {
+        "path": [
+          "${workspaceFolder}/esp-bsp/components/icm42670"
+        ]
+      },
+      "cStandard": "c23",
+      "cppStandard": "c++23",
+      "intelliSenseMode": "linux-gcc-x64",
+      "compilerPath": "/home/benni/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc"
+    }
+  ],
+  "version": 4
 }

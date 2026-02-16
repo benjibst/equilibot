@@ -13,6 +13,18 @@ public:
     {
         vSemaphoreDelete(mutex);
     }
+    void lock()
+    {
+        if (xSemaphoreTake(mutex, portMAX_DELAY) != pdTRUE)
+        {
+            // Handle error: failed to acquire mutex
+            // For example, you could throw an exception or log an error message
+        }
+    }
+    void unlock()
+    {
+        xSemaphoreGive(mutex);
+    }
 
     StaticMutex(const StaticMutex &) = delete;
     StaticMutex &operator=(const StaticMutex &) = delete;
