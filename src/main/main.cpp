@@ -7,7 +7,26 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "tmc5240.hpp"
 #include <cmath>
+
+void teststepper(TMC5240 &drv, uint32_t data)
+{
+    uint8_t status = 12;
+    ESP_LOGI(__FILE__, "TESTING DRIVER %d with data %x", drv.device_id(), data);
+    if (drv.write(0x21, data, status) == ESP_OK)
+    {
+        ESP_LOGI(__FILE__, "Write with status %x", status);
+    }
+    vTaskDelay(pdMS_TO_TICKS(100));
+    uint32_t val;
+    if (drv.read(0x21, val, status) == ESP_OK)
+    {
+        ESP_LOGI(__FILE__, "Read with status %x", status);
+    }
+
+    ESP_LOGI(__FILE__, "Sent: %x, received: %x", data, val);
+}
 
 extern "C" void app_main(void)
 {
@@ -33,7 +52,8 @@ extern "C" void app_main(void)
         .motor2_segment = {.start_index = 28, .led_count = 3},
     };
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
-
+    TMC5240 mot1(spi_bus, GPIO_NUM_12, MOT_1);
+    TMC5240 mot2(spi_bus, GPIO_NUM_10, MOT_2);
     esp_err_t web_server_err = start_web_server();
     if (web_server_err != ESP_OK)
     {
@@ -41,14 +61,11 @@ extern "C" void app_main(void)
     }
 
     TickType_t last_telemetry_send = 0;
+    int cnt = 0;
     while (true)
     {
         ICM42670Sample sample = imu.read_sample();
-        ESP_LOGI(__FILE__, "acc: %f %f %f, gyro: %f %f %f", sample.acc.x, sample.acc.y, sample.acc.z, sample.gyro.x, sample.gyro.y, sample.gyro.z);
         float abs = std::sqrt(sample.acc.x * sample.acc.x + sample.acc.y * sample.acc.y + sample.acc.z * sample.acc.z);
-        float angle = std::lerp(-90.0f, 90.0f, (abs));
-        led_strip.set_tilt(angle);
-
         TickType_t now = xTaskGetTickCount();
         if (now - last_telemetry_send >= pdMS_TO_TICKS(50))
         {
@@ -62,6 +79,8 @@ extern "C" void app_main(void)
             };
             web_server_publish_telemetry(telemetry);
             last_telemetry_send = now;
+            teststepper(mot1, cnt++);
+            teststepper(mot2, cnt++);
         }
     }
 }

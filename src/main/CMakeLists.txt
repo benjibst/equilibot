@@ -4,6 +4,7 @@ idf_component_register(
          "spi_bus.cpp"
          "icm42670_spi.cpp"
          "web_server.cpp"
+         "tmc5240.cpp"
     EMBED_TXTFILES "index.html"
     INCLUDE_DIRS "."
     REQUIRES esp_driver_gpio
