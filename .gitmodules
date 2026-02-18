@@ -1,3 +1,0 @@
-[submodule "src/esp-bsp"]
-	path = src/esp-bsp
-	url = git@github.com:benjibst/esp-bsp.git
