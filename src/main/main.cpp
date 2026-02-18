@@ -2,6 +2,7 @@
 #include "common.hpp"
 #include "icm42670_spi.hpp"
 #include "led_strip.hpp"
+#include "web_server.hpp"
 #include "esp_err.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
@@ -15,7 +16,7 @@ extern "C" void app_main(void)
         .config = {
             .acce_fs = ACCE_FS_2G,
             .acce_odr = ACCE_ODR_400HZ,
-            .gyro_fs = GYRO_FS_1000DPS,
+            .gyro_fs = GYRO_FS_250DPS,
             .gyro_odr = GYRO_ODR_400HZ},
         .acce_pwr = ACCE_PWR_LOWNOISE,
         .gyro_pwr = GYRO_PWR_LOWNOISE,
@@ -32,13 +33,35 @@ extern "C" void app_main(void)
         .motor2_segment = {.start_index = 28, .led_count = 3},
     };
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
+
+    esp_err_t web_server_err = start_web_server();
+    if (web_server_err != ESP_OK)
+    {
+        ESP_LOGE(__FILE__, "Failed to start web server: %s", esp_err_to_name(web_server_err));
+    }
+
+    TickType_t last_telemetry_send = 0;
     while (true)
     {
         ICM42670Sample sample = imu.read_sample();
-        sample.acc.z -= 1.0f; // compensate for gravity
         ESP_LOGI(__FILE__, "acc: %f %f %f, gyro: %f %f %f", sample.acc.x, sample.acc.y, sample.acc.z, sample.gyro.x, sample.gyro.y, sample.gyro.z);
         float abs = std::sqrt(sample.acc.x * sample.acc.x + sample.acc.y * sample.acc.y + sample.acc.z * sample.acc.z);
         float angle = std::lerp(-90.0f, 90.0f, (abs));
         led_strip.set_tilt(angle);
+
+        TickType_t now = xTaskGetTickCount();
+        if (now - last_telemetry_send >= pdMS_TO_TICKS(50))
+        {
+            TelemetrySample telemetry = {
+                .acc_x = sample.acc.x,
+                .acc_y = sample.acc.y,
+                .acc_z = sample.acc.z,
+                .gyro_x = sample.gyro.x,
+                .gyro_y = sample.gyro.y,
+                .gyro_z = sample.gyro.z,
+            };
+            web_server_publish_telemetry(telemetry);
+            last_telemetry_send = now;
+        }
     }
 }

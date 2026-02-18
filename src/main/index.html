@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equilibot Telemetry</title>
+  <style>
+    :root {
+      --bg-a: #f4f6f8;
+      --bg-b: #dbe8ef;
+      --panel: #ffffff;
+      --ink: #1d2a36;
+      --muted: #5c7283;
+      --x: #1b76d1;
+      --y: #1d9d75;
+      --z: #d43a4f;
+      --line: #d3dde4;
+      --online: #1f8f5f;
+      --offline: #b04040;
+      --pending: #b67912;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 15% 0, #ffffff 0%, var(--bg-a) 35%, var(--bg-b) 100%);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .top {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      font-weight: 700;
+    }
+
+    .status.online {
+      color: var(--online);
+    }
+
+    .status.offline {
+      color: var(--offline);
+    }
+
+    .status.pending {
+      color: var(--pending);
+    }
+
+    .readout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+    }
+
+    .panel h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .axis-grid {
+      display: grid;
+      gap: 0.25rem;
+    }
+
+    .axis {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .axis .name {
+      font-weight: 700;
+      min-width: 2rem;
+    }
+
+    .axis .name.x {
+      color: var(--x);
+    }
+
+    .axis .name.y {
+      color: var(--y);
+    }
+
+    .axis .name.z {
+      color: var(--z);
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .chart-card {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 0.8rem;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .chart-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .legend {
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.83rem;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .dot {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+    }
+
+    .dot.x { background: var(--x); }
+    .dot.y { background: var(--y); }
+    .dot.z { background: var(--z); }
+
+    canvas {
+      width: 100%;
+      height: 250px;
+      display: block;
+      border-radius: 10px;
+      background: #f9fbfc;
+      border: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      .readout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="top">
+      <h1>Equilibot Live Telemetry</h1>
+      <div class="status pending" id="wsStatus">Connecting...</div>
+    </section>
+
+    <section class="readout">
+      <article class="panel">
+        <h2>Acceleration (g)</h2>
+        <div class="axis-grid">
+          <div class="axis"><span class="name x">X</span><span id="accX">--</span></div>
+          <div class="axis"><span class="name y">Y</span><span id="accY">--</span></div>
+          <div class="axis"><span class="name z">Z</span><span id="accZ">--</span></div>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Gyroscope (dps)</h2>
+        <div class="axis-grid">
+          <div class="axis"><span class="name x">X</span><span id="gyroX">--</span></div>
+          <div class="axis"><span class="name y">Y</span><span id="gyroY">--</span></div>
+          <div class="axis"><span class="name z">Z</span><span id="gyroZ">--</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="charts">
+      <article class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Acceleration Over Time</div>
+          <div class="legend">
+            <span><i class="dot x"></i>X</span>
+            <span><i class="dot y"></i>Y</span>
+            <span><i class="dot z"></i>Z</span>
+          </div>
+        </div>
+        <canvas id="accChart"></canvas>
+      </article>
+      <article class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Gyroscope Over Time</div>
+          <div class="legend">
+            <span><i class="dot x"></i>X</span>
+            <span><i class="dot y"></i>Y</span>
+            <span><i class="dot z"></i>Z</span>
+          </div>
+        </div>
+        <canvas id="gyroChart"></canvas>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const MAX_POINTS = 180;
+    const COLORS = { x: "#1b76d1", y: "#1d9d75", z: "#d43a4f" };
+
+    const acc = { x: [], y: [], z: [] };
+    const gyro = { x: [], y: [], z: [] };
+    const latest = { acc: { x: null, y: null, z: null }, gyro: { x: null, y: null, z: null } };
+
+    const wsStatus = document.getElementById("wsStatus");
+    const accChart = document.getElementById("accChart");
+    const gyroChart = document.getElementById("gyroChart");
+
+    function setStatus(text, mode) {
+      wsStatus.textContent = text;
+      wsStatus.className = "status " + mode;
+    }
+
+    function push3(series, values) {
+      for (const axis of ["x", "y", "z"]) {
+        const value = Number(values[axis]);
+        if (!Number.isFinite(value)) {
+          continue;
+        }
+        series[axis].push(value);
+        if (series[axis].length > MAX_POINTS) {
+          series[axis].shift();
+        }
+      }
+    }
+
+    function fmt(value, digits) {
+      return Number.isFinite(value) ? value.toFixed(digits) : "--";
+    }
+
+    function refreshReadout() {
+      document.getElementById("accX").textContent = fmt(latest.acc.x, 4);
+      document.getElementById("accY").textContent = fmt(latest.acc.y, 4);
+      document.getElementById("accZ").textContent = fmt(latest.acc.z, 4);
+      document.getElementById("gyroX").textContent = fmt(latest.gyro.x, 3);
+      document.getElementById("gyroY").textContent = fmt(latest.gyro.y, 3);
+      document.getElementById("gyroZ").textContent = fmt(latest.gyro.z, 3);
+    }
+
+    function computeRange(series, minSpan) {
+      let min = Infinity;
+      let max = -Infinity;
+      for (const axis of ["x", "y", "z"]) {
+        for (const value of series[axis]) {
+          if (value < min) min = value;
+          if (value > max) max = value;
+        }
+      }
+
+      if (!Number.isFinite(min) || !Number.isFinite(max)) {
+        return [-minSpan / 2, minSpan / 2];
+      }
+
+      const center = (min + max) / 2;
+      const span = Math.max(max - min, minSpan) * 1.18;
+      return [center - span / 2, center + span / 2];
+    }
+
+    function resizeCanvas(canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = Math.max(320, Math.floor(rect.width * dpr));
+      const height = Math.max(180, Math.floor(rect.height * dpr));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    }
+
+    function drawChart(canvas, series, yMin, yMax, unitLabel) {
+      resizeCanvas(canvas);
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width;
+      const h = canvas.height;
+      const pad = { l: 58, r: 14, t: 12, b: 28 };
+      const pw = w - pad.l - pad.r;
+      const ph = h - pad.t - pad.b;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#f9fbfc";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = "#e2e9ef";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i += 1) {
+        const y = pad.t + (ph * i) / 5;
+        ctx.beginPath();
+        ctx.moveTo(pad.l, y);
+        ctx.lineTo(pad.l + pw, y);
+        ctx.stroke();
+      }
+
+      const yToPx = (value) => pad.t + (1 - (value - yMin) / (yMax - yMin)) * ph;
+      const xToPx = (index) => {
+        if (MAX_POINTS <= 1) return pad.l;
+        return pad.l + (index / (MAX_POINTS - 1)) * pw;
+      };
+
+      if (yMin <= 0 && yMax >= 0) {
+        ctx.strokeStyle = "#c2d0dd";
+        ctx.beginPath();
+        ctx.moveTo(pad.l, yToPx(0));
+        ctx.lineTo(pad.l + pw, yToPx(0));
+        ctx.stroke();
+      }
+
+      for (const axis of ["x", "y", "z"]) {
+        const points = series[axis];
+        if (points.length < 2) continue;
+        ctx.strokeStyle = COLORS[axis];
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        points.forEach((value, index) => {
+          const x = xToPx(MAX_POINTS - points.length + index);
+          const y = yToPx(value);
+          if (index === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = "#5c7283";
+      ctx.font = "14px Trebuchet MS, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText((yMax).toFixed(2) + " " + unitLabel, 8, pad.t + 10);
+      ctx.fillText((yMin).toFixed(2) + " " + unitLabel, 8, pad.t + ph);
+      ctx.textAlign = "right";
+      ctx.fillText("latest " + MAX_POINTS + " samples", w - 8, h - 8);
+    }
+
+    function render() {
+      const accRange = computeRange(acc, 2.0);
+      const gyroRange = computeRange(gyro, 250.0);
+      drawChart(accChart, acc, accRange[0], accRange[1], "g");
+      drawChart(gyroChart, gyro, gyroRange[0], gyroRange[1], "dps");
+      requestAnimationFrame(render);
+    }
+
+    let ws = null;
+    let reconnectTimer = null;
+
+    function scheduleReconnect() {
+      if (reconnectTimer !== null) {
+        return;
+      }
+      reconnectTimer = setTimeout(() => {
+        reconnectTimer = null;
+        connectWebSocket();
+      }, 1200);
+    }
+
+    function connectWebSocket() {
+      setStatus("Connecting...", "pending");
+      const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+      ws = new WebSocket(protocol + "://" + window.location.host + "/ws");
+
+      ws.addEventListener("open", () => setStatus("Connected", "online"));
+
+      ws.addEventListener("message", (event) => {
+        let message;
+        try {
+          message = JSON.parse(event.data);
+        } catch (_ignored) {
+          return;
+        }
+
+        if (!message.acc || !message.gyro) {
+          return;
+        }
+
+        push3(acc, message.acc);
+        push3(gyro, message.gyro);
+
+        latest.acc.x = Number(message.acc.x);
+        latest.acc.y = Number(message.acc.y);
+        latest.acc.z = Number(message.acc.z);
+        latest.gyro.x = Number(message.gyro.x);
+        latest.gyro.y = Number(message.gyro.y);
+        latest.gyro.z = Number(message.gyro.z);
+        refreshReadout();
+      });
+
+      ws.addEventListener("close", () => {
+        setStatus("Disconnected, retrying...", "offline");
+        scheduleReconnect();
+      });
+
+      ws.addEventListener("error", () => {
+        setStatus("Socket error", "offline");
+        if (ws && ws.readyState <= 1) {
+          ws.close();
+        }
+      });
+    }
+
+    refreshReadout();
+    render();
+    connectWebSocket();
+  </script>
+</body>
+</html>
