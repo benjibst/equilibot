@@ -346,9 +346,9 @@ esp_err_t ICM42670Spi::get_raw_value(uint8_t reg, icm42670_raw_value_t &value)
         return ret;
     }
 
-    value.x = static_cast<int16_t>((static_cast<uint16_t>(data[0]) << 8) | data[1]);
-    value.y = static_cast<int16_t>((static_cast<uint16_t>(data[2]) << 8) | data[3]);
-    value.z = static_cast<int16_t>((static_cast<uint16_t>(data[4]) << 8) | data[5]);
+    value[0] = static_cast<int16_t>((static_cast<uint16_t>(data[0]) << 8) | data[1]);
+    value[1] = static_cast<int16_t>((static_cast<uint16_t>(data[2]) << 8) | data[3]);
+    value[2] = static_cast<int16_t>((static_cast<uint16_t>(data[4]) << 8) | data[5]);
 
     return ESP_OK;
 }
@@ -375,9 +375,9 @@ esp_err_t ICM42670Spi::get_acce_value(icm42670_value_t &value)
         return ret;
     }
 
-    value.x = raw_value.x / sensitivity;
-    value.y = raw_value.y / sensitivity;
-    value.z = raw_value.z / sensitivity;
+    value[0] = raw_value[0] / sensitivity;
+    value[1] = raw_value[1] / sensitivity;
+    value[2] = raw_value[2] / sensitivity;
     return ESP_OK;
 }
 
@@ -403,8 +403,8 @@ esp_err_t ICM42670Spi::get_gyro_value(icm42670_value_t &value)
         return ret;
     }
 
-    value.x = raw_value.x / sensitivity;
-    value.y = raw_value.y / sensitivity;
-    value.z = raw_value.z / sensitivity;
+    value[0] = raw_value[0] / sensitivity;
+    value[1] = raw_value[1] / sensitivity;
+    value[2] = raw_value[2] / sensitivity;
     return ESP_OK;
 }

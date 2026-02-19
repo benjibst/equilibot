@@ -166,6 +166,21 @@
       gap: 0.35rem;
     }
 
+    .sample-style {
+      width: 1.2rem;
+      border-top: 2px solid var(--muted);
+      display: inline-block;
+    }
+
+    .sample-style.raw {
+      border-top-style: dashed;
+      opacity: 0.5;
+    }
+
+    .sample-style.filtered {
+      border-top-style: solid;
+    }
+
     .dot {
       width: 0.65rem;
       height: 0.65rem;
@@ -226,6 +241,8 @@
             <span><i class="dot x"></i>X</span>
             <span><i class="dot y"></i>Y</span>
             <span><i class="dot z"></i>Z</span>
+            <span><i class="sample-style raw"></i>Raw</span>
+            <span><i class="sample-style filtered"></i>Filtered</span>
           </div>
         </div>
         <canvas id="accChart"></canvas>
@@ -237,6 +254,8 @@
             <span><i class="dot x"></i>X</span>
             <span><i class="dot y"></i>Y</span>
             <span><i class="dot z"></i>Z</span>
+            <span><i class="sample-style raw"></i>Raw</span>
+            <span><i class="sample-style filtered"></i>Filtered</span>
           </div>
         </div>
         <canvas id="gyroChart"></canvas>
@@ -248,8 +267,10 @@
     const MAX_POINTS = 180;
     const COLORS = { x: "#1b76d1", y: "#1d9d75", z: "#d43a4f" };
 
-    const acc = { x: [], y: [], z: [] };
-    const gyro = { x: [], y: [], z: [] };
+    const accRaw = { x: [], y: [], z: [] };
+    const accFiltered = { x: [], y: [], z: [] };
+    const gyroRaw = { x: [], y: [], z: [] };
+    const gyroFiltered = { x: [], y: [], z: [] };
     const latest = { acc: { x: null, y: null, z: null }, gyro: { x: null, y: null, z: null } };
 
     const wsStatus = document.getElementById("wsStatus");
@@ -287,13 +308,15 @@
       document.getElementById("gyroZ").textContent = fmt(latest.gyro.z, 3);
     }
 
-    function computeRange(series, minSpan) {
+    function computeRange(minSpan, ...seriesList) {
       let min = Infinity;
       let max = -Infinity;
-      for (const axis of ["x", "y", "z"]) {
-        for (const value of series[axis]) {
-          if (value < min) min = value;
-          if (value > max) max = value;
+      for (const series of seriesList) {
+        for (const axis of ["x", "y", "z"]) {
+          for (const value of series[axis]) {
+            if (value < min) min = value;
+            if (value > max) max = value;
+          }
         }
       }
 
@@ -317,7 +340,7 @@
       }
     }
 
-    function drawChart(canvas, series, yMin, yMax, unitLabel) {
+    function drawChart(canvas, rawSeries, filteredSeries, yMin, yMax, unitLabel) {
       resizeCanvas(canvas);
       const ctx = canvas.getContext("2d");
       const w = canvas.width;
@@ -354,20 +377,29 @@
         ctx.stroke();
       }
 
-      for (const axis of ["x", "y", "z"]) {
-        const points = series[axis];
-        if (points.length < 2) continue;
-        ctx.strokeStyle = COLORS[axis];
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        points.forEach((value, index) => {
-          const x = xToPx(MAX_POINTS - points.length + index);
-          const y = yToPx(value);
-          if (index === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        });
-        ctx.stroke();
-      }
+      const drawSeries = (series, lineWidth, alpha, dash) => {
+        ctx.globalAlpha = alpha;
+        ctx.setLineDash(dash);
+        for (const axis of ["x", "y", "z"]) {
+          const points = series[axis];
+          if (points.length < 2) continue;
+          ctx.strokeStyle = COLORS[axis];
+          ctx.lineWidth = lineWidth;
+          ctx.beginPath();
+          points.forEach((value, index) => {
+            const x = xToPx(MAX_POINTS - points.length + index);
+            const y = yToPx(value);
+            if (index === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          });
+          ctx.stroke();
+        }
+      };
+
+      drawSeries(rawSeries, 1.6, 0.45, [7, 5]);
+      drawSeries(filteredSeries, 2.2, 1.0, []);
+      ctx.globalAlpha = 1;
+      ctx.setLineDash([]);
 
       ctx.fillStyle = "#5c7283";
       ctx.font = "14px Trebuchet MS, sans-serif";
@@ -379,10 +411,10 @@
     }
 
     function render() {
-      const accRange = computeRange(acc, 2.0);
-      const gyroRange = computeRange(gyro, 250.0);
-      drawChart(accChart, acc, accRange[0], accRange[1], "g");
-      drawChart(gyroChart, gyro, gyroRange[0], gyroRange[1], "dps");
+      const accRange = computeRange(2.0, accRaw, accFiltered);
+      const gyroRange = computeRange(250.0, gyroRaw, gyroFiltered);
+      drawChart(accChart, accRaw, accFiltered, accRange[0], accRange[1], "g");
+      drawChart(gyroChart, gyroRaw, gyroFiltered, gyroRange[0], gyroRange[1], "dps");
       requestAnimationFrame(render);
     }
 
@@ -414,12 +446,14 @@
           return;
         }
 
-        if (!message.acc || !message.gyro) {
+        if (!message.acc || !message.gyro || !message.f_acc || !message.f_gyro) {
           return;
         }
 
-        push3(acc, message.acc);
-        push3(gyro, message.gyro);
+        push3(accRaw, message.acc);
+        push3(accFiltered, message.f_acc);
+        push3(gyroRaw, message.gyro);
+        push3(gyroFiltered, message.f_gyro);
 
         latest.acc.x = Number(message.acc.x);
         latest.acc.y = Number(message.acc.y);

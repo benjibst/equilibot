@@ -1,15 +1,13 @@
 #pragma once
 
 #include "esp_err.h"
-
+#include "array"
 struct TelemetrySample
 {
-    float acc_x;
-    float acc_y;
-    float acc_z;
-    float gyro_x;
-    float gyro_y;
-    float gyro_z;
+    std::array<float, 3> acc;
+    std::array<float, 3> gyro;
+    std::array<float, 3> f_acc;
+    std::array<float, 3> f_gyro;
 };
 
 esp_err_t start_web_server();

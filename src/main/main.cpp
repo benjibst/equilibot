@@ -5,28 +5,12 @@
 #include "web_server.hpp"
 #include "esp_err.h"
 #include "esp_log.h"
+#include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "tmc5240.hpp"
+#include "filter.hpp"
 #include <cmath>
-
-void teststepper(TMC5240 &drv, uint32_t data)
-{
-    uint8_t status = 12;
-    ESP_LOGI(__FILE__, "TESTING DRIVER %d with data %x", drv.device_id(), data);
-    if (drv.write(0x21, data, status) == ESP_OK)
-    {
-        ESP_LOGI(__FILE__, "Write with status %x", status);
-    }
-    vTaskDelay(pdMS_TO_TICKS(100));
-    uint32_t val;
-    if (drv.read(0x21, val, status) == ESP_OK)
-    {
-        ESP_LOGI(__FILE__, "Read with status %x", status);
-    }
-
-    ESP_LOGI(__FILE__, "Sent: %x, received: %x", data, val);
-}
 
 extern "C" void app_main(void)
 {
@@ -39,9 +23,8 @@ extern "C" void app_main(void)
             .gyro_odr = GYRO_ODR_400HZ},
         .acce_pwr = ACCE_PWR_LOWNOISE,
         .gyro_pwr = GYRO_PWR_LOWNOISE,
-        .acce_ui_filt_bw = ACCE_UI_FILT_BW_16HZ,
-        .gyro_ui_filt_bw = GYRO_UI_FILT_BW_16HZ};
-
+        .acce_ui_filt_bw = ACCE_UI_FILT_BW_BYPASS,
+        .gyro_ui_filt_bw = GYRO_UI_FILT_BW_BYPASS};
     ICM42670Spi imu(spi_bus, GPIO_NUM_41, imu_config);
     LedStripConfig led_strip_config = {
         .led_count = 31,
@@ -59,28 +42,37 @@ extern "C" void app_main(void)
     {
         ESP_LOGE(__FILE__, "Failed to start web server: %s", esp_err_to_name(web_server_err));
     }
-
+    // Tuned for stable web telemetry while keeping responsive motion tracking.
+    LowPassIIR<3> acc_filter(8.0f);
+    LowPassIIR<3> gyro_filter(10.0f);
     TickType_t last_telemetry_send = 0;
-    int cnt = 0;
+    int64_t last_sample_us = 0;
     while (true)
     {
+        const int64_t now_us = esp_timer_get_time();
+        float dt_seconds = 1.0f / 400.0f;
+        if (last_sample_us > 0)
+        {
+            dt_seconds = static_cast<float>(now_us - last_sample_us) / 1'000'000.0f;
+            if (dt_seconds < 0.0001f)
+            {
+                dt_seconds = 0.0001f;
+            }
+        }
+        last_sample_us = now_us;
+
         ICM42670Sample sample = imu.read_sample();
-        float abs = std::sqrt(sample.acc.x * sample.acc.x + sample.acc.y * sample.acc.y + sample.acc.z * sample.acc.z);
+        auto f_acc = acc_filter.process(sample.acc, dt_seconds);
+        auto f_gyro = gyro_filter.process(sample.gyro, dt_seconds);
         TickType_t now = xTaskGetTickCount();
         if (now - last_telemetry_send >= pdMS_TO_TICKS(50))
         {
             TelemetrySample telemetry = {
-                .acc_x = sample.acc.x,
-                .acc_y = sample.acc.y,
-                .acc_z = sample.acc.z,
-                .gyro_x = sample.gyro.x,
-                .gyro_y = sample.gyro.y,
-                .gyro_z = sample.gyro.z,
-            };
+                sample.acc,
+                sample.gyro,
+                f_acc, f_gyro};
             web_server_publish_telemetry(telemetry);
             last_telemetry_send = now;
-            teststepper(mot1, cnt++);
-            teststepper(mot2, cnt++);
         }
     }
 }

@@ -8,17 +8,17 @@
 #include "esp_wifi.h"
 #include "nvs_flash.h"
 #include <array>
+#include <cassert>
 #include <cstdint>
+#include <cstring>
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
 
 namespace
 {
     constexpr char TAG[] = "web_server";
     constexpr char AP_SSID[] = "equilibot";
     constexpr char AP_PASSWORD[] = "equilibot123";
-    constexpr size_t MAX_JSON_PAYLOAD_LEN = 256;
     constexpr uint8_t WIFI_CHANNEL = 1;
     constexpr uint8_t WIFI_MAX_CONNECTIONS = 4;
 
@@ -30,26 +30,20 @@ namespace
     struct WsBroadcastContext
     {
         httpd_handle_t server;
-        char payload[MAX_JSON_PAYLOAD_LEN];
+        char payload[1024];
         size_t payload_len;
     };
 
     void ws_broadcast_work(void *arg)
     {
-        WsBroadcastContext *context = static_cast<WsBroadcastContext *>(arg);
-        if (context == nullptr || context->server == nullptr)
-        {
-            free(context);
-            return;
-        }
-
+        WsBroadcastContext *context = (WsBroadcastContext *)arg;
         std::array<int, CONFIG_LWIP_MAX_SOCKETS> client_fds = {};
         size_t fd_count = client_fds.size();
         esp_err_t list_err = httpd_get_client_list(context->server, &fd_count, client_fds.data());
         if (list_err != ESP_OK)
         {
             ESP_LOGW(TAG, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
-            free(context);
+            delete context;
             return;
         }
 
@@ -72,8 +66,7 @@ namespace
                 ESP_LOGW(TAG, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
             }
         }
-
-        free(context);
+        delete context;
     }
 
     esp_err_t ws_get_handler(httpd_req_t *request)
@@ -237,43 +230,41 @@ esp_err_t start_web_server()
     ESP_LOGI(TAG, "SoftAP started. Open http://192.168.4.1/");
     return ESP_OK;
 }
-
+int printxyz(char *buf, size_t sz, const std::array<float, 3> &xyz)
+{
+    return std::snprintf(buf, sz, R"("x":%.5f,"y":%.5f,"z":%.5f)", xyz[0], xyz[1], xyz[2]);
+}
+size_t write_telemetry_json(char *buf, size_t sz, const TelemetrySample &sample)
+{
+    size_t written = 0;
+    written += std::snprintf(buf + written, sz - written, R"({"t_ms":%lld,"acc":{)", esp_timer_get_time() / 1000);
+    written += printxyz(buf + written, sz - written, sample.acc);
+    written += std::snprintf(buf + written, sz - written, R"(},"gyro":{)");
+    written += printxyz(buf + written, sz - written, sample.gyro);
+    written += std::snprintf(buf + written, sz - written, R"(},"f_acc":{)");
+    written += printxyz(buf + written, sz - written, sample.f_acc);
+    written += std::snprintf(buf + written, sz - written, R"(},"f_gyro":{)");
+    written += printxyz(buf + written, sz - written, sample.f_gyro);
+    written += std::snprintf(buf + written, sz - written, R"(}})");
+    assert(written < sz);
+    return written;
+}
 esp_err_t web_server_publish_telemetry(const TelemetrySample &sample)
 {
-    if (g_server == nullptr)
+    if (!g_server)
     {
         return ESP_ERR_INVALID_STATE;
     }
-
-    WsBroadcastContext *context = static_cast<WsBroadcastContext *>(calloc(1, sizeof(WsBroadcastContext)));
-    if (context == nullptr)
-    {
-        return ESP_ERR_NO_MEM;
-    }
-
+    WsBroadcastContext *context = new WsBroadcastContext;
     context->server = g_server;
-    int written = std::snprintf(
-        context->payload,
-        sizeof(context->payload),
-        "{\"t_ms\":%lld,\"acc\":{\"x\":%.5f,\"y\":%.5f,\"z\":%.5f},\"gyro\":{\"x\":%.5f,\"y\":%.5f,\"z\":%.5f}}",
-        static_cast<long long>(esp_timer_get_time() / 1000LL),
-        sample.acc_x,
-        sample.acc_y,
-        sample.acc_z,
-        sample.gyro_x,
-        sample.gyro_y,
-        sample.gyro_z);
-    if (written < 0 || static_cast<size_t>(written) >= sizeof(context->payload))
-    {
-        free(context);
-        return ESP_ERR_INVALID_SIZE;
-    }
+    auto sz = write_telemetry_json(context->payload, sizeof(context->payload), sample);
+    ESP_LOGI(__FILE__, "%s", context->payload);
+    context->payload_len = sz;
 
-    context->payload_len = static_cast<size_t>(written);
     esp_err_t err = httpd_queue_work(g_server, ws_broadcast_work, context);
     if (err != ESP_OK)
     {
-        free(context);
+        delete context;
     }
     return err;
 }

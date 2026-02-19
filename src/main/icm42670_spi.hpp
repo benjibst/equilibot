@@ -5,6 +5,8 @@
 
 #include "spi_bus.hpp"
 #include <cstddef>
+#include <array>
+#include <cstdint>
 
 typedef enum
 {
@@ -104,19 +106,9 @@ struct ICM42670Config
     icm42670_acce_ui_filt_bw_t acce_ui_filt_bw = ACCE_UI_FILT_BW_BYPASS;
     icm42670_gyro_ui_filt_bw_t gyro_ui_filt_bw = GYRO_UI_FILT_BW_BYPASS;
 };
-typedef struct
-{
-    int16_t x;
-    int16_t y;
-    int16_t z;
-} icm42670_raw_value_t;
+using icm42670_raw_value_t = std::array<int16_t, 3>;
+using icm42670_value_t = std::array<float, 3>;
 
-typedef struct
-{
-    float x;
-    float y;
-    float z;
-} icm42670_value_t;
 struct ICM42670Sample
 {
     icm42670_value_t acc;
