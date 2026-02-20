@@ -13,6 +13,8 @@
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
+#include <string>
+#include <nlohmann/json.hpp>
 
 namespace
 {
@@ -230,36 +232,37 @@ esp_err_t start_web_server()
     ESP_LOGI(TAG, "SoftAP started. Open http://192.168.4.1/");
     return ESP_OK;
 }
-int printxyz(char *buf, size_t sz, const std::array<float, 3> &xyz)
-{
-    return std::snprintf(buf, sz, R"("x":%.5f,"y":%.5f,"z":%.5f)", xyz[0], xyz[1], xyz[2]);
-}
-size_t write_telemetry_json(char *buf, size_t sz, const TelemetrySample &sample)
-{
-    size_t written = 0;
-    written += std::snprintf(buf + written, sz - written, R"({"t_ms":%lld,"acc":{)", esp_timer_get_time() / 1000);
-    written += printxyz(buf + written, sz - written, sample.acc);
-    written += std::snprintf(buf + written, sz - written, R"(},"gyro":{)");
-    written += printxyz(buf + written, sz - written, sample.gyro);
-    written += std::snprintf(buf + written, sz - written, R"(},"f_acc":{)");
-    written += printxyz(buf + written, sz - written, sample.f_acc);
-    written += std::snprintf(buf + written, sz - written, R"(},"f_gyro":{)");
-    written += printxyz(buf + written, sz - written, sample.f_gyro);
-    written += std::snprintf(buf + written, sz - written, R"(}})");
-    assert(written < sz);
-    return written;
-}
 esp_err_t web_server_publish_telemetry(const TelemetrySample &sample)
 {
     if (!g_server)
     {
         return ESP_ERR_INVALID_STATE;
     }
+
+    using nlohmann::json;
+
+    json payload = {
+        {"t_ms", esp_timer_get_time() / 1000},
+        {"acc", {{"x", sample.acc[0]}, {"y", sample.acc[1]}, {"z", sample.acc[2]}}},
+        {"gyro", {{"x", sample.gyro[0]}, {"y", sample.gyro[1]}, {"z", sample.gyro[2]}}},
+        {"f_acc", {{"x", sample.f_acc[0]}, {"y", sample.f_acc[1]}, {"z", sample.f_acc[2]}}},
+        {"f_gyro", {{"x", sample.f_gyro[0]}, {"y", sample.f_gyro[1]}, {"z", sample.f_gyro[2]}}},
+    };
+
+    const std::string serialized = payload.dump();
+    if (serialized.size() >= sizeof(WsBroadcastContext::payload))
+    {
+        ESP_LOGE(TAG, "Telemetry JSON too large: %u", static_cast<unsigned>(serialized.size()));
+        return ESP_ERR_INVALID_SIZE;
+    }
+
     WsBroadcastContext *context = new WsBroadcastContext;
     context->server = g_server;
-    auto sz = write_telemetry_json(context->payload, sizeof(context->payload), sample);
+    std::memcpy(context->payload, serialized.data(), serialized.size());
+    context->payload[serialized.size()] = '\0';
+    context->payload_len = serialized.size();
+
     ESP_LOGI(__FILE__, "%s", context->payload);
-    context->payload_len = sz;
 
     esp_err_t err = httpd_queue_work(g_server, ws_broadcast_work, context);
     if (err != ESP_OK)
