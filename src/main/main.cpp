@@ -25,7 +25,7 @@ extern "C" void app_main(void)
         .gyro_pwr = GYRO_PWR_LOWNOISE,
         .acce_ui_filt_bw = ACCE_UI_FILT_BW_BYPASS,
         .gyro_ui_filt_bw = GYRO_UI_FILT_BW_BYPASS};
-    ICM42670Spi imu(spi_bus, GPIO_NUM_41, imu_config);
+    ICM42670Spi imu(spi_bus, GPIO_NUM_41, imu_config, GPIO_NUM_40);
     LedStripConfig led_strip_config = {
         .led_count = 31,
         .tilt_segment = {.start_index = 0, .led_count = 19},
@@ -49,6 +49,12 @@ extern "C" void app_main(void)
     int64_t last_sample_us = 0;
     while (true)
     {
+        ICM42670Sample sample{};
+        if (!imu.receive_sample(sample, pdMS_TO_TICKS(100)))
+        {
+            continue;
+        }
+
         const int64_t now_us = esp_timer_get_time();
         float dt_seconds = 1.0f / 400.0f;
         if (last_sample_us > 0)
@@ -61,7 +67,6 @@ extern "C" void app_main(void)
         }
         last_sample_us = now_us;
 
-        ICM42670Sample sample = imu.read_sample();
         auto f_acc = acc_filter.process(sample.acc, dt_seconds);
         auto f_gyro = gyro_filter.process(sample.gyro, dt_seconds);
         TickType_t now = xTaskGetTickCount();
@@ -70,7 +75,8 @@ extern "C" void app_main(void)
             TelemetrySample telemetry = {
                 sample.acc,
                 sample.gyro,
-                f_acc, f_gyro};
+                f_acc,
+                f_gyro};
             web_server_publish_telemetry(telemetry);
             last_telemetry_send = now;
         }

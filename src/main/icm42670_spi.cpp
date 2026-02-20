@@ -14,16 +14,27 @@ namespace
     constexpr uint32_t kSpiClockHz = 1000 * 1000;
     constexpr uint8_t kReadMask = 0x80;
 
+    constexpr uint8_t kIntConfig = 0x06;
     constexpr uint8_t kWhoAmI = 0x75;
     constexpr uint8_t kPwrMgmt0 = 0x1F;
     constexpr uint8_t kGyroConfig0 = 0x20;
     constexpr uint8_t kAccelConfig0 = 0x21;
     constexpr uint8_t kGyroConfig1 = 0x23;
     constexpr uint8_t kAccelConfig1 = 0x24;
+    constexpr uint8_t kIntSource0 = 0x2B;
+    constexpr uint8_t kIntStatusDrdy = 0x39;
     constexpr uint8_t kAccelData = 0x0B;
     constexpr uint8_t kGyroData = 0x11;
 
     constexpr uint8_t kIcm42670Id = 0x67;
+
+    constexpr uint8_t kInt1ModePulsed = 0;
+    constexpr uint8_t kInt1DrivePushPull = 1;
+    constexpr uint8_t kInt1PolarityActiveHigh = 1;
+    constexpr uint8_t kDrdyInt1EnableMask = 1u << 3;
+
+    constexpr UBaseType_t kDataReadyTaskPriority = configMAX_PRIORITIES - 2;
+    constexpr uint32_t kSampleQueueLength = 32;
 
     constexpr float kGyroFs2000Sensitivity = 16.4f;
     constexpr float kGyroFs1000Sensitivity = 32.8f;
@@ -37,9 +48,17 @@ namespace
 
 } // namespace
 
-ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Config &config)
-    : spi_bus(spi_bus), config(config)
+ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Config &config,
+                         gpio_num_t interrupt_pin)
+    : spi_bus(spi_bus), config(config), interrupt_pin(interrupt_pin)
 {
+    sample_queue = xQueueCreate(kSampleQueueLength, sizeof(ICM42670Sample));
+    if (sample_queue == nullptr)
+    {
+        ESP_LOGE(kTag, "Failed to create sample queue");
+        return;
+    }
+
     const esp_err_t add_ret = spi_bus.add_device(EquiliBotSpiDevices::IMU,
                                                  {.mode = SpiDeviceConfig::Mode::CPOL1_CPHA1,
                                                   .cs = cs_pin,
@@ -58,6 +77,13 @@ ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Confi
     }
 
     initialized = true;
+
+    const esp_err_t task_ret = start_data_ready_task();
+    if (task_ret != ESP_OK)
+    {
+        ESP_LOGE(kTag, "Failed starting data-ready task: %s", esp_err_to_name(task_ret));
+        initialized = false;
+    }
 }
 
 ICM42670Sample ICM42670Spi::read_sample()
@@ -83,7 +109,84 @@ ICM42670Sample ICM42670Spi::read_sample()
     return sample;
 }
 
-ICM42670Spi::~ICM42670Spi() {}
+bool ICM42670Spi::receive_sample(ICM42670Sample &sample, TickType_t timeout_ticks)
+{
+    if (sample_queue == nullptr)
+    {
+        return false;
+    }
+    return xQueueReceive(sample_queue, &sample, timeout_ticks) == pdTRUE;
+}
+
+void ICM42670Spi::data_ready_task_entry(void *arg)
+{
+    auto *self = static_cast<ICM42670Spi *>(arg);
+    self->data_ready_task();
+}
+
+void IRAM_ATTR ICM42670Spi::gpio_isr_handler(void *arg)
+{
+    auto *self = static_cast<ICM42670Spi *>(arg);
+    if (self == nullptr || self->data_ready_task_handle == nullptr)
+    {
+        return;
+    }
+
+    BaseType_t high_priority_task_woken = pdFALSE;
+    vTaskNotifyGiveFromISR(self->data_ready_task_handle, &high_priority_task_woken);
+    if (high_priority_task_woken == pdTRUE)
+    {
+        portYIELD_FROM_ISR();
+    }
+}
+
+void ICM42670Spi::data_ready_task()
+{
+    while (true)
+    {
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
+        uint8_t drdy_status = 0;
+        const esp_err_t status_ret = read_register(kIntStatusDrdy, drdy_status);
+        if (status_ret != ESP_OK)
+        {
+            ESP_LOGW(kTag, "Failed to read INT_STATUS_DRDY: %s", esp_err_to_name(status_ret));
+            continue;
+        }
+        if ((drdy_status & 0x01u) == 0)
+        {
+            continue;
+        }
+
+        ICM42670Sample sample = read_sample();
+        if (xQueueSend(sample_queue, &sample, 0) != pdTRUE)
+        {
+            ICM42670Sample dropped{};
+            (void)xQueueReceive(sample_queue, &dropped, 0);
+            (void)xQueueSend(sample_queue, &sample, 0);
+        }
+    }
+}
+
+ICM42670Spi::~ICM42670Spi()
+{
+    if (interrupt_pin != GPIO_NUM_NC)
+    {
+        gpio_isr_handler_remove(interrupt_pin);
+    }
+
+    if (data_ready_task_handle != nullptr)
+    {
+        vTaskDelete(data_ready_task_handle);
+        data_ready_task_handle = nullptr;
+    }
+
+    if (sample_queue != nullptr)
+    {
+        vQueueDelete(sample_queue);
+        sample_queue = nullptr;
+    }
+}
 
 esp_err_t ICM42670Spi::initialize()
 {
@@ -124,6 +227,111 @@ esp_err_t ICM42670Spi::initialize()
     // Datasheet: after transitioning Accel/Gyro from OFF to any active mode, avoid
     // issuing register writes for at least 200 us.
     esp_rom_delay_us(200);
+
+    if (interrupt_pin != GPIO_NUM_NC)
+    {
+        ret = configure_data_ready_interrupt();
+        if (ret != ESP_OK)
+        {
+            return ret;
+        }
+
+        ret = setup_interrupt_gpio();
+        if (ret != ESP_OK)
+        {
+            return ret;
+        }
+    }
+
+    return ESP_OK;
+}
+
+esp_err_t ICM42670Spi::configure_data_ready_interrupt()
+{
+    uint8_t int_config = 0;
+    esp_err_t ret = read_register(kIntConfig, int_config);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    int_config = static_cast<uint8_t>((int_config & ~0x07u) |
+                                      ((kInt1ModePulsed & 0x01u) << 2) |
+                                      ((kInt1DrivePushPull & 0x01u) << 1) |
+                                      (kInt1PolarityActiveHigh & 0x01u));
+    ret = write_register(kIntConfig, int_config);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    uint8_t int_source0 = 0;
+    ret = read_register(kIntSource0, int_source0);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    int_source0 = static_cast<uint8_t>(int_source0 | kDrdyInt1EnableMask);
+    ret = write_register(kIntSource0, int_source0);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    uint8_t drdy_status = 0;
+    return read_register(kIntStatusDrdy, drdy_status);
+}
+
+esp_err_t ICM42670Spi::setup_interrupt_gpio()
+{
+    gpio_config_t io_config = {
+        .pin_bit_mask = (1ULL << interrupt_pin),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_POSEDGE,
+    };
+
+    esp_err_t ret = gpio_config(&io_config);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    ret = gpio_install_isr_service(0);
+    if (ret != ESP_OK && ret != ESP_ERR_INVALID_STATE)
+    {
+        return ret;
+    }
+
+    ret = gpio_isr_handler_add(interrupt_pin, gpio_isr_handler, this);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    return ESP_OK;
+}
+
+esp_err_t ICM42670Spi::start_data_ready_task()
+{
+    if (interrupt_pin == GPIO_NUM_NC)
+    {
+        return ESP_OK;
+    }
+
+    const BaseType_t created = xTaskCreate(data_ready_task_entry,
+                                           "icm42670_drdy",
+                                           4096,
+                                           this,
+                                           kDataReadyTaskPriority,
+                                           &data_ready_task_handle);
+    if (created != pdPASS)
+    {
+        return ESP_ERR_NO_MEM;
+    }
+
     return ESP_OK;
 }
 

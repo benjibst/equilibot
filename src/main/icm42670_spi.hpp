@@ -4,6 +4,9 @@
 #include "esp_err.h"
 
 #include "spi_bus.hpp"
+#include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
+#include "freertos/task.h"
 #include <cstddef>
 #include <array>
 #include <cstdint>
@@ -118,9 +121,11 @@ struct ICM42670Sample
 class ICM42670Spi
 {
 public:
-    ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Config &config);
+    ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Config &config,
+                gpio_num_t interrupt_pin = GPIO_NUM_NC);
     ~ICM42670Spi();
     ICM42670Sample read_sample();
+    bool receive_sample(ICM42670Sample &sample, TickType_t timeout_ticks);
 
     ICM42670Spi(const ICM42670Spi &) = delete;
     ICM42670Spi &operator=(const ICM42670Spi &) = delete;
@@ -128,8 +133,15 @@ public:
     ICM42670Spi &operator=(ICM42670Spi &&) = delete;
 
 private:
+    static void data_ready_task_entry(void *arg);
+    static void IRAM_ATTR gpio_isr_handler(void *arg);
+    void data_ready_task();
+
     esp_err_t initialize();
     esp_err_t check_device_present();
+    esp_err_t configure_data_ready_interrupt();
+    esp_err_t setup_interrupt_gpio();
+    esp_err_t start_data_ready_task();
 
     esp_err_t write_register(uint8_t reg, uint8_t value);
     esp_err_t write_registers(uint8_t reg, const uint8_t *values, size_t count);
@@ -150,5 +162,8 @@ private:
 
     SpiBus &spi_bus;
     ICM42670Config config;
+    gpio_num_t interrupt_pin;
+    QueueHandle_t sample_queue = nullptr;
+    TaskHandle_t data_ready_task_handle = nullptr;
     bool initialized = false;
 };
