@@ -45,15 +45,11 @@ extern "C" void app_main(void)
     // Tuned for stable web telemetry while keeping responsive motion tracking.
     LowPassIIR<3> acc_filter(8.0f);
     LowPassIIR<3> gyro_filter(10.0f);
-    TickType_t last_telemetry_send = 0;
     int64_t last_sample_us = 0;
     while (true)
     {
         ICM42670Sample sample{};
-        if (!imu.receive_sample(sample, pdMS_TO_TICKS(100)))
-        {
-            continue;
-        }
+        imu.receive_sample(sample, portMAX_DELAY);
 
         const int64_t now_us = esp_timer_get_time();
         float dt_seconds = 1.0f / 400.0f;
@@ -69,16 +65,11 @@ extern "C" void app_main(void)
 
         auto f_acc = acc_filter.process(sample.acc, dt_seconds);
         auto f_gyro = gyro_filter.process(sample.gyro, dt_seconds);
-        TickType_t now = xTaskGetTickCount();
-        if (now - last_telemetry_send >= pdMS_TO_TICKS(50))
-        {
-            TelemetrySample telemetry = {
-                sample.acc,
-                sample.gyro,
-                f_acc,
-                f_gyro};
-            web_server_publish_telemetry(telemetry);
-            last_telemetry_send = now;
-        }
+        TelemetrySample telemetry = {
+            sample.acc,
+            sample.gyro,
+            f_acc,
+            f_gyro};
+        web_server_queue_telemetry(telemetry);
     }
 }

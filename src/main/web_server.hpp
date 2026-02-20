@@ -11,4 +11,4 @@ struct TelemetrySample
 };
 
 esp_err_t start_web_server();
-esp_err_t web_server_publish_telemetry(const TelemetrySample &sample);
+esp_err_t web_server_queue_telemetry(const TelemetrySample &sample);

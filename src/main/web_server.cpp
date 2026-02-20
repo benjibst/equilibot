@@ -7,8 +7,10 @@
 #include "esp_timer.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
+#include "freertos/task.h"
 #include <array>
-#include <cassert>
 #include <cstdint>
 #include <cstring>
 #include <cstdio>
@@ -25,6 +27,9 @@ namespace
     constexpr uint8_t WIFI_MAX_CONNECTIONS = 4;
 
     httpd_handle_t g_server = nullptr;
+    QueueHandle_t g_telemetry_queue = nullptr;
+    TaskHandle_t g_telemetry_sender_task = nullptr;
+    constexpr size_t kWebTelemetryQueueLength = 256;
 
     extern const uint8_t index_html_start[] asm("_binary_index_html_start");
     extern const uint8_t index_html_end[] asm("_binary_index_html_end");
@@ -32,9 +37,11 @@ namespace
     struct WsBroadcastContext
     {
         httpd_handle_t server;
-        char payload[1024];
+        char payload[8192];
         size_t payload_len;
     };
+
+    void telemetry_sender_task(void *);
 
     void ws_broadcast_work(void *arg)
     {
@@ -181,6 +188,15 @@ esp_err_t start_web_server()
         return ESP_OK;
     }
 
+    if (g_telemetry_queue == nullptr)
+    {
+        g_telemetry_queue = xQueueCreate(kWebTelemetryQueueLength, sizeof(TelemetrySample));
+        if (g_telemetry_queue == nullptr)
+        {
+            return ESP_ERR_NO_MEM;
+        }
+    }
+
     esp_err_t err = init_nvs();
     if (err != ESP_OK)
     {
@@ -229,45 +245,94 @@ esp_err_t start_web_server()
         return err;
     }
 
+    if (g_telemetry_sender_task == nullptr)
+    {
+        BaseType_t ok = xTaskCreate(telemetry_sender_task,
+                                    "web_tx",
+                                    4096,
+                                    nullptr,
+                                    tskIDLE_PRIORITY + 2,
+                                    &g_telemetry_sender_task);
+        if (ok != pdPASS)
+        {
+            return ESP_ERR_NO_MEM;
+        }
+    }
+
     ESP_LOGI(TAG, "SoftAP started. Open http://192.168.4.1/");
     return ESP_OK;
 }
-esp_err_t web_server_publish_telemetry(const TelemetrySample &sample)
+namespace
 {
-    if (!g_server)
+    esp_err_t publish_telemetry_sample(const TelemetrySample &sample)
+    {
+        if (!g_server)
+        {
+            return ESP_ERR_INVALID_STATE;
+        }
+
+        using nlohmann::json;
+        json payload = {
+            {"t_ms", esp_timer_get_time() / 1000},
+            {"acc", {{"x", sample.acc[0]}, {"y", sample.acc[1]}, {"z", sample.acc[2]}}},
+            {"gyro", {{"x", sample.gyro[0]}, {"y", sample.gyro[1]}, {"z", sample.gyro[2]}}},
+            {"f_acc", {{"x", sample.f_acc[0]}, {"y", sample.f_acc[1]}, {"z", sample.f_acc[2]}}},
+            {"f_gyro", {{"x", sample.f_gyro[0]}, {"y", sample.f_gyro[1]}, {"z", sample.f_gyro[2]}}},
+        };
+
+        const std::string serialized = payload.dump();
+        if (serialized.size() >= sizeof(WsBroadcastContext::payload))
+        {
+            ESP_LOGE(TAG, "Telemetry JSON too large: %u", static_cast<unsigned>(serialized.size()));
+            return ESP_ERR_INVALID_SIZE;
+        }
+
+        WsBroadcastContext *context = new WsBroadcastContext;
+        context->server = g_server;
+        std::memcpy(context->payload, serialized.data(), serialized.size());
+        context->payload[serialized.size()] = '\0';
+        context->payload_len = serialized.size();
+
+        esp_err_t err = httpd_queue_work(g_server, ws_broadcast_work, context);
+        if (err != ESP_OK)
+        {
+            delete context;
+        }
+        return err;
+    }
+
+    void telemetry_sender_task(void *)
+    {
+        TelemetrySample sample{};
+        while (true)
+        {
+            if (xQueueReceive(g_telemetry_queue, &sample, portMAX_DELAY) != pdTRUE)
+            {
+                continue;
+            }
+            (void)publish_telemetry_sample(sample);
+        }
+    }
+}
+
+esp_err_t web_server_queue_telemetry(const TelemetrySample &sample)
+{
+    if (g_telemetry_queue == nullptr)
     {
         return ESP_ERR_INVALID_STATE;
     }
 
-    using nlohmann::json;
-
-    json payload = {
-        {"t_ms", esp_timer_get_time() / 1000},
-        {"acc", {{"x", sample.acc[0]}, {"y", sample.acc[1]}, {"z", sample.acc[2]}}},
-        {"gyro", {{"x", sample.gyro[0]}, {"y", sample.gyro[1]}, {"z", sample.gyro[2]}}},
-        {"f_acc", {{"x", sample.f_acc[0]}, {"y", sample.f_acc[1]}, {"z", sample.f_acc[2]}}},
-        {"f_gyro", {{"x", sample.f_gyro[0]}, {"y", sample.f_gyro[1]}, {"z", sample.f_gyro[2]}}},
-    };
-
-    const std::string serialized = payload.dump();
-    if (serialized.size() >= sizeof(WsBroadcastContext::payload))
+    if (xQueueSend(g_telemetry_queue, &sample, 0) == pdTRUE)
     {
-        ESP_LOGE(TAG, "Telemetry JSON too large: %u", static_cast<unsigned>(serialized.size()));
-        return ESP_ERR_INVALID_SIZE;
+        return ESP_OK;
     }
 
-    WsBroadcastContext *context = new WsBroadcastContext;
-    context->server = g_server;
-    std::memcpy(context->payload, serialized.data(), serialized.size());
-    context->payload[serialized.size()] = '\0';
-    context->payload_len = serialized.size();
-
-    ESP_LOGI(__FILE__, "%s", context->payload);
-
-    esp_err_t err = httpd_queue_work(g_server, ws_broadcast_work, context);
-    if (err != ESP_OK)
+    TelemetrySample dropped{};
+    (void)xQueueReceive(g_telemetry_queue, &dropped, 0);
+    if (xQueueSend(g_telemetry_queue, &sample, 0) == pdTRUE)
     {
-        delete context;
+        return ESP_OK;
     }
-    return err;
+
+    return ESP_FAIL;
 }

@@ -295,6 +295,29 @@
       }
     }
 
+    function pushVec3Array(series, rows) {
+      if (!Array.isArray(rows)) {
+        return;
+      }
+      for (const row of rows) {
+        if (!Array.isArray(row) || row.length < 3) {
+          continue;
+        }
+        const x = Number(row[0]);
+        const y = Number(row[1]);
+        const z = Number(row[2]);
+        if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(z)) {
+          continue;
+        }
+        series.x.push(x);
+        series.y.push(y);
+        series.z.push(z);
+        if (series.x.length > MAX_POINTS) series.x.shift();
+        if (series.y.length > MAX_POINTS) series.y.shift();
+        if (series.z.length > MAX_POINTS) series.z.shift();
+      }
+    }
+
     function fmt(value, digits) {
       return Number.isFinite(value) ? value.toFixed(digits) : "--";
     }
