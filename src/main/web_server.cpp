@@ -28,6 +28,15 @@ namespace
     httpd_handle_t g_server = nullptr;
     QueueHandle_t g_telemetry_queue = nullptr;
     TaskHandle_t g_telemetry_sender_task = nullptr;
+    ICM42670Spi *g_imu = nullptr;
+    ICM42670Config g_imu_config = {
+        .acce_odr = ICM42670_ACCE_ODR_400HZ,
+        .gyro_odr = ICM42670_GYRO_ODR_400HZ,
+        .acce_fs = ICM42670_ACCE_FS_2G,
+        .gyro_fs = ICM42670_GYRO_FS_250DPS,
+        .acce_bw = ICM42670_UI_FILT_BW_BYPASS,
+        .gyro_bw = ICM42670_UI_FILT_BW_BYPASS,
+    };
     constexpr size_t kWebTelemetryQueueLength = 8;
 
     extern const uint8_t index_html_start[] asm("_binary_index_html_start");
@@ -40,6 +49,197 @@ namespace
     };
 
     void telemetry_sender_task(void *);
+
+    bool is_valid_acce_odr(int value)
+    {
+        switch (value)
+        {
+        case ICM42670_ACCE_ODR_1600HZ:
+        case ICM42670_ACCE_ODR_800HZ:
+        case ICM42670_ACCE_ODR_400HZ:
+        case ICM42670_ACCE_ODR_200HZ:
+        case ICM42670_ACCE_ODR_100HZ:
+        case ICM42670_ACCE_ODR_50HZ:
+        case ICM42670_ACCE_ODR_25HZ:
+        case ICM42670_ACCE_ODR_12_5HZ:
+        case ICM42670_ACCE_ODR_6_25HZ:
+        case ICM42670_ACCE_ODR_3_125HZ:
+        case ICM42670_ACCE_ODR_1_5625HZ:
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    bool is_valid_gyro_odr(int value)
+    {
+        switch (value)
+        {
+        case ICM42670_GYRO_ODR_1600HZ:
+        case ICM42670_GYRO_ODR_800HZ:
+        case ICM42670_GYRO_ODR_400HZ:
+        case ICM42670_GYRO_ODR_200HZ:
+        case ICM42670_GYRO_ODR_100HZ:
+        case ICM42670_GYRO_ODR_50HZ:
+        case ICM42670_GYRO_ODR_25HZ:
+        case ICM42670_GYRO_ODR_12_5HZ:
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    bool is_valid_acce_fs(int value)
+    {
+        switch (value)
+        {
+        case ICM42670_ACCE_FS_16G:
+        case ICM42670_ACCE_FS_8G:
+        case ICM42670_ACCE_FS_4G:
+        case ICM42670_ACCE_FS_2G:
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    bool is_valid_gyro_fs(int value)
+    {
+        switch (value)
+        {
+        case ICM42670_GYRO_FS_2000DPS:
+        case ICM42670_GYRO_FS_1000DPS:
+        case ICM42670_GYRO_FS_500DPS:
+        case ICM42670_GYRO_FS_250DPS:
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    bool is_valid_filter_bw(int value)
+    {
+        return value >= ICM42670_UI_FILT_BW_BYPASS && value <= ICM42670_UI_FILT_BW_16HZ;
+    }
+
+    esp_err_t apply_imu_config_json(const nlohmann::json &message)
+    {
+        if (g_imu == nullptr)
+        {
+            return ESP_ERR_INVALID_STATE;
+        }
+
+        const nlohmann::json *cfg = &message;
+        const auto config_it = message.find("config");
+        if (config_it != message.end())
+        {
+            if (!config_it->is_object())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            cfg = &(*config_it);
+        }
+
+        ICM42670Config updated = g_imu_config;
+        int value = 0;
+
+        const auto acce_odr_it = cfg->find("acce_odr");
+        if (acce_odr_it != cfg->end())
+        {
+            if (!acce_odr_it->is_number_integer())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            value = acce_odr_it->get<int>();
+            if (!is_valid_acce_odr(value))
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            updated.acce_odr = static_cast<ICM42670AcceODR_t>(value);
+        }
+
+        const auto gyro_odr_it = cfg->find("gyro_odr");
+        if (gyro_odr_it != cfg->end())
+        {
+            if (!gyro_odr_it->is_number_integer())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            value = gyro_odr_it->get<int>();
+            if (!is_valid_gyro_odr(value))
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            updated.gyro_odr = static_cast<ICM42670GyroODR_t>(value);
+        }
+
+        const auto acce_fs_it = cfg->find("acce_fs");
+        if (acce_fs_it != cfg->end())
+        {
+            if (!acce_fs_it->is_number_integer())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            value = acce_fs_it->get<int>();
+            if (!is_valid_acce_fs(value))
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            updated.acce_fs = static_cast<ICM42670AcceFS_t>(value);
+        }
+
+        const auto gyro_fs_it = cfg->find("gyro_fs");
+        if (gyro_fs_it != cfg->end())
+        {
+            if (!gyro_fs_it->is_number_integer())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            value = gyro_fs_it->get<int>();
+            if (!is_valid_gyro_fs(value))
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            updated.gyro_fs = static_cast<ICM42670GyroFS_t>(value);
+        }
+
+        const auto acce_bw_it = cfg->find("acce_bw");
+        if (acce_bw_it != cfg->end())
+        {
+            if (!acce_bw_it->is_number_integer())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            value = acce_bw_it->get<int>();
+            if (!is_valid_filter_bw(value))
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            updated.acce_bw = static_cast<ICM42670LowpassBW_t>(value);
+        }
+
+        const auto gyro_bw_it = cfg->find("gyro_bw");
+        if (gyro_bw_it != cfg->end())
+        {
+            if (!gyro_bw_it->is_number_integer())
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            value = gyro_bw_it->get<int>();
+            if (!is_valid_filter_bw(value))
+            {
+                return ESP_ERR_INVALID_ARG;
+            }
+            updated.gyro_bw = static_cast<ICM42670LowpassBW_t>(value);
+        }
+
+        const esp_err_t err = g_imu->configure_sensor(updated);
+        if (err == ESP_OK)
+        {
+            g_imu_config = updated;
+        }
+        return err;
+    }
 
     void ws_broadcast_work(void *arg)
     {
@@ -105,6 +305,33 @@ namespace
 
         ws_frame.payload = payload;
         err = httpd_ws_recv_frame(request, &ws_frame, ws_frame.len);
+        if (err == ESP_OK)
+        {
+            const char *begin = reinterpret_cast<const char *>(payload);
+            const char *end = begin + ws_frame.len;
+            const nlohmann::json message = nlohmann::json::parse(begin, end, nullptr, false);
+            if (message.is_discarded())
+            {
+                ESP_LOGW(__FILE__, "Invalid websocket JSON payload");
+            }
+            else
+            {
+                const auto type_it = message.find("type");
+                if (type_it != message.end() && type_it->is_string() &&
+                    type_it->get<std::string>() == "imu_config")
+                {
+                    const esp_err_t apply_err = apply_imu_config_json(message);
+                    if (apply_err != ESP_OK)
+                    {
+                        ESP_LOGW(__FILE__, "Failed applying IMU config: %s", esp_err_to_name(apply_err));
+                    }
+                    else
+                    {
+                        ESP_LOGI(__FILE__, "Applied IMU config over websocket");
+                    }
+                }
+            }
+        }
         free(payload);
         return err;
     }
@@ -179,8 +406,15 @@ namespace
     }
 } // namespace
 
-esp_err_t start_web_server()
+esp_err_t start_web_server(ICM42670Spi *imu, const ICM42670Config &imu_config)
 {
+    if (imu == nullptr)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
+    g_imu = imu;
+    g_imu_config = imu_config;
+
     if (g_server != nullptr)
     {
         return ESP_OK;
@@ -208,6 +442,7 @@ esp_err_t start_web_server()
     }
 
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
+    config.stack_size = 4096 + 2048;
     err = httpd_start(&g_server, &config);
     if (err != ESP_OK)
     {

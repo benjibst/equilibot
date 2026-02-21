@@ -307,6 +307,8 @@ esp_err_t ICM42670Spi::check_device_present()
 
 esp_err_t ICM42670Spi::configure_sensor(const ICM42670Config &cfg)
 {
+    if (!memcmp(&cfg, &config, sizeof(ICM42670Config)))
+        return ESP_OK;
     uint8_t config_data[2] = {
         (uint8_t)(((cfg.gyro_fs & 0x03) << 5) | (cfg.gyro_odr & 0x0F)),
         (uint8_t)(((cfg.acce_fs & 0x03) << 5) | (cfg.acce_odr & 0x0F)),
@@ -319,6 +321,7 @@ esp_err_t ICM42670Spi::configure_sensor(const ICM42670Config &cfg)
     data = cfg.acce_bw & 0x7;
     if (write_registers(kAccelConfig1, &data, 1) != ESP_OK)
         return ESP_FAIL;
+    config = cfg;
     return ESP_OK;
 }
 

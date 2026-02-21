@@ -97,6 +97,69 @@
       color: var(--muted);
     }
 
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(170px, 1fr));
+      gap: 0.65rem 0.9rem;
+      align-items: end;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.25rem;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .field select {
+      width: 100%;
+      border: 1px solid #ccd8e2;
+      border-radius: 10px;
+      padding: 0.42rem 0.5rem;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    .config-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.25rem;
+    }
+
+    .config-actions button {
+      border: 1px solid #2c7fb3;
+      background: #2c7fb3;
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 0.42rem 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .config-actions button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .cfg-status {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .cfg-status.err {
+      color: var(--offline);
+    }
+
     .axis-grid {
       display: grid;
       gap: 0.25rem;
@@ -198,6 +261,10 @@
       .readout {
         grid-template-columns: 1fr;
       }
+
+      .config-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -207,6 +274,40 @@
     <section class="top">
       <h1>Equilibot Live Telemetry</h1>
       <div class="status pending" id="wsStatus">Connecting...</div>
+    </section>
+
+    <section class="panel">
+      <h2>IMU Runtime Config</h2>
+      <div class="config-grid">
+        <div class="field">
+          <label for="cfgAccOdr">Accel ODR</label>
+          <select id="cfgAccOdr"></select>
+        </div>
+        <div class="field">
+          <label for="cfgGyroOdr">Gyro ODR</label>
+          <select id="cfgGyroOdr"></select>
+        </div>
+        <div class="field">
+          <label for="cfgAccFs">Accel Full Scale</label>
+          <select id="cfgAccFs"></select>
+        </div>
+        <div class="field">
+          <label for="cfgGyroFs">Gyro Full Scale</label>
+          <select id="cfgGyroFs"></select>
+        </div>
+        <div class="field">
+          <label for="cfgAccBw">Accel LPF BW</label>
+          <select id="cfgAccBw"></select>
+        </div>
+        <div class="field">
+          <label for="cfgGyroBw">Gyro LPF BW</label>
+          <select id="cfgGyroBw"></select>
+        </div>
+        <div class="config-actions">
+          <button id="cfgApplyBtn" type="button">Apply IMU Config</button>
+          <span id="cfgStatus" class="cfg-status">No pending changes</span>
+        </div>
+      </div>
     </section>
 
     <section class="readout">
@@ -265,10 +366,113 @@
     const wsStatus = document.getElementById("wsStatus");
     const accChart = document.getElementById("accChart");
     const gyroChart = document.getElementById("gyroChart");
+    const cfgApplyBtn = document.getElementById("cfgApplyBtn");
+    const cfgStatus = document.getElementById("cfgStatus");
+    const cfgAccOdr = document.getElementById("cfgAccOdr");
+    const cfgGyroOdr = document.getElementById("cfgGyroOdr");
+    const cfgAccFs = document.getElementById("cfgAccFs");
+    const cfgGyroFs = document.getElementById("cfgGyroFs");
+    const cfgAccBw = document.getElementById("cfgAccBw");
+    const cfgGyroBw = document.getElementById("cfgGyroBw");
+
+    const ACC_ODR_OPTIONS = [
+      { value: 5, label: "1600 Hz" },
+      { value: 6, label: "800 Hz" },
+      { value: 7, label: "400 Hz" },
+      { value: 8, label: "200 Hz" },
+      { value: 9, label: "100 Hz" },
+      { value: 10, label: "50 Hz" },
+      { value: 11, label: "25 Hz" },
+      { value: 12, label: "12.5 Hz" },
+      { value: 13, label: "6.25 Hz" },
+      { value: 14, label: "3.125 Hz" },
+      { value: 15, label: "1.5625 Hz" },
+    ];
+    const GYRO_ODR_OPTIONS = [
+      { value: 5, label: "1600 Hz" },
+      { value: 6, label: "800 Hz" },
+      { value: 7, label: "400 Hz" },
+      { value: 8, label: "200 Hz" },
+      { value: 9, label: "100 Hz" },
+      { value: 10, label: "50 Hz" },
+      { value: 11, label: "25 Hz" },
+      { value: 12, label: "12.5 Hz" },
+    ];
+    const ACC_FS_OPTIONS = [
+      { value: 0, label: "±16 g" },
+      { value: 1, label: "±8 g" },
+      { value: 2, label: "±4 g" },
+      { value: 3, label: "±2 g" },
+    ];
+    const GYRO_FS_OPTIONS = [
+      { value: 0, label: "±2000 dps" },
+      { value: 1, label: "±1000 dps" },
+      { value: 2, label: "±500 dps" },
+      { value: 3, label: "±250 dps" },
+    ];
+    const BW_OPTIONS = [
+      { value: 0, label: "Bypass" },
+      { value: 1, label: "180 Hz" },
+      { value: 2, label: "121 Hz" },
+      { value: 3, label: "73 Hz" },
+      { value: 4, label: "53 Hz" },
+      { value: 5, label: "34 Hz" },
+      { value: 6, label: "25 Hz" },
+      { value: 7, label: "16 Hz" },
+    ];
 
     function setStatus(text, mode) {
       wsStatus.textContent = text;
       wsStatus.className = "status " + mode;
+    }
+
+    function setCfgStatus(text, isError) {
+      cfgStatus.textContent = text;
+      cfgStatus.className = isError ? "cfg-status err" : "cfg-status";
+    }
+
+    function populateSelect(selectElement, options, selectedValue) {
+      selectElement.textContent = "";
+      for (const option of options) {
+        const node = document.createElement("option");
+        node.value = String(option.value);
+        node.textContent = option.label;
+        if (option.value === selectedValue) {
+          node.selected = true;
+        }
+        selectElement.appendChild(node);
+      }
+    }
+
+    function initConfigForm() {
+      populateSelect(cfgAccOdr, ACC_ODR_OPTIONS, 7);
+      populateSelect(cfgGyroOdr, GYRO_ODR_OPTIONS, 7);
+      populateSelect(cfgAccFs, ACC_FS_OPTIONS, 3);
+      populateSelect(cfgGyroFs, GYRO_FS_OPTIONS, 3);
+      populateSelect(cfgAccBw, BW_OPTIONS, 0);
+      populateSelect(cfgGyroBw, BW_OPTIONS, 0);
+      cfgApplyBtn.disabled = true;
+      cfgApplyBtn.addEventListener("click", () => {
+        if (!ws || ws.readyState !== WebSocket.OPEN) {
+          setCfgStatus("WebSocket is not connected", true);
+          return;
+        }
+
+        const configMessage = {
+          type: "imu_config",
+          config: {
+            acce_odr: Number(cfgAccOdr.value),
+            gyro_odr: Number(cfgGyroOdr.value),
+            acce_fs: Number(cfgAccFs.value),
+            gyro_fs: Number(cfgGyroFs.value),
+            acce_bw: Number(cfgAccBw.value),
+            gyro_bw: Number(cfgGyroBw.value),
+          },
+        };
+
+        ws.send(JSON.stringify(configMessage));
+        setCfgStatus("IMU config sent", false);
+      });
     }
 
     function pushTelemetryBatch(series, rows) {
@@ -448,7 +652,11 @@
       const protocol = window.location.protocol === "https:" ? "wss" : "ws";
       ws = new WebSocket(protocol + "://" + window.location.host + "/ws");
 
-      ws.addEventListener("open", () => setStatus("Connected", "online"));
+      ws.addEventListener("open", () => {
+        setStatus("Connected", "online");
+        cfgApplyBtn.disabled = false;
+        setCfgStatus("Connected, ready to apply", false);
+      });
 
       ws.addEventListener("message", (event) => {
         let message;
@@ -476,17 +684,22 @@
 
       ws.addEventListener("close", () => {
         setStatus("Disconnected, retrying...", "offline");
+        cfgApplyBtn.disabled = true;
+        setCfgStatus("Disconnected", true);
         scheduleReconnect();
       });
 
       ws.addEventListener("error", () => {
         setStatus("Socket error", "offline");
+        cfgApplyBtn.disabled = true;
+        setCfgStatus("Socket error", true);
         if (ws && ws.readyState <= 1) {
           ws.close();
         }
       });
     }
 
+    initConfigForm();
     refreshReadout();
     render();
     connectWebSocket();

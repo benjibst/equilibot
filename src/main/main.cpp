@@ -33,7 +33,7 @@ extern "C" void app_main(void)
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
     TMC5240 mot1(spi_bus, GPIO_NUM_12, MOT_1);
     TMC5240 mot2(spi_bus, GPIO_NUM_10, MOT_2);
-    esp_err_t web_server_err = start_web_server();
+    esp_err_t web_server_err = start_web_server(&imu, imu_config);
     if (web_server_err != ESP_OK)
     {
         ESP_LOGE(__FILE__, "Failed to start web server: %s", esp_err_to_name(web_server_err));
@@ -44,7 +44,6 @@ extern "C" void app_main(void)
         imu.receive_sample(sample, portMAX_DELAY);
 
         const int64_t now_us = esp_timer_get_time();
-        ESP_LOGI(__FILE__, "received sample at %lld", now_us);
 
         web_server_queue_imu_data(sample);
     }
