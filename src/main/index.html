@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -166,30 +167,23 @@
       gap: 0.35rem;
     }
 
-    .sample-style {
-      width: 1.2rem;
-      border-top: 2px solid var(--muted);
-      display: inline-block;
-    }
-
-    .sample-style.raw {
-      border-top-style: dashed;
-      opacity: 0.5;
-    }
-
-    .sample-style.filtered {
-      border-top-style: solid;
-    }
-
     .dot {
       width: 0.65rem;
       height: 0.65rem;
       border-radius: 50%;
     }
 
-    .dot.x { background: var(--x); }
-    .dot.y { background: var(--y); }
-    .dot.z { background: var(--z); }
+    .dot.x {
+      background: var(--x);
+    }
+
+    .dot.y {
+      background: var(--y);
+    }
+
+    .dot.z {
+      background: var(--z);
+    }
 
     canvas {
       width: 100%;
@@ -207,6 +201,7 @@
     }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <section class="top">
@@ -241,8 +236,6 @@
             <span><i class="dot x"></i>X</span>
             <span><i class="dot y"></i>Y</span>
             <span><i class="dot z"></i>Z</span>
-            <span><i class="sample-style raw"></i>Raw</span>
-            <span><i class="sample-style filtered"></i>Filtered</span>
           </div>
         </div>
         <canvas id="accChart"></canvas>
@@ -254,8 +247,6 @@
             <span><i class="dot x"></i>X</span>
             <span><i class="dot y"></i>Y</span>
             <span><i class="dot z"></i>Z</span>
-            <span><i class="sample-style raw"></i>Raw</span>
-            <span><i class="sample-style filtered"></i>Filtered</span>
           </div>
         </div>
         <canvas id="gyroChart"></canvas>
@@ -267,10 +258,8 @@
     const MAX_POINTS = 180;
     const COLORS = { x: "#1b76d1", y: "#1d9d75", z: "#d43a4f" };
 
-    const accRaw = { x: [], y: [], z: [] };
-    const accFiltered = { x: [], y: [], z: [] };
-    const gyroRaw = { x: [], y: [], z: [] };
-    const gyroFiltered = { x: [], y: [], z: [] };
+    const accRaw = { t: [], x: [], y: [], z: [] };
+    const gyroRaw = { t: [], x: [], y: [], z: [] };
     const latest = { acc: { x: null, y: null, z: null }, gyro: { x: null, y: null, z: null } };
 
     const wsStatus = document.getElementById("wsStatus");
@@ -282,44 +271,41 @@
       wsStatus.className = "status " + mode;
     }
 
-    function push3(series, values) {
-      for (const axis of ["x", "y", "z"]) {
-        const value = Number(values[axis]);
-        if (!Number.isFinite(value)) {
-          continue;
-        }
-        series[axis].push(value);
-        if (series[axis].length > MAX_POINTS) {
-          series[axis].shift();
-        }
-      }
-    }
-
-    function pushVec3Array(series, rows) {
+    function pushTelemetryBatch(series, rows) {
       if (!Array.isArray(rows)) {
-        return;
+        return null;
       }
+      let latestVector = null;
       for (const row of rows) {
-        if (!Array.isArray(row) || row.length < 3) {
+        if (!row || !Array.isArray(row.data) || row.data.length < 3) {
           continue;
         }
-        const x = Number(row[0]);
-        const y = Number(row[1]);
-        const z = Number(row[2]);
-        if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(z)) {
+        const ts = Number(row.ts_ms);
+        const x = Number(row.data[0]);
+        const y = Number(row.data[1]);
+        const z = Number(row.data[2]);
+        if (!Number.isFinite(ts) || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(z)) {
           continue;
         }
+        series.t.push(ts);
         series.x.push(x);
         series.y.push(y);
         series.z.push(z);
+        latestVector = { x, y, z };
+        if (series.t.length > MAX_POINTS) series.t.shift();
         if (series.x.length > MAX_POINTS) series.x.shift();
         if (series.y.length > MAX_POINTS) series.y.shift();
         if (series.z.length > MAX_POINTS) series.z.shift();
       }
+      return latestVector;
     }
 
     function fmt(value, digits) {
       return Number.isFinite(value) ? value.toFixed(digits) : "--";
+    }
+
+    function fmtTsSeconds(tsMs) {
+      return Number.isFinite(tsMs) ? (tsMs / 1000).toFixed(3) + "s" : "--";
     }
 
     function refreshReadout() {
@@ -363,7 +349,7 @@
       }
     }
 
-    function drawChart(canvas, rawSeries, filteredSeries, yMin, yMax, unitLabel) {
+    function drawChart(canvas, series, yMin, yMax, unitLabel) {
       resizeCanvas(canvas);
       const ctx = canvas.getContext("2d");
       const w = canvas.width;
@@ -387,9 +373,17 @@
       }
 
       const yToPx = (value) => pad.t + (1 - (value - yMin) / (yMax - yMin)) * ph;
-      const xToPx = (index) => {
+      const tsValues = series.t;
+      const tCount = tsValues.length;
+      const tMin = tCount > 0 ? tsValues[0] : 0;
+      const tMax = tCount > 0 ? tsValues[tCount - 1] : 0;
+      const hasTimeRange = Number.isFinite(tMin) && Number.isFinite(tMax) && tMax > tMin;
+      const xToPx = (ts, fallbackIndex) => {
+        if (hasTimeRange && Number.isFinite(ts)) {
+          return pad.l + ((ts - tMin) / (tMax - tMin)) * pw;
+        }
         if (MAX_POINTS <= 1) return pad.l;
-        return pad.l + (index / (MAX_POINTS - 1)) * pw;
+        return pad.l + (fallbackIndex / (MAX_POINTS - 1)) * pw;
       };
 
       if (yMin <= 0 && yMax >= 0) {
@@ -400,44 +394,39 @@
         ctx.stroke();
       }
 
-      const drawSeries = (series, lineWidth, alpha, dash) => {
-        ctx.globalAlpha = alpha;
-        ctx.setLineDash(dash);
-        for (const axis of ["x", "y", "z"]) {
-          const points = series[axis];
-          if (points.length < 2) continue;
-          ctx.strokeStyle = COLORS[axis];
-          ctx.lineWidth = lineWidth;
-          ctx.beginPath();
-          points.forEach((value, index) => {
-            const x = xToPx(MAX_POINTS - points.length + index);
-            const y = yToPx(value);
-            if (index === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-          });
-          ctx.stroke();
-        }
-      };
-
-      drawSeries(rawSeries, 1.6, 0.45, [7, 5]);
-      drawSeries(filteredSeries, 2.2, 1.0, []);
-      ctx.globalAlpha = 1;
-      ctx.setLineDash([]);
+      for (const axis of ["x", "y", "z"]) {
+        const points = series[axis];
+        if (points.length < 2) continue;
+        ctx.strokeStyle = COLORS[axis];
+        ctx.lineWidth = 2.0;
+        ctx.beginPath();
+        points.forEach((value, index) => {
+          const ts = tsValues[index];
+          const x = xToPx(ts, MAX_POINTS - points.length + index);
+          const y = yToPx(value);
+          if (index === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
 
       ctx.fillStyle = "#5c7283";
       ctx.font = "14px Trebuchet MS, sans-serif";
       ctx.textAlign = "left";
       ctx.fillText((yMax).toFixed(2) + " " + unitLabel, 8, pad.t + 10);
       ctx.fillText((yMin).toFixed(2) + " " + unitLabel, 8, pad.t + ph);
+      ctx.fillText("t0 " + fmtTsSeconds(tMin), pad.l, h - 8);
+      ctx.textAlign = "center";
+      ctx.fillText(hasTimeRange ? ("span " + (tMax - tMin).toFixed(0) + " ms") : "span 0 ms", pad.l + pw / 2, h - 8);
       ctx.textAlign = "right";
-      ctx.fillText("latest " + MAX_POINTS + " samples", w - 8, h - 8);
+      ctx.fillText("t1 " + fmtTsSeconds(tMax), w - 8, h - 8);
     }
 
     function render() {
-      const accRange = computeRange(2.0, accRaw, accFiltered);
-      const gyroRange = computeRange(250.0, gyroRaw, gyroFiltered);
-      drawChart(accChart, accRaw, accFiltered, accRange[0], accRange[1], "g");
-      drawChart(gyroChart, gyroRaw, gyroFiltered, gyroRange[0], gyroRange[1], "dps");
+      const accRange = computeRange(2.0, accRaw);
+      const gyroRange = computeRange(250.0, gyroRaw);
+      drawChart(accChart, accRaw, accRange[0], accRange[1], "g");
+      drawChart(gyroChart, gyroRaw, gyroRange[0], gyroRange[1], "dps");
       requestAnimationFrame(render);
     }
 
@@ -469,21 +458,19 @@
           return;
         }
 
-        if (!message.acc || !message.gyro || !message.f_acc || !message.f_gyro) {
+        if (!Array.isArray(message.acc) || !Array.isArray(message.gyro)) {
           return;
         }
 
-        push3(accRaw, message.acc);
-        push3(accFiltered, message.f_acc);
-        push3(gyroRaw, message.gyro);
-        push3(gyroFiltered, message.f_gyro);
+        const latestAcc = pushTelemetryBatch(accRaw, message.acc);
+        const latestGyro = pushTelemetryBatch(gyroRaw, message.gyro);
 
-        latest.acc.x = Number(message.acc.x);
-        latest.acc.y = Number(message.acc.y);
-        latest.acc.z = Number(message.acc.z);
-        latest.gyro.x = Number(message.gyro.x);
-        latest.gyro.y = Number(message.gyro.y);
-        latest.gyro.z = Number(message.gyro.z);
+        if (latestAcc !== null) {
+          latest.acc = latestAcc;
+        }
+        if (latestGyro !== null) {
+          latest.gyro = latestGyro;
+        }
         refreshReadout();
       });
 
@@ -505,4 +492,5 @@
     connectWebSocket();
   </script>
 </body>
+
 </html>

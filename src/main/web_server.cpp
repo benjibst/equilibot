@@ -20,7 +20,6 @@
 
 namespace
 {
-    constexpr char TAG[] = "web_server";
     constexpr char AP_SSID[] = "equilibot";
     constexpr char AP_PASSWORD[] = "equilibot123";
     constexpr uint8_t WIFI_CHANNEL = 1;
@@ -29,7 +28,7 @@ namespace
     httpd_handle_t g_server = nullptr;
     QueueHandle_t g_telemetry_queue = nullptr;
     TaskHandle_t g_telemetry_sender_task = nullptr;
-    constexpr size_t kWebTelemetryQueueLength = 256;
+    constexpr size_t kWebTelemetryQueueLength = 8;
 
     extern const uint8_t index_html_start[] asm("_binary_index_html_start");
     extern const uint8_t index_html_end[] asm("_binary_index_html_end");
@@ -37,8 +36,7 @@ namespace
     struct WsBroadcastContext
     {
         httpd_handle_t server;
-        char payload[8192];
-        size_t payload_len;
+        std::string payload;
     };
 
     void telemetry_sender_task(void *);
@@ -51,15 +49,15 @@ namespace
         esp_err_t list_err = httpd_get_client_list(context->server, &fd_count, client_fds.data());
         if (list_err != ESP_OK)
         {
-            ESP_LOGW(TAG, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
+            ESP_LOGW(__FILE__, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
             delete context;
             return;
         }
 
         httpd_ws_frame_t ws_frame = {};
         ws_frame.type = HTTPD_WS_TYPE_TEXT;
-        ws_frame.payload = reinterpret_cast<uint8_t *>(context->payload);
-        ws_frame.len = context->payload_len;
+        ws_frame.payload = reinterpret_cast<uint8_t *>(context->payload.data());
+        ws_frame.len = context->payload.size();
 
         for (size_t i = 0; i < fd_count; ++i)
         {
@@ -72,7 +70,7 @@ namespace
             esp_err_t send_err = httpd_ws_send_frame_async(context->server, fd, &ws_frame);
             if (send_err != ESP_OK)
             {
-                ESP_LOGW(TAG, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
+                ESP_LOGW(__FILE__, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
             }
         }
         delete context;
@@ -82,7 +80,7 @@ namespace
     {
         if (request->method == HTTP_GET)
         {
-            ESP_LOGI(TAG, "WebSocket handshake complete");
+            ESP_LOGI(__FILE__, "WebSocket handshake complete");
             return ESP_OK;
         }
 
@@ -90,7 +88,7 @@ namespace
         esp_err_t err = httpd_ws_recv_frame(request, &ws_frame, 0);
         if (err != ESP_OK)
         {
-            ESP_LOGW(TAG, "ws recv length failed: %s", esp_err_to_name(err));
+            ESP_LOGW(__FILE__, "ws recv length failed: %s", esp_err_to_name(err));
             return err;
         }
 
@@ -190,7 +188,7 @@ esp_err_t start_web_server()
 
     if (g_telemetry_queue == nullptr)
     {
-        g_telemetry_queue = xQueueCreate(kWebTelemetryQueueLength, sizeof(TelemetrySample));
+        g_telemetry_queue = xQueueCreate(kWebTelemetryQueueLength, sizeof(ICM42670Sample));
         if (g_telemetry_queue == nullptr)
         {
             return ESP_ERR_NO_MEM;
@@ -259,39 +257,23 @@ esp_err_t start_web_server()
         }
     }
 
-    ESP_LOGI(TAG, "SoftAP started. Open http://192.168.4.1/");
+    ESP_LOGI(__FILE__, "SoftAP started. Open http://192.168.4.1/");
     return ESP_OK;
 }
 namespace
 {
-    esp_err_t publish_telemetry_sample(const TelemetrySample &sample)
+    esp_err_t publish_telemetry_payload(std::string &&serialized)
     {
         if (!g_server)
         {
             return ESP_ERR_INVALID_STATE;
         }
 
-        using nlohmann::json;
-        json payload = {
-            {"t_ms", esp_timer_get_time() / 1000},
-            {"acc", {{"x", sample.acc[0]}, {"y", sample.acc[1]}, {"z", sample.acc[2]}}},
-            {"gyro", {{"x", sample.gyro[0]}, {"y", sample.gyro[1]}, {"z", sample.gyro[2]}}},
-            {"f_acc", {{"x", sample.f_acc[0]}, {"y", sample.f_acc[1]}, {"z", sample.f_acc[2]}}},
-            {"f_gyro", {{"x", sample.f_gyro[0]}, {"y", sample.f_gyro[1]}, {"z", sample.f_gyro[2]}}},
-        };
-
-        const std::string serialized = payload.dump();
-        if (serialized.size() >= sizeof(WsBroadcastContext::payload))
-        {
-            ESP_LOGE(TAG, "Telemetry JSON too large: %u", static_cast<unsigned>(serialized.size()));
-            return ESP_ERR_INVALID_SIZE;
-        }
-
         WsBroadcastContext *context = new WsBroadcastContext;
+        if (!context)
+            return ESP_ERR_NO_MEM;
         context->server = g_server;
-        std::memcpy(context->payload, serialized.data(), serialized.size());
-        context->payload[serialized.size()] = '\0';
-        context->payload_len = serialized.size();
+        context->payload = std::move(serialized);
 
         esp_err_t err = httpd_queue_work(g_server, ws_broadcast_work, context);
         if (err != ESP_OK)
@@ -303,36 +285,39 @@ namespace
 
     void telemetry_sender_task(void *)
     {
-        TelemetrySample sample{};
         while (true)
         {
-            if (xQueueReceive(g_telemetry_queue, &sample, portMAX_DELAY) != pdTRUE)
+            ICM42670Sample sample = {};
+            xQueueReceive(g_telemetry_queue, &sample, portMAX_DELAY);
+
+            nlohmann::json payload = {
+                {"acc", nlohmann::json::array()},
+                {"gyro", nlohmann::json::array()},
+            };
+
+            auto append_sample = [&payload](const ICM42670Sample &telemetry_sample)
             {
-                continue;
+                payload["acc"].push_back({
+                    {"ts_ms", telemetry_sample.ts_ms},
+                    {"data", telemetry_sample.acc},
+                });
+                payload["gyro"].push_back({
+                    {"ts_ms", telemetry_sample.ts_ms},
+                    {"data", telemetry_sample.gyro},
+                });
+            };
+
+            append_sample(sample);
+            while (xQueueReceive(g_telemetry_queue, &sample, 0) == pdTRUE)
+            {
+                append_sample(sample);
             }
-            (void)publish_telemetry_sample(sample);
+            publish_telemetry_payload(payload.dump());
         }
     }
 }
 
-esp_err_t web_server_queue_telemetry(const TelemetrySample &sample)
+esp_err_t web_server_queue_imu_data(const ICM42670Sample &sample)
 {
-    if (g_telemetry_queue == nullptr)
-    {
-        return ESP_ERR_INVALID_STATE;
-    }
-
-    if (xQueueSend(g_telemetry_queue, &sample, 0) == pdTRUE)
-    {
-        return ESP_OK;
-    }
-
-    TelemetrySample dropped{};
-    (void)xQueueReceive(g_telemetry_queue, &dropped, 0);
-    if (xQueueSend(g_telemetry_queue, &sample, 0) == pdTRUE)
-    {
-        return ESP_OK;
-    }
-
-    return ESP_FAIL;
+    return xQueueSend(g_telemetry_queue, &sample, 0);
 }

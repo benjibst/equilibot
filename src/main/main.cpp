@@ -9,22 +9,18 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "tmc5240.hpp"
-#include "filter.hpp"
 #include <cmath>
 
 extern "C" void app_main(void)
 {
     SpiBus spi_bus(SPI2_HOST, {.miso = GPIO_NUM_13, .mosi = GPIO_NUM_14, .sclk = GPIO_NUM_21}, NUM_DEVICES);
     ICM42670Config imu_config = {
-        .config = {
-            .acce_fs = ACCE_FS_2G,
-            .acce_odr = ACCE_ODR_400HZ,
-            .gyro_fs = GYRO_FS_250DPS,
-            .gyro_odr = GYRO_ODR_400HZ},
-        .acce_pwr = ACCE_PWR_LOWNOISE,
-        .gyro_pwr = GYRO_PWR_LOWNOISE,
-        .acce_ui_filt_bw = ACCE_UI_FILT_BW_BYPASS,
-        .gyro_ui_filt_bw = GYRO_UI_FILT_BW_BYPASS};
+        .acce_odr = ICM42670_ACCE_ODR_400HZ,
+        .gyro_odr = ICM42670_GYRO_ODR_400HZ,
+        .acce_fs = ICM42670_ACCE_FS_2G,
+        .gyro_fs = ICM42670_GYRO_FS_250DPS,
+        .acce_bw = ICM42670_UI_FILT_BW_BYPASS,
+        .gyro_bw = ICM42670_UI_FILT_BW_BYPASS};
     ICM42670Spi imu(spi_bus, GPIO_NUM_41, imu_config, GPIO_NUM_40);
     LedStripConfig led_strip_config = {
         .led_count = 31,
@@ -42,34 +38,14 @@ extern "C" void app_main(void)
     {
         ESP_LOGE(__FILE__, "Failed to start web server: %s", esp_err_to_name(web_server_err));
     }
-    // Tuned for stable web telemetry while keeping responsive motion tracking.
-    LowPassIIR<3> acc_filter(8.0f);
-    LowPassIIR<3> gyro_filter(10.0f);
-    int64_t last_sample_us = 0;
     while (true)
     {
         ICM42670Sample sample{};
         imu.receive_sample(sample, portMAX_DELAY);
 
         const int64_t now_us = esp_timer_get_time();
-        float dt_seconds = 1.0f / 400.0f;
-        if (last_sample_us > 0)
-        {
-            dt_seconds = static_cast<float>(now_us - last_sample_us) / 1'000'000.0f;
-            if (dt_seconds < 0.0001f)
-            {
-                dt_seconds = 0.0001f;
-            }
-        }
-        last_sample_us = now_us;
+        ESP_LOGI(__FILE__, "received sample at %lld", now_us);
 
-        auto f_acc = acc_filter.process(sample.acc, dt_seconds);
-        auto f_gyro = gyro_filter.process(sample.gyro, dt_seconds);
-        TelemetrySample telemetry = {
-            sample.acc,
-            sample.gyro,
-            f_acc,
-            f_gyro};
-        web_server_queue_telemetry(telemetry);
+        web_server_queue_imu_data(sample);
     }
 }
