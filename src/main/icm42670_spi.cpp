@@ -53,7 +53,7 @@ namespace
 
 ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Config &config,
                          gpio_num_t interrupt_pin)
-    : spi_bus(spi_bus), config(config), interrupt_pin(interrupt_pin)
+    : spi_bus(spi_bus), interrupt_pin(interrupt_pin)
 {
     initialized = false;
     sample_queue = xQueueCreate(kSampleQueueLength, sizeof(ICM42670Sample));
@@ -69,7 +69,7 @@ ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Confi
         return;
     }
 
-    const esp_err_t init_ret = initialize();
+    const esp_err_t init_ret = initialize(config);
     if (init_ret != ESP_OK)
     {
         ESP_LOGE(kTag, "Failed initializing ICM42670: %s", esp_err_to_name(init_ret));
@@ -175,7 +175,7 @@ ICM42670Spi::~ICM42670Spi()
     }
 }
 
-esp_err_t ICM42670Spi::initialize()
+esp_err_t ICM42670Spi::initialize(const ICM42670Config &cfg)
 {
     esp_err_t ret = check_device_present();
     if (ret != ESP_OK)
@@ -183,16 +183,8 @@ esp_err_t ICM42670Spi::initialize()
         return ret;
     }
 
-    if (configure_sensor(config) != ESP_OK)
+    if (configure_sensor(cfg) != ESP_OK)
         return ESP_FAIL;
-
-    uint8_t data = ICM42670_GYRO_PWR_LOWNOISE << 2 | ICM42670_ACCE_PWR_LOWNOISE;
-    if (write_registers(kPwrMgmt0, &data, 1) != ESP_OK)
-        return ESP_FAIL;
-
-    // Datasheet: after transitioning Accel/Gyro from OFF to any active mode, avoid
-    // issuing register writes for at least 200 us.
-    esp_rom_delay_us(200);
 
     assert(interrupt_pin != GPIO_NUM_NC);
     if (configure_data_ready_interrupt() != ESP_OK)
@@ -201,6 +193,10 @@ esp_err_t ICM42670Spi::initialize()
     if (setup_interrupt_gpio() != ESP_OK)
         return ESP_FAIL;
 
+    uint8_t data = ICM42670_GYRO_PWR_LOWNOISE << 2 | ICM42670_ACCE_PWR_LOWNOISE;
+    if (write_registers(kPwrMgmt0, &data, 1) != ESP_OK)
+        return ESP_FAIL;
+    config = cfg;
     return ESP_OK;
 }
 
@@ -316,7 +312,7 @@ esp_err_t ICM42670Spi::check_device_present()
 
 esp_err_t ICM42670Spi::configure_sensor(const ICM42670Config &cfg)
 {
-    if (config_applied && !memcmp(&cfg, &config, sizeof(ICM42670Config)))
+    if (!memcmp(&cfg, &config, sizeof(ICM42670Config)))
         return ESP_OK;
 
     uint8_t config_data[2] = {
@@ -338,36 +334,7 @@ esp_err_t ICM42670Spi::configure_sensor(const ICM42670Config &cfg)
         return ESP_FAIL;
 
     config = cfg;
-    config_applied = true;
     return ESP_OK;
-}
-
-esp_err_t ICM42670Spi::set_acce_power(ICM42670AccePwr_t state)
-{
-    uint8_t value = 0;
-    esp_err_t ret = read_register(kPwrMgmt0, value);
-    if (ret != ESP_OK)
-    {
-        return ret;
-    }
-
-    value = static_cast<uint8_t>((value & ~0x03) |
-                                 (static_cast<uint8_t>(state) & 0x03));
-    return write_register(kPwrMgmt0, value);
-}
-
-esp_err_t ICM42670Spi::set_gyro_power(ICM42670GyroPwr_t state)
-{
-    uint8_t value = 0;
-    esp_err_t ret = read_register(kPwrMgmt0, value);
-    if (ret != ESP_OK)
-    {
-        return ret;
-    }
-
-    value = static_cast<uint8_t>((value & ~(0x03 << 2)) |
-                                 ((static_cast<uint8_t>(state) & 0x03) << 2));
-    return write_register(kPwrMgmt0, value);
 }
 
 esp_err_t ICM42670Spi::write_register(uint8_t reg, uint8_t value)

@@ -117,7 +117,7 @@ private:
     static void IRAM_ATTR gpio_isr_handler(void *arg);
     void data_ready_task();
 
-    esp_err_t initialize();
+    esp_err_t initialize(const ICM42670Config &cfg);
     esp_err_t check_device_present();
     esp_err_t configure_data_ready_interrupt();
     esp_err_t setup_interrupt_gpio();
@@ -127,9 +127,6 @@ private:
     esp_err_t write_registers(uint8_t reg, const uint8_t *values, size_t count);
     esp_err_t read_register(uint8_t reg, uint8_t &value);
     esp_err_t read_registers(uint8_t reg, uint8_t *values, size_t count);
-
-    esp_err_t set_acce_power(ICM42670AccePwr_t state);
-    esp_err_t set_gyro_power(ICM42670GyroPwr_t state);
 
     static esp_err_t decode_acce_sensitivity(uint8_t accel_config0, float &sensitivity);
     static esp_err_t decode_gyro_sensitivity(uint8_t gyro_config0, float &sensitivity);

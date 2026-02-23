@@ -75,12 +75,6 @@
       color: var(--pending);
     }
 
-    .readout {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-
     .panel {
       background: var(--panel);
       border: 1px solid #e3e8ed;
@@ -160,35 +154,6 @@
       color: var(--offline);
     }
 
-    .axis-grid {
-      display: grid;
-      gap: 0.25rem;
-    }
-
-    .axis {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.8rem;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .axis .name {
-      font-weight: 700;
-      min-width: 2rem;
-    }
-
-    .axis .name.x {
-      color: var(--x);
-    }
-
-    .axis .name.y {
-      color: var(--y);
-    }
-
-    .axis .name.z {
-      color: var(--z);
-    }
-
     .charts {
       display: grid;
       grid-template-columns: 1fr;
@@ -258,10 +223,6 @@
     }
 
     @media (max-width: 900px) {
-      .readout {
-        grid-template-columns: 1fr;
-      }
-
       .config-grid {
         grid-template-columns: 1fr;
       }
@@ -310,25 +271,6 @@
       </div>
     </section>
 
-    <section class="readout">
-      <article class="panel">
-        <h2>Acceleration (g)</h2>
-        <div class="axis-grid">
-          <div class="axis"><span class="name x">X</span><span id="accX">--</span></div>
-          <div class="axis"><span class="name y">Y</span><span id="accY">--</span></div>
-          <div class="axis"><span class="name z">Z</span><span id="accZ">--</span></div>
-        </div>
-      </article>
-      <article class="panel">
-        <h2>Gyroscope (dps)</h2>
-        <div class="axis-grid">
-          <div class="axis"><span class="name x">X</span><span id="gyroX">--</span></div>
-          <div class="axis"><span class="name y">Y</span><span id="gyroY">--</span></div>
-          <div class="axis"><span class="name z">Z</span><span id="gyroZ">--</span></div>
-        </div>
-      </article>
-    </section>
-
     <section class="charts">
       <article class="chart-card">
         <div class="chart-head">
@@ -356,13 +298,11 @@
   </main>
 
   <script>
-    const MAX_POINTS = 180;
+    const CHART_WINDOW_MS = 5000;
     const COLORS = { x: "#1b76d1", y: "#1d9d75", z: "#d43a4f" };
 
     const accRaw = { t: [], x: [], y: [], z: [] };
     const gyroRaw = { t: [], x: [], y: [], z: [] };
-    const latest = { acc: { x: null, y: null, z: null }, gyro: { x: null, y: null, z: null } };
-
     const wsStatus = document.getElementById("wsStatus");
     const accChart = document.getElementById("accChart");
     const gyroChart = document.getElementById("gyroChart");
@@ -374,6 +314,53 @@
     const cfgGyroFs = document.getElementById("cfgGyroFs");
     const cfgAccBw = document.getElementById("cfgAccBw");
     const cfgGyroBw = document.getElementById("cfgGyroBw");
+
+    const DEFAULT_IMU_CONFIG = {
+      acce_odr: 7,
+      gyro_odr: 7,
+      acce_fs: 3,
+      gyro_fs: 3,
+      acce_bw: 0,
+      gyro_bw: 0,
+    };
+    const ACC_ODR_TO_HZ = {
+      5: 1600,
+      6: 800,
+      7: 400,
+      8: 200,
+      9: 100,
+      10: 50,
+      11: 25,
+      12: 12.5,
+      13: 6.25,
+      14: 3.125,
+      15: 1.5625,
+    };
+    const GYRO_ODR_TO_HZ = {
+      5: 1600,
+      6: 800,
+      7: 400,
+      8: 200,
+      9: 100,
+      10: 50,
+      11: 25,
+      12: 12.5,
+    };
+    const ACC_FS_TO_G = {
+      0: 16,
+      1: 8,
+      2: 4,
+      3: 2,
+    };
+    const GYRO_FS_TO_DPS = {
+      0: 2000,
+      1: 1000,
+      2: 500,
+      3: 250,
+    };
+    let chartMaxPoints = 2;
+    let chartAccFullScaleG = 2;
+    let chartGyroFullScaleDps = 250;
 
     const ACC_ODR_OPTIONS = [
       { value: 5, label: "1600 Hz" },
@@ -444,13 +431,66 @@
       }
     }
 
+    function trimSeries(series) {
+      const count = series.t.length;
+      if (count === 0) {
+        return;
+      }
+
+      const latestTs = series.t[count - 1];
+      if (Number.isFinite(latestTs)) {
+        const minAllowedTs = latestTs - CHART_WINDOW_MS;
+        let firstValidIndex = 0;
+        while (firstValidIndex < series.t.length && series.t[firstValidIndex] < minAllowedTs) {
+          firstValidIndex += 1;
+        }
+        if (firstValidIndex > 0) {
+          series.t.splice(0, firstValidIndex);
+          series.x.splice(0, firstValidIndex);
+          series.y.splice(0, firstValidIndex);
+          series.z.splice(0, firstValidIndex);
+        }
+      }
+
+      const dropCount = series.t.length - chartMaxPoints;
+      if (dropCount > 0) {
+        series.t.splice(0, dropCount);
+        series.x.splice(0, dropCount);
+        series.y.splice(0, dropCount);
+        series.z.splice(0, dropCount);
+      }
+    }
+
+    function readConfigFromForm() {
+      return {
+        acce_odr: Number(cfgAccOdr.value),
+        gyro_odr: Number(cfgGyroOdr.value),
+        acce_fs: Number(cfgAccFs.value),
+        gyro_fs: Number(cfgGyroFs.value),
+        acce_bw: Number(cfgAccBw.value),
+        gyro_bw: Number(cfgGyroBw.value),
+      };
+    }
+
+    function applyChartSettingsFromConfig(config) {
+      const accOdrHz = ACC_ODR_TO_HZ[config.acce_odr] ?? 100;
+      const gyroOdrHz = GYRO_ODR_TO_HZ[config.gyro_odr] ?? 100;
+      const sampleRateHz = Math.max(accOdrHz, gyroOdrHz);
+      chartMaxPoints = Math.max(2, Math.ceil((CHART_WINDOW_MS * sampleRateHz) / 1000));
+      chartAccFullScaleG = ACC_FS_TO_G[config.acce_fs] ?? 2;
+      chartGyroFullScaleDps = GYRO_FS_TO_DPS[config.gyro_fs] ?? 250;
+      trimSeries(accRaw);
+      trimSeries(gyroRaw);
+    }
+
     function initConfigForm() {
-      populateSelect(cfgAccOdr, ACC_ODR_OPTIONS, 7);
-      populateSelect(cfgGyroOdr, GYRO_ODR_OPTIONS, 7);
-      populateSelect(cfgAccFs, ACC_FS_OPTIONS, 3);
-      populateSelect(cfgGyroFs, GYRO_FS_OPTIONS, 3);
-      populateSelect(cfgAccBw, BW_OPTIONS, 0);
-      populateSelect(cfgGyroBw, BW_OPTIONS, 0);
+      populateSelect(cfgAccOdr, ACC_ODR_OPTIONS, DEFAULT_IMU_CONFIG.acce_odr);
+      populateSelect(cfgGyroOdr, GYRO_ODR_OPTIONS, DEFAULT_IMU_CONFIG.gyro_odr);
+      populateSelect(cfgAccFs, ACC_FS_OPTIONS, DEFAULT_IMU_CONFIG.acce_fs);
+      populateSelect(cfgGyroFs, GYRO_FS_OPTIONS, DEFAULT_IMU_CONFIG.gyro_fs);
+      populateSelect(cfgAccBw, BW_OPTIONS, DEFAULT_IMU_CONFIG.acce_bw);
+      populateSelect(cfgGyroBw, BW_OPTIONS, DEFAULT_IMU_CONFIG.gyro_bw);
+      applyChartSettingsFromConfig(DEFAULT_IMU_CONFIG);
       cfgApplyBtn.disabled = true;
       cfgApplyBtn.addEventListener("click", () => {
         if (!ws || ws.readyState !== WebSocket.OPEN) {
@@ -458,28 +498,22 @@
           return;
         }
 
+        const selectedConfig = readConfigFromForm();
         const configMessage = {
           type: "imu_config",
-          config: {
-            acce_odr: Number(cfgAccOdr.value),
-            gyro_odr: Number(cfgGyroOdr.value),
-            acce_fs: Number(cfgAccFs.value),
-            gyro_fs: Number(cfgGyroFs.value),
-            acce_bw: Number(cfgAccBw.value),
-            gyro_bw: Number(cfgGyroBw.value),
-          },
+          config: selectedConfig,
         };
 
         ws.send(JSON.stringify(configMessage));
+        applyChartSettingsFromConfig(selectedConfig);
         setCfgStatus("IMU config sent", false);
       });
     }
 
     function pushTelemetryBatch(series, rows) {
       if (!Array.isArray(rows)) {
-        return null;
+        return;
       }
-      let latestVector = null;
       for (const row of rows) {
         if (!row || !Array.isArray(row.data) || row.data.length < 3) {
           continue;
@@ -495,51 +529,12 @@
         series.x.push(x);
         series.y.push(y);
         series.z.push(z);
-        latestVector = { x, y, z };
-        if (series.t.length > MAX_POINTS) series.t.shift();
-        if (series.x.length > MAX_POINTS) series.x.shift();
-        if (series.y.length > MAX_POINTS) series.y.shift();
-        if (series.z.length > MAX_POINTS) series.z.shift();
       }
-      return latestVector;
-    }
-
-    function fmt(value, digits) {
-      return Number.isFinite(value) ? value.toFixed(digits) : "--";
+      trimSeries(series);
     }
 
     function fmtTsSeconds(tsMs) {
       return Number.isFinite(tsMs) ? (tsMs / 1000).toFixed(3) + "s" : "--";
-    }
-
-    function refreshReadout() {
-      document.getElementById("accX").textContent = fmt(latest.acc.x, 4);
-      document.getElementById("accY").textContent = fmt(latest.acc.y, 4);
-      document.getElementById("accZ").textContent = fmt(latest.acc.z, 4);
-      document.getElementById("gyroX").textContent = fmt(latest.gyro.x, 3);
-      document.getElementById("gyroY").textContent = fmt(latest.gyro.y, 3);
-      document.getElementById("gyroZ").textContent = fmt(latest.gyro.z, 3);
-    }
-
-    function computeRange(minSpan, ...seriesList) {
-      let min = Infinity;
-      let max = -Infinity;
-      for (const series of seriesList) {
-        for (const axis of ["x", "y", "z"]) {
-          for (const value of series[axis]) {
-            if (value < min) min = value;
-            if (value > max) max = value;
-          }
-        }
-      }
-
-      if (!Number.isFinite(min) || !Number.isFinite(max)) {
-        return [-minSpan / 2, minSpan / 2];
-      }
-
-      const center = (min + max) / 2;
-      const span = Math.max(max - min, minSpan) * 1.18;
-      return [center - span / 2, center + span / 2];
     }
 
     function resizeCanvas(canvas) {
@@ -553,7 +548,7 @@
       }
     }
 
-    function drawChart(canvas, series, yMin, yMax, unitLabel) {
+    function drawChart(canvas, series, yMin, yMax, unitLabel, timeWindowMs) {
       resizeCanvas(canvas);
       const ctx = canvas.getContext("2d");
       const w = canvas.width;
@@ -579,24 +574,24 @@
       const yToPx = (value) => pad.t + (1 - (value - yMin) / (yMax - yMin)) * ph;
       const tsValues = series.t;
       const tCount = tsValues.length;
-      const tMin = tCount > 0 ? tsValues[0] : 0;
-      const tMax = tCount > 0 ? tsValues[tCount - 1] : 0;
-      const hasTimeRange = Number.isFinite(tMin) && Number.isFinite(tMax) && tMax > tMin;
+      const tMax = tCount > 0 ? tsValues[tCount - 1] : NaN;
+      const tMin = Number.isFinite(tMax) ? tMax - timeWindowMs : NaN;
+      const hasTimeRange = Number.isFinite(tMin) && Number.isFinite(tMax) && timeWindowMs > 0;
       const xToPx = (ts, fallbackIndex) => {
         if (hasTimeRange && Number.isFinite(ts)) {
-          return pad.l + ((ts - tMin) / (tMax - tMin)) * pw;
+          const clampedTs = Math.max(tMin, Math.min(ts, tMax));
+          return pad.l + ((clampedTs - tMin) / timeWindowMs) * pw;
         }
-        if (MAX_POINTS <= 1) return pad.l;
-        return pad.l + (fallbackIndex / (MAX_POINTS - 1)) * pw;
+        if (chartMaxPoints <= 1) return pad.l;
+        return pad.l + (fallbackIndex / (chartMaxPoints - 1)) * pw;
       };
 
-      if (yMin <= 0 && yMax >= 0) {
-        ctx.strokeStyle = "#c2d0dd";
-        ctx.beginPath();
-        ctx.moveTo(pad.l, yToPx(0));
-        ctx.lineTo(pad.l + pw, yToPx(0));
-        ctx.stroke();
-      }
+      ctx.strokeStyle = "#000000";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, yToPx(0));
+      ctx.lineTo(pad.l + pw, yToPx(0));
+      ctx.stroke();
 
       for (const axis of ["x", "y", "z"]) {
         const points = series[axis];
@@ -606,7 +601,7 @@
         ctx.beginPath();
         points.forEach((value, index) => {
           const ts = tsValues[index];
-          const x = xToPx(ts, MAX_POINTS - points.length + index);
+          const x = xToPx(ts, chartMaxPoints - points.length + index);
           const y = yToPx(value);
           if (index === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
@@ -621,16 +616,14 @@
       ctx.fillText((yMin).toFixed(2) + " " + unitLabel, 8, pad.t + ph);
       ctx.fillText("t0 " + fmtTsSeconds(tMin), pad.l, h - 8);
       ctx.textAlign = "center";
-      ctx.fillText(hasTimeRange ? ("span " + (tMax - tMin).toFixed(0) + " ms") : "span 0 ms", pad.l + pw / 2, h - 8);
+      ctx.fillText("span " + timeWindowMs.toFixed(0) + " ms", pad.l + pw / 2, h - 8);
       ctx.textAlign = "right";
       ctx.fillText("t1 " + fmtTsSeconds(tMax), w - 8, h - 8);
     }
 
     function render() {
-      const accRange = computeRange(2.0, accRaw);
-      const gyroRange = computeRange(250.0, gyroRaw);
-      drawChart(accChart, accRaw, accRange[0], accRange[1], "g");
-      drawChart(gyroChart, gyroRaw, gyroRange[0], gyroRange[1], "dps");
+      drawChart(accChart, accRaw, -chartAccFullScaleG, chartAccFullScaleG, "g", CHART_WINDOW_MS);
+      drawChart(gyroChart, gyroRaw, -chartGyroFullScaleDps, chartGyroFullScaleDps, "dps", CHART_WINDOW_MS);
       requestAnimationFrame(render);
     }
 
@@ -670,16 +663,8 @@
           return;
         }
 
-        const latestAcc = pushTelemetryBatch(accRaw, message.acc);
-        const latestGyro = pushTelemetryBatch(gyroRaw, message.gyro);
-
-        if (latestAcc !== null) {
-          latest.acc = latestAcc;
-        }
-        if (latestGyro !== null) {
-          latest.gyro = latestGyro;
-        }
-        refreshReadout();
+        pushTelemetryBatch(accRaw, message.acc);
+        pushTelemetryBatch(gyroRaw, message.gyro);
       });
 
       ws.addEventListener("close", () => {
@@ -700,7 +685,6 @@
     }
 
     initConfigForm();
-    refreshReadout();
     render();
     connectWebSocket();
   </script>
