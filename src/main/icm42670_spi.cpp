@@ -5,6 +5,7 @@
 #include "esp_timer.h"
 
 #include <array>
+#include <cstring>
 
 namespace
 {
@@ -24,7 +25,6 @@ namespace
     constexpr uint8_t kIntSource0 = 0x2B;
     constexpr uint8_t kIntStatusDrdy = 0x39;
     constexpr uint8_t kAccelData = 0x0B;
-    constexpr uint8_t kGyroData = 0x11;
 
     constexpr uint8_t kIcm42670Id = 0x67;
 
@@ -35,6 +35,9 @@ namespace
 
     constexpr UBaseType_t kDataReadyTaskPriority = configMAX_PRIORITIES - 2;
     constexpr uint32_t kSampleQueueLength = 2;
+    constexpr size_t kMaxWriteRegisterCount = 4;
+    constexpr size_t kMaxReadRegisterCount = 12;
+    constexpr size_t kAccelGyroReadSize = 12;
 
     constexpr float kGyroFs2000Sensitivity = 16.4f;
     constexpr float kGyroFs1000Sensitivity = 32.8f;
@@ -84,19 +87,25 @@ ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Confi
 
 esp_err_t ICM42670Spi::read_sample(ICM42670Sample &sample)
 {
+    if (acce_sensitivity_lsb_per_g <= 0.0f || gyro_sensitivity_lsb_per_dps <= 0.0f)
+    {
+        return ESP_ERR_INVALID_STATE;
+    }
+
     uint64_t start_time = esp_timer_get_time();
-    esp_err_t ret = get_acce_value(sample.acc);
+    ICM42670RawVal_t accel_raw{};
+    ICM42670RawVal_t gyro_raw{};
+    esp_err_t ret = read_accel_and_gyro(accel_raw, gyro_raw);
     if (ret != ESP_OK)
     {
-        ESP_LOGE(kTag, "Failed reading accelerometer value: %s", esp_err_to_name(ret));
+        ESP_LOGE(kTag, "Failed reading accel+gyro values: %s", esp_err_to_name(ret));
         return ESP_FAIL;
     }
 
-    ret = get_gyro_value(sample.gyro);
-    if (ret != ESP_OK)
+    for (size_t i = 0; i < sample.acc.size(); ++i)
     {
-        ESP_LOGE(kTag, "Failed reading gyroscope value: %s", esp_err_to_name(ret));
-        return ESP_FAIL;
+        sample.acc[i] = static_cast<float>(accel_raw[i]) / acce_sensitivity_lsb_per_g;
+        sample.gyro[i] = static_cast<float>(gyro_raw[i]) / gyro_sensitivity_lsb_per_dps;
     }
     sample.ts_ms = (esp_timer_get_time() + start_time) / 2000;
     return ESP_OK;
@@ -307,21 +316,29 @@ esp_err_t ICM42670Spi::check_device_present()
 
 esp_err_t ICM42670Spi::configure_sensor(const ICM42670Config &cfg)
 {
-    if (!memcmp(&cfg, &config, sizeof(ICM42670Config)))
+    if (config_applied && !memcmp(&cfg, &config, sizeof(ICM42670Config)))
         return ESP_OK;
+
     uint8_t config_data[2] = {
         (uint8_t)(((cfg.gyro_fs & 0x03) << 5) | (cfg.gyro_odr & 0x0F)),
         (uint8_t)(((cfg.acce_fs & 0x03) << 5) | (cfg.acce_odr & 0x0F)),
     };
     if (write_registers(kGyroConfig0, config_data, sizeof(config_data)) != ESP_OK)
         return ESP_FAIL;
+
     uint8_t data = cfg.gyro_bw & 0x7;
     if (write_registers(kGyroConfig1, &data, 1) != ESP_OK)
         return ESP_FAIL;
+
     data = cfg.acce_bw & 0x7;
     if (write_registers(kAccelConfig1, &data, 1) != ESP_OK)
         return ESP_FAIL;
+
+    if (update_sensitivity_cache() != ESP_OK)
+        return ESP_FAIL;
+
     config = cfg;
+    config_applied = true;
     return ESP_OK;
 }
 
@@ -360,12 +377,12 @@ esp_err_t ICM42670Spi::write_register(uint8_t reg, uint8_t value)
 
 esp_err_t ICM42670Spi::write_registers(uint8_t reg, const uint8_t *values, size_t count)
 {
-    if (values == nullptr || count == 0 || count > 4)
+    if (values == nullptr || count == 0 || count > kMaxWriteRegisterCount)
     {
         return ESP_ERR_INVALID_ARG;
     }
 
-    std::array<uint8_t, 5> tx{};
+    std::array<uint8_t, kMaxWriteRegisterCount + 1> tx{};
     tx[0] = reg;
     for (size_t i = 0; i < count; ++i)
     {
@@ -382,13 +399,13 @@ esp_err_t ICM42670Spi::read_register(uint8_t reg, uint8_t &value)
 
 esp_err_t ICM42670Spi::read_registers(uint8_t reg, uint8_t *values, size_t count)
 {
-    if (values == nullptr || count == 0 || count > 6)
+    if (values == nullptr || count == 0 || count > kMaxReadRegisterCount)
     {
         return ESP_ERR_INVALID_ARG;
     }
 
-    std::array<uint8_t, 7> tx{};
-    std::array<uint8_t, 7> rx{};
+    std::array<uint8_t, kMaxReadRegisterCount + 1> tx{};
+    std::array<uint8_t, kMaxReadRegisterCount + 1> rx{};
     tx[0] = static_cast<uint8_t>(reg | kReadMask);
 
     const esp_err_t ret = spi_bus.transfer(EquiliBotSpiDevices::IMU, tx.data(), rx.data(), count + 1);
@@ -404,17 +421,10 @@ esp_err_t ICM42670Spi::read_registers(uint8_t reg, uint8_t *values, size_t count
     return ESP_OK;
 }
 
-esp_err_t ICM42670Spi::get_acce_sensitivity(float &sensitivity)
+esp_err_t ICM42670Spi::decode_acce_sensitivity(uint8_t accel_config0, float &sensitivity)
 {
     sensitivity = 0.0f;
-    uint8_t acce_fs = 0;
-    esp_err_t ret = read_register(kAccelConfig0, acce_fs);
-    if (ret != ESP_OK)
-    {
-        return ret;
-    }
-
-    acce_fs = (acce_fs >> 5) & 0x03;
+    const uint8_t acce_fs = static_cast<uint8_t>((accel_config0 >> 5) & 0x03);
     switch (acce_fs)
     {
     case ICM42670_ACCE_FS_16G:
@@ -436,17 +446,10 @@ esp_err_t ICM42670Spi::get_acce_sensitivity(float &sensitivity)
     return ESP_OK;
 }
 
-esp_err_t ICM42670Spi::get_gyro_sensitivity(float &sensitivity)
+esp_err_t ICM42670Spi::decode_gyro_sensitivity(uint8_t gyro_config0, float &sensitivity)
 {
     sensitivity = 0.0f;
-    uint8_t gyro_fs = 0;
-    esp_err_t ret = read_register(kGyroConfig0, gyro_fs);
-    if (ret != ESP_OK)
-    {
-        return ret;
-    }
-
-    gyro_fs = (gyro_fs >> 5) & 0x03;
+    const uint8_t gyro_fs = static_cast<uint8_t>((gyro_config0 >> 5) & 0x03);
     switch (gyro_fs)
     {
     case ICM42670_GYRO_FS_2000DPS:
@@ -468,75 +471,54 @@ esp_err_t ICM42670Spi::get_gyro_sensitivity(float &sensitivity)
     return ESP_OK;
 }
 
-esp_err_t ICM42670Spi::get_raw_value(uint8_t reg, ICM42670RawVal_t &value)
+esp_err_t ICM42670Spi::update_sensitivity_cache()
 {
-    value = {};
-    uint8_t data[6] = {0};
-    const esp_err_t ret = read_registers(reg, data, sizeof(data));
+    uint8_t config_data[2] = {0};
+    const esp_err_t ret = read_registers(kGyroConfig0, config_data, sizeof(config_data));
     if (ret != ESP_OK)
     {
         return ret;
     }
 
-    value[0] = static_cast<int16_t>((static_cast<uint16_t>(data[0]) << 8) | data[1]);
-    value[1] = static_cast<int16_t>((static_cast<uint16_t>(data[2]) << 8) | data[3]);
-    value[2] = static_cast<int16_t>((static_cast<uint16_t>(data[4]) << 8) | data[5]);
+    float gyro_sensitivity = 0.0f;
+    esp_err_t err = decode_gyro_sensitivity(config_data[0], gyro_sensitivity);
+    if (err != ESP_OK)
+    {
+        return err;
+    }
+
+    float accel_sensitivity = 0.0f;
+    err = decode_acce_sensitivity(config_data[1], accel_sensitivity);
+    if (err != ESP_OK)
+    {
+        return err;
+    }
+
+    gyro_sensitivity_lsb_per_dps = gyro_sensitivity;
+    acce_sensitivity_lsb_per_g = accel_sensitivity;
 
     return ESP_OK;
 }
 
-esp_err_t ICM42670Spi::get_acce_value(ICM42670Val_t &value)
+esp_err_t ICM42670Spi::read_accel_and_gyro(ICM42670RawVal_t &accel, ICM42670RawVal_t &gyro)
 {
-    value = {};
+    accel = {};
+    gyro = {};
 
-    float sensitivity = 0.0f;
-    esp_err_t ret = get_acce_sensitivity(sensitivity);
-    if (ret != ESP_OK)
-    {
-        return ret;
-    }
-    if (sensitivity == 0.0f)
-    {
-        return ESP_ERR_INVALID_STATE;
-    }
-
-    ICM42670RawVal_t raw_value{};
-    ret = get_raw_value(kAccelData, raw_value);
+    uint8_t data[kAccelGyroReadSize] = {0};
+    const esp_err_t ret = read_registers(kAccelData, data, sizeof(data));
     if (ret != ESP_OK)
     {
         return ret;
     }
 
-    value[0] = raw_value[0] / sensitivity;
-    value[1] = raw_value[1] / sensitivity;
-    value[2] = raw_value[2] / sensitivity;
-    return ESP_OK;
-}
-
-esp_err_t ICM42670Spi::get_gyro_value(ICM42670Val_t &value)
-{
-    value = {};
-
-    float sensitivity = 0.0f;
-    esp_err_t ret = get_gyro_sensitivity(sensitivity);
-    if (ret != ESP_OK)
+    for (size_t axis = 0; axis < accel.size(); ++axis)
     {
-        return ret;
-    }
-    if (sensitivity == 0.0f)
-    {
-        return ESP_ERR_INVALID_STATE;
+        const size_t accel_idx = axis * 2;
+        const size_t gyro_idx = 6 + axis * 2;
+        accel[axis] = static_cast<int16_t>((static_cast<uint16_t>(data[accel_idx]) << 8) | data[accel_idx + 1]);
+        gyro[axis] = static_cast<int16_t>((static_cast<uint16_t>(data[gyro_idx]) << 8) | data[gyro_idx + 1]);
     }
 
-    ICM42670RawVal_t raw_value{};
-    ret = get_raw_value(kGyroData, raw_value);
-    if (ret != ESP_OK)
-    {
-        return ret;
-    }
-
-    value[0] = raw_value[0] / sensitivity;
-    value[1] = raw_value[1] / sensitivity;
-    value[2] = raw_value[2] / sensitivity;
     return ESP_OK;
 }

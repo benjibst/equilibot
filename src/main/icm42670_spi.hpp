@@ -131,16 +131,18 @@ private:
     esp_err_t set_acce_power(ICM42670AccePwr_t state);
     esp_err_t set_gyro_power(ICM42670GyroPwr_t state);
 
-    esp_err_t get_acce_sensitivity(float &sensitivity);
-    esp_err_t get_gyro_sensitivity(float &sensitivity);
-    esp_err_t get_raw_value(uint8_t reg, ICM42670RawVal_t &value);
-    esp_err_t get_acce_value(ICM42670Val_t &value);
-    esp_err_t get_gyro_value(ICM42670Val_t &value);
+    static esp_err_t decode_acce_sensitivity(uint8_t accel_config0, float &sensitivity);
+    static esp_err_t decode_gyro_sensitivity(uint8_t gyro_config0, float &sensitivity);
+    esp_err_t update_sensitivity_cache();
+    esp_err_t read_accel_and_gyro(ICM42670RawVal_t &accel, ICM42670RawVal_t &gyro);
 
     SpiBus &spi_bus;
     ICM42670Config config;
     gpio_num_t interrupt_pin;
     QueueHandle_t sample_queue = nullptr;
     TaskHandle_t data_ready_task_handle = nullptr;
+    float acce_sensitivity_lsb_per_g = 0.0f;
+    float gyro_sensitivity_lsb_per_dps = 0.0f;
+    bool config_applied = false;
     bool initialized = false;
 };

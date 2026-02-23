@@ -1,7 +1,7 @@
 #pragma once
 
 #include "driver/gpio.h"
-#include "lock_guard.hpp"
+#include "freertos_wrappers.hpp"
 #include "led_strip.h"
 
 #include <cstdint>

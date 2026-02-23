@@ -2,7 +2,7 @@
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 #include <vector>
-#include "lock_guard.hpp"
+#include "freertos_wrappers.hpp"
 
 struct SpiBusConfig
 {
