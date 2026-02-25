@@ -22,69 +22,22 @@ namespace
 
     bool is_valid_acce_odr(int value)
     {
-        switch (value)
-        {
-        case ICM42670_ACCE_ODR_1600HZ:
-        case ICM42670_ACCE_ODR_800HZ:
-        case ICM42670_ACCE_ODR_400HZ:
-        case ICM42670_ACCE_ODR_200HZ:
-        case ICM42670_ACCE_ODR_100HZ:
-        case ICM42670_ACCE_ODR_50HZ:
-        case ICM42670_ACCE_ODR_25HZ:
-        case ICM42670_ACCE_ODR_12_5HZ:
-        case ICM42670_ACCE_ODR_6_25HZ:
-        case ICM42670_ACCE_ODR_3_125HZ:
-        case ICM42670_ACCE_ODR_1_5625HZ:
-            return true;
-        default:
-            return false;
-        }
+        return value >= ICM42670_ACCE_ODR_1600HZ && value <= ICM42670_ACCE_ODR_1_5625HZ;
     }
 
     bool is_valid_gyro_odr(int value)
     {
-        switch (value)
-        {
-        case ICM42670_GYRO_ODR_1600HZ:
-        case ICM42670_GYRO_ODR_800HZ:
-        case ICM42670_GYRO_ODR_400HZ:
-        case ICM42670_GYRO_ODR_200HZ:
-        case ICM42670_GYRO_ODR_100HZ:
-        case ICM42670_GYRO_ODR_50HZ:
-        case ICM42670_GYRO_ODR_25HZ:
-        case ICM42670_GYRO_ODR_12_5HZ:
-            return true;
-        default:
-            return false;
-        }
+        return value >= ICM42670_GYRO_ODR_1600HZ && value <= ICM42670_GYRO_ODR_12_5HZ;
     }
 
     bool is_valid_acce_fs(int value)
     {
-        switch (value)
-        {
-        case ICM42670_ACCE_FS_16G:
-        case ICM42670_ACCE_FS_8G:
-        case ICM42670_ACCE_FS_4G:
-        case ICM42670_ACCE_FS_2G:
-            return true;
-        default:
-            return false;
-        }
+        return value >= ICM42670_ACCE_FS_16G && value <= ICM42670_ACCE_FS_2G;
     }
 
     bool is_valid_gyro_fs(int value)
     {
-        switch (value)
-        {
-        case ICM42670_GYRO_FS_2000DPS:
-        case ICM42670_GYRO_FS_1000DPS:
-        case ICM42670_GYRO_FS_500DPS:
-        case ICM42670_GYRO_FS_250DPS:
-            return true;
-        default:
-            return false;
-        }
+        return value >= ICM42670_GYRO_FS_2000DPS && value <= ICM42670_GYRO_FS_250DPS;
     }
 
     bool is_valid_filter_bw(int value)
@@ -92,57 +45,24 @@ namespace
         return value >= ICM42670_UI_FILT_BW_BYPASS && value <= ICM42670_UI_FILT_BW_16HZ;
     }
 
-    template <typename EnumType>
-    esp_err_t parse_checked_config_field(const nlohmann::json &cfg,
-                                         const char *field_name,
-                                         bool (*is_valid)(int),
-                                         EnumType &target)
-    {
-        const auto field_it = cfg.find(field_name);
-        if (field_it == cfg.end())
-        {
-            return ESP_OK;
-        }
-
-        if (!field_it->is_number_integer())
-        {
-            return ESP_ERR_INVALID_ARG;
-        }
-
-        const int value = field_it->get<int>();
-        if (!is_valid(value))
-        {
-            return ESP_ERR_INVALID_ARG;
-        }
-        target = static_cast<EnumType>(value);
-        return ESP_OK;
-    }
-
     esp_err_t parse_imu_config_json(const nlohmann::json &message,
                                     ICM42670Config &current_config)
     {
-        const nlohmann::json *cfg = &message;
-        const auto config_it = message.find("config");
-        if (config_it != message.end())
+        const nlohmann::json &config = message.at("config");
+
+        auto apply_if_valid = [&config, &current_config]<typename TEnum>(const char *key, bool (*valid)(int), TEnum &out)
         {
-            if (!config_it->is_object())
-            {
-                return ESP_ERR_INVALID_ARG;
-            }
-            cfg = &(*config_it);
-        }
+            int value = config[key];
+            if (valid(value))
+                out = static_cast<TEnum>(value);
+        };
 
-        ESP_ERROR_CHECK(parse_checked_config_field(*cfg, "acce_odr", is_valid_acce_odr, current_config.acce_odr));
-
-        ESP_ERROR_CHECK(parse_checked_config_field(*cfg, "gyro_odr", is_valid_gyro_odr, current_config.gyro_odr));
-
-        ESP_ERROR_CHECK(parse_checked_config_field(*cfg, "acce_fs", is_valid_acce_fs, current_config.acce_fs));
-
-        ESP_ERROR_CHECK(parse_checked_config_field(*cfg, "gyro_fs", is_valid_gyro_fs, current_config.gyro_fs));
-
-        ESP_ERROR_CHECK(parse_checked_config_field(*cfg, "acce_bw", is_valid_filter_bw, current_config.acce_bw));
-
-        ESP_ERROR_CHECK(parse_checked_config_field(*cfg, "gyro_bw", is_valid_filter_bw, current_config.gyro_bw));
+        apply_if_valid("acce_odr", is_valid_acce_odr, current_config.acce_odr);
+        apply_if_valid("gyro_odr", is_valid_gyro_odr, current_config.gyro_odr);
+        apply_if_valid("acce_fs", is_valid_acce_fs, current_config.acce_fs);
+        apply_if_valid("gyro_fs", is_valid_gyro_fs, current_config.gyro_fs);
+        apply_if_valid("acce_bw", is_valid_filter_bw, current_config.acce_bw);
+        apply_if_valid("gyro_bw", is_valid_filter_bw, current_config.gyro_bw);
         return ESP_OK;
     }
 
@@ -243,7 +163,7 @@ esp_err_t WebServer::start()
     return ESP_OK;
 }
 
-esp_err_t WebServer::queue_imu_data(const ICM42670Sample &sample)
+esp_err_t WebServer::queue_imu_data(const TelemetryData &sample)
 {
     return telemetry_queue_.send(sample, 0) == pdPASS ? ESP_OK : ESP_FAIL;
 }
@@ -361,8 +281,8 @@ void WebServer::telemetry_sender_task()
 {
     while (true)
     {
-        ICM42670Sample sample = {};
-        if (telemetry_queue_.receive(sample, portMAX_DELAY) != pdTRUE)
+        TelemetryData telemetry = {};
+        if (telemetry_queue_.receive(telemetry, portMAX_DELAY) != pdTRUE)
         {
             continue;
         }
@@ -371,26 +291,33 @@ void WebServer::telemetry_sender_task()
             {"acc", nlohmann::json::array()},
             {"gyro", nlohmann::json::array()},
         };
+        payload["acc"].get_ref<nlohmann::json::array_t &>().reserve(kMaxSamplesPerTelemetryPayload);
+        payload["gyro"].get_ref<nlohmann::json::array_t &>().reserve(kMaxSamplesPerTelemetryPayload);
 
         auto append_sample = [&payload](const ICM42670Sample &telemetry_sample)
         {
             payload["acc"].push_back({
-                {"ts_ms", telemetry_sample.ts_ms},
+                {"ts_us", telemetry_sample.ts_us},
                 {"data", telemetry_sample.acc},
             });
             payload["gyro"].push_back({
-                {"ts_ms", telemetry_sample.ts_ms},
+                {"ts_us", telemetry_sample.ts_us},
                 {"data", telemetry_sample.gyro},
             });
         };
 
-        append_sample(sample);
-        while (telemetry_queue_.receive(sample, 0) == pdTRUE)
+        append_sample(telemetry.sample);
+        size_t samples_in_payload = 1;
+        while (samples_in_payload < kMaxSamplesPerTelemetryPayload &&
+               telemetry_queue_.receive(telemetry, 0) == pdTRUE)
         {
-            append_sample(sample);
+            append_sample(telemetry.sample);
+            ++samples_in_payload;
         }
-
-        publish_telemetry_payload(payload.dump());
+        payload["theta_kalman"] = telemetry.theta_kalman_rad;
+        payload["theta_int"] = telemetry.theta_int_rad;
+        std::string serialized = payload.dump();
+        publish_telemetry_payload(std::move(serialized));
     }
 }
 

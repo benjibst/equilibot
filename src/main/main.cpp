@@ -9,6 +9,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "tmc5240.hpp"
+#include "kalman.hpp"
 #include <cmath>
 
 extern "C" void app_main(void)
@@ -33,6 +34,8 @@ extern "C" void app_main(void)
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
     TMC5240 mot1(spi_bus, GPIO_NUM_12, MOT_1);
     TMC5240 mot2(spi_bus, GPIO_NUM_10, MOT_2);
+    KalmanFilter kalman;
+    GyroIntegrator integ;
     WebServer web_server(imu, imu_config);
     esp_err_t web_server_err = web_server.start();
     if (web_server_err != ESP_OK)
@@ -43,6 +46,8 @@ extern "C" void app_main(void)
     {
         ICM42670Sample sample{};
         imu.receive_sample(sample, portMAX_DELAY);
-        web_server.queue_imu_data(sample);
+        float theta_kalman = kalman.process(sample);
+        float theta_int = integ.process(sample);
+        web_server.queue_imu_data(WebServer::TelemetryData{sample, theta_kalman, theta_int});
     }
 }

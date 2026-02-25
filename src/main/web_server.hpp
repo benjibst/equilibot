@@ -12,10 +12,16 @@
 class WebServer
 {
 public:
+    struct TelemetryData
+    {
+        ICM42670Sample sample;
+        float theta_kalman_rad;
+        float theta_int_rad;
+    };
     WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config);
 
     esp_err_t start();
-    esp_err_t queue_imu_data(const ICM42670Sample &sample);
+    esp_err_t queue_imu_data(const TelemetryData &sample);
 
     WebServer(const WebServer &) = delete;
     WebServer &operator=(const WebServer &) = delete;
@@ -24,6 +30,7 @@ public:
 
 private:
     static constexpr size_t kTelemetryQueueLength = 8;
+    static constexpr size_t kMaxSamplesPerTelemetryPayload = kTelemetryQueueLength;
     static constexpr uint32_t kTelemetryTaskStackSizeBytes = 4096;
 
     struct WsBroadcastContext
@@ -50,6 +57,6 @@ private:
     esp_netif_t *ap_netif_ = nullptr;
     bool started_ = false;
 
-    StaticQueue<ICM42670Sample, kTelemetryQueueLength> telemetry_queue_;
+    StaticQueue<TelemetryData, kTelemetryQueueLength> telemetry_queue_;
     StaticTask<kTelemetryTaskStackSizeBytes, WebServer> telemetry_sender_task_;
 };

@@ -87,15 +87,9 @@ ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Confi
 
 esp_err_t ICM42670Spi::read_sample(ICM42670Sample &sample)
 {
-    if (acce_sensitivity_lsb_per_g <= 0.0f || gyro_sensitivity_lsb_per_dps <= 0.0f)
-    {
-        return ESP_ERR_INVALID_STATE;
-    }
-
-    uint64_t start_time = esp_timer_get_time();
     ICM42670RawVal_t accel_raw{};
     ICM42670RawVal_t gyro_raw{};
-    esp_err_t ret = read_accel_and_gyro(accel_raw, gyro_raw);
+    esp_err_t ret = read_accel_and_gyro(accel_raw, gyro_raw, sample.ts_us);
     if (ret != ESP_OK)
     {
         ESP_LOGE(kTag, "Failed reading accel+gyro values: %s", esp_err_to_name(ret));
@@ -107,7 +101,6 @@ esp_err_t ICM42670Spi::read_sample(ICM42670Sample &sample)
         sample.acc[i] = static_cast<float>(accel_raw[i]) / acce_sensitivity_lsb_per_g;
         sample.gyro[i] = static_cast<float>(gyro_raw[i]) / gyro_sensitivity_lsb_per_dps;
     }
-    sample.ts_ms = (esp_timer_get_time() + start_time) / 2000;
     return ESP_OK;
 }
 
@@ -467,13 +460,14 @@ esp_err_t ICM42670Spi::update_sensitivity_cache()
     return ESP_OK;
 }
 
-esp_err_t ICM42670Spi::read_accel_and_gyro(ICM42670RawVal_t &accel, ICM42670RawVal_t &gyro)
+esp_err_t ICM42670Spi::read_accel_and_gyro(ICM42670RawVal_t &accel, ICM42670RawVal_t &gyro, uint64_t &ts_us)
 {
     accel = {};
     gyro = {};
 
     uint8_t data[kAccelGyroReadSize] = {0};
     const esp_err_t ret = read_registers(kAccelData, data, sizeof(data));
+    ts_us = esp_timer_get_time();
     if (ret != ESP_OK)
     {
         return ret;

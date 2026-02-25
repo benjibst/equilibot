@@ -94,7 +94,7 @@ struct ICM42670Sample
 {
     ICM42670Val_t acc;
     ICM42670Val_t gyro;
-    uint64_t ts_ms;
+    uint64_t ts_us;
 };
 
 class ICM42670Spi
@@ -131,7 +131,7 @@ private:
     static esp_err_t decode_acce_sensitivity(uint8_t accel_config0, float &sensitivity);
     static esp_err_t decode_gyro_sensitivity(uint8_t gyro_config0, float &sensitivity);
     esp_err_t update_sensitivity_cache();
-    esp_err_t read_accel_and_gyro(ICM42670RawVal_t &accel, ICM42670RawVal_t &gyro);
+    esp_err_t read_accel_and_gyro(ICM42670RawVal_t &accel, ICM42670RawVal_t &gyro, uint64_t &ts_us);
 
     SpiBus &spi_bus;
     ICM42670Config config;
