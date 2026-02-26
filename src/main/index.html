@@ -156,126 +156,34 @@
 
     .orientation-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(140px, 180px));
+      grid-template-columns: minmax(260px, 1fr);
       gap: 1rem;
       justify-content: start;
     }
 
-    .compass-card {
+    .orientation-card {
       border: 1px solid #d8e2ea;
       border-radius: 12px;
-      padding: 0.55rem 0.45rem 0.6rem;
+      padding: 0.65rem;
       background: #f8fbfd;
-      text-align: center;
     }
 
-    .compass-title {
+    .orientation-title {
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.45rem;
     }
 
-    .compass {
-      --angle: 0deg;
-      width: 108px;
-      height: 108px;
-      margin: 0 auto;
-      border-radius: 50%;
-      border: 1px solid #c8d4df;
-      background: radial-gradient(circle at 50% 40%, #ffffff 0%, #ecf3f8 67%, #dce8f0 100%);
-      box-shadow: inset 0 0 0 6px #f7fbfe;
-      position: relative;
-    }
-
-    .compass::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 8px;
-      bottom: 8px;
-      width: 1px;
-      background: #c7d4df;
-      transform: translateX(-50%);
-    }
-
-    .compass::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 8px;
-      right: 8px;
-      height: 1px;
-      background: #c7d4df;
-      transform: translateY(-50%);
-    }
-
-    .compass-mark {
-      position: absolute;
-      font-size: 0.6rem;
-      font-weight: 700;
-      color: #688092;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .compass-mark.n {
-      top: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .compass-mark.e {
-      right: 7px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .compass-mark.s {
-      bottom: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .compass-mark.w {
-      left: 7px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .compass-needle {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 3px;
-      height: 42px;
-      border-radius: 999px;
-      background: linear-gradient(to top, #5f7485 30%, #d43a4f 30%);
-      transform-origin: 50% 84%;
-      transform: translate(-50%, -84%) rotate(var(--angle));
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    }
-
-    .compass-hub {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      background: #1d2a36;
-      border: 1px solid #ffffff;
-      z-index: 1;
-    }
-
-    .compass-value {
-      margin-top: 0.35rem;
+    .orientation-value {
+      margin-top: 0.45rem;
       font-size: 0.86rem;
       font-weight: 700;
-      color: var(--ink);
+      color: #41596b;
+      font-family: "Fira Code", "Consolas", "Monaco", monospace;
+      letter-spacing: 0.02em;
     }
 
     .charts {
@@ -346,18 +254,13 @@
       border: 1px solid var(--line);
     }
 
-    @media (max-width: 900px) {
-      .config-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .orientation-grid {
-        grid-template-columns: repeat(2, minmax(130px, 1fr));
-      }
+    .quat-canvas {
+      height: min(62vw, 340px);
+      min-height: 220px;
     }
 
-    @media (max-width: 560px) {
-      .orientation-grid {
+    @media (max-width: 900px) {
+      .config-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -408,29 +311,10 @@
     <section class="panel">
       <h2>Orientation</h2>
       <div class="orientation-grid">
-        <article class="compass-card">
-          <div class="compass-title">Theta Kalman</div>
-          <div class="compass" id="compassKalman">
-            <span class="compass-mark n">N</span>
-            <span class="compass-mark e">E</span>
-            <span class="compass-mark s">S</span>
-            <span class="compass-mark w">W</span>
-            <div class="compass-needle"></div>
-            <div class="compass-hub"></div>
-          </div>
-          <div class="compass-value" id="compassKalmanValue">--</div>
-        </article>
-        <article class="compass-card">
-          <div class="compass-title">Theta Integrated</div>
-          <div class="compass" id="compassIntegrated">
-            <span class="compass-mark n">N</span>
-            <span class="compass-mark e">E</span>
-            <span class="compass-mark s">S</span>
-            <span class="compass-mark w">W</span>
-            <div class="compass-needle"></div>
-            <div class="compass-hub"></div>
-          </div>
-          <div class="compass-value" id="compassIntegratedValue">--</div>
+        <article class="orientation-card">
+          <div class="orientation-title">Simple Rot Quaternion</div>
+          <canvas id="orientationCanvas" class="quat-canvas"></canvas>
+          <div class="orientation-value" id="orientationQuatValue">w=1.000 x=0.000 y=0.000 z=0.000</div>
         </article>
       </div>
     </section>
@@ -478,10 +362,8 @@
     const cfgGyroFs = document.getElementById("cfgGyroFs");
     const cfgAccBw = document.getElementById("cfgAccBw");
     const cfgGyroBw = document.getElementById("cfgGyroBw");
-    const compassKalman = document.getElementById("compassKalman");
-    const compassIntegrated = document.getElementById("compassIntegrated");
-    const compassKalmanValue = document.getElementById("compassKalmanValue");
-    const compassIntegratedValue = document.getElementById("compassIntegratedValue");
+    const orientationCanvas = document.getElementById("orientationCanvas");
+    const orientationQuatValue = document.getElementById("orientationQuatValue");
 
     const DEFAULT_IMU_CONFIG = {
       acce_odr: 7,
@@ -529,6 +411,7 @@
     let chartMaxPoints = 2;
     let chartAccFullScaleG = 2;
     let chartGyroFullScaleDps = 250;
+    let currentQuaternion = { w: 1, x: 0, y: 0, z: 0 };
 
     const ACC_ODR_OPTIONS = [
       { value: 5, label: "1600 Hz" },
@@ -599,22 +482,57 @@
       }
     }
 
-    function normalizeAngleDegrees(degrees) {
-      return ((degrees % 360) + 360) % 360;
+    function normalizeQuaternion(quaternion) {
+      const magnitude = Math.hypot(quaternion.w, quaternion.x, quaternion.y, quaternion.z);
+      if (!Number.isFinite(magnitude) || magnitude < 1e-6) {
+        return { w: 1, x: 0, y: 0, z: 0 };
+      }
+      return {
+        w: quaternion.w / magnitude,
+        x: quaternion.x / magnitude,
+        y: quaternion.y / magnitude,
+        z: quaternion.z / magnitude,
+      };
     }
 
-    function updateCompass(compassElement, labelElement, thetaRadians) {
-      if (!Number.isFinite(thetaRadians)) {
+    function parseSimpleRotQuaternion(simpleRot) {
+      if (!simpleRot) {
+        return null;
+      }
+      if (Array.isArray(simpleRot) && simpleRot.length >= 4) {
+        const parsed = {
+          w: Number(simpleRot[0]),
+          x: Number(simpleRot[1]),
+          y: Number(simpleRot[2]),
+          z: Number(simpleRot[3]),
+        };
+        if (Number.isFinite(parsed.w) && Number.isFinite(parsed.x) &&
+          Number.isFinite(parsed.y) && Number.isFinite(parsed.z)) {
+          return normalizeQuaternion(parsed);
+        }
+        return null;
+      }
+      const parsed = {
+        w: Number(simpleRot.w),
+        x: Number(simpleRot.x),
+        y: Number(simpleRot.y),
+        z: Number(simpleRot.z),
+      };
+      if (Number.isFinite(parsed.w) && Number.isFinite(parsed.x) &&
+        Number.isFinite(parsed.y) && Number.isFinite(parsed.z)) {
+        return normalizeQuaternion(parsed);
+      }
+      return null;
+    }
+
+    function updateOrientationFromMessage(message) {
+      const parsed = parseSimpleRotQuaternion(message.simple_rot);
+      if (!parsed) {
         return;
       }
-      const degrees = normalizeAngleDegrees((thetaRadians * 180) / Math.PI);
-      compassElement.style.setProperty("--angle", degrees.toFixed(3) + "deg");
-      labelElement.textContent = degrees.toFixed(1) + "°";
-    }
-
-    function updateOrientationCompasses(message) {
-      updateCompass(compassKalman, compassKalmanValue, Number(message.theta_kalman));
-      updateCompass(compassIntegrated, compassIntegratedValue, Number(message.theta_int));
+      currentQuaternion = parsed;
+      orientationQuatValue.textContent =
+        `w=${parsed.w.toFixed(3)} x=${parsed.x.toFixed(3)} y=${parsed.y.toFixed(3)} z=${parsed.z.toFixed(3)}`;
     }
 
     function trimSeries(series) {
@@ -729,19 +647,135 @@
       return Number.isFinite(tsUs) ? (tsUs / 1000000).toFixed(3) + "s" : "--";
     }
 
-    function resizeCanvas(canvas) {
+    function resizeCanvas(canvas, minCssWidth, minCssHeight) {
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      const width = Math.max(320, Math.floor(rect.width * dpr));
-      const height = Math.max(180, Math.floor(rect.height * dpr));
+      const width = Math.max(Math.floor(minCssWidth * dpr), Math.floor(rect.width * dpr));
+      const height = Math.max(Math.floor(minCssHeight * dpr), Math.floor(rect.height * dpr));
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
       }
     }
 
+    function quaternionToMatrix(quaternion) {
+      const { w, x, y, z } = quaternion;
+      const xx = x * x;
+      const yy = y * y;
+      const zz = z * z;
+      const xy = x * y;
+      const xz = x * z;
+      const yz = y * z;
+      const wx = w * x;
+      const wy = w * y;
+      const wz = w * z;
+      return [
+        [1 - 2 * (yy + zz), 2 * (xy - wz), 2 * (xz + wy)],
+        [2 * (xy + wz), 1 - 2 * (xx + zz), 2 * (yz - wx)],
+        [2 * (xz - wy), 2 * (yz + wx), 1 - 2 * (xx + yy)],
+      ];
+    }
+
+    function rotatePoint(point, matrix) {
+      return [
+        matrix[0][0] * point[0] + matrix[0][1] * point[1] + matrix[0][2] * point[2],
+        matrix[1][0] * point[0] + matrix[1][1] * point[1] + matrix[1][2] * point[2],
+        matrix[2][0] * point[0] + matrix[2][1] * point[1] + matrix[2][2] * point[2],
+      ];
+    }
+
+    function projectPoint(point, width, height) {
+      const cameraDistance = 3.8;
+      const perspective = 1 / Math.max(0.8, cameraDistance - point[2]);
+      const scale = Math.min(width, height) * 1.3;
+      return {
+        x: width * 0.5 + point[0] * scale * perspective,
+        y: height * 0.52 - point[1] * scale * perspective,
+        z: point[2],
+      };
+    }
+
+    function drawOrientationBox() {
+      resizeCanvas(orientationCanvas, 220, 220);
+      const ctx = orientationCanvas.getContext("2d");
+      const width = orientationCanvas.width;
+      const height = orientationCanvas.height;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#f9fbfc";
+      ctx.fillRect(0, 0, width, height);
+
+      const matrix = quaternionToMatrix(currentQuaternion);
+      const vertices = [
+        [-0.8, -0.5, -0.32],
+        [0.8, -0.5, -0.32],
+        [0.8, 0.5, -0.32],
+        [-0.8, 0.5, -0.32],
+        [-0.8, -0.5, 0.32],
+        [0.8, -0.5, 0.32],
+        [0.8, 0.5, 0.32],
+        [-0.8, 0.5, 0.32],
+      ].map((point) => rotatePoint(point, matrix));
+
+      const projected = vertices.map((point) => projectPoint(point, width, height));
+      const faces = [
+        { idx: [0, 1, 2, 3], fill: "#d7e5f2" },
+        { idx: [4, 5, 6, 7], fill: "#a8cbeb" },
+        { idx: [0, 1, 5, 4], fill: "#c5dbee" },
+        { idx: [1, 2, 6, 5], fill: "#b7d2ea" },
+        { idx: [2, 3, 7, 6], fill: "#cfdff0" },
+        { idx: [3, 0, 4, 7], fill: "#bfd5e9" },
+      ];
+
+      faces.sort((left, right) => {
+        const zLeft = left.idx.reduce((sum, index) => sum + vertices[index][2], 0) / left.idx.length;
+        const zRight = right.idx.reduce((sum, index) => sum + vertices[index][2], 0) / right.idx.length;
+        return zLeft - zRight;
+      });
+
+      for (const face of faces) {
+        ctx.beginPath();
+        for (let i = 0; i < face.idx.length; i += 1) {
+          const point = projected[face.idx[i]];
+          if (i === 0) {
+            ctx.moveTo(point.x, point.y);
+          } else {
+            ctx.lineTo(point.x, point.y);
+          }
+        }
+        ctx.closePath();
+        ctx.fillStyle = face.fill;
+        ctx.fill();
+        ctx.lineWidth = 1.25;
+        ctx.strokeStyle = "#3e5568";
+        ctx.stroke();
+      }
+
+      const origin = projectPoint([0, 0, 0], width, height);
+      const axisLength = 1.25;
+      const axes = [
+        { vector: rotatePoint([axisLength, 0, 0], matrix), color: "#1b76d1", label: "X" },
+        { vector: rotatePoint([0, axisLength, 0], matrix), color: "#1d9d75", label: "Y" },
+        { vector: rotatePoint([0, 0, axisLength], matrix), color: "#d43a4f", label: "Z" },
+      ];
+      ctx.font = "600 12px Trebuchet MS, sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      for (const axis of axes) {
+        const endpoint = projectPoint(axis.vector, width, height);
+        ctx.beginPath();
+        ctx.moveTo(origin.x, origin.y);
+        ctx.lineTo(endpoint.x, endpoint.y);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = axis.color;
+        ctx.stroke();
+        ctx.fillStyle = axis.color;
+        ctx.fillText(axis.label, endpoint.x + 4, endpoint.y);
+      }
+    }
+
     function drawChart(canvas, series, yMin, yMax, unitLabel, timeWindowUs) {
-      resizeCanvas(canvas);
+      resizeCanvas(canvas, 320, 180);
       const ctx = canvas.getContext("2d");
       const w = canvas.width;
       const h = canvas.height;
@@ -814,6 +848,7 @@
     }
 
     function render() {
+      drawOrientationBox();
       drawChart(accChart, accRaw, -chartAccFullScaleG, chartAccFullScaleG, "g", CHART_WINDOW_US);
       drawChart(gyroChart, gyroRaw, -chartGyroFullScaleDps, chartGyroFullScaleDps, "dps", CHART_WINDOW_US);
       requestAnimationFrame(render);
@@ -851,7 +886,7 @@
           return;
         }
 
-        updateOrientationCompasses(message);
+        updateOrientationFromMessage(message);
 
         if (Array.isArray(message.acc)) {
           pushTelemetryBatch(accRaw, message.acc);

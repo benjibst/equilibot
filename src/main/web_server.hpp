@@ -5,6 +5,7 @@
 #include "esp_netif.h"
 #include "freertos_wrappers.hpp"
 #include "icm42670_spi.hpp"
+#include "vectors.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <string>
@@ -15,8 +16,7 @@ public:
     struct TelemetryData
     {
         ICM42670Sample sample;
-        float theta_kalman_rad;
-        float theta_int_rad;
+        Quaternion orientation;
     };
     WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config);
 

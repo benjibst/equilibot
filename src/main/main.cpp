@@ -34,8 +34,9 @@ extern "C" void app_main(void)
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
     TMC5240 mot1(spi_bus, GPIO_NUM_12, MOT_1);
     TMC5240 mot2(spi_bus, GPIO_NUM_10, MOT_2);
-    KalmanFilter kalman;
-    GyroIntegrator integ;
+    ICM42670Sample sample{};
+    imu.receive_sample(sample, portMAX_DELAY);
+    GyroIntegrator integ(sample.ts_us);
     WebServer web_server(imu, imu_config);
     esp_err_t web_server_err = web_server.start();
     if (web_server_err != ESP_OK)
@@ -44,10 +45,8 @@ extern "C" void app_main(void)
     }
     while (true)
     {
-        ICM42670Sample sample{};
         imu.receive_sample(sample, portMAX_DELAY);
-        float theta_kalman = kalman.process(sample);
-        float theta_int = integ.process(sample);
-        web_server.queue_imu_data(WebServer::TelemetryData{sample, theta_kalman, theta_int});
+        Quaternion orientation = integ.process(sample);
+        web_server.queue_imu_data(WebServer::TelemetryData{sample, orientation});
     }
 }

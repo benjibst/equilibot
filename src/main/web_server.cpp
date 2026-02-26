@@ -314,8 +314,7 @@ void WebServer::telemetry_sender_task()
             append_sample(telemetry.sample);
             ++samples_in_payload;
         }
-        payload["theta_kalman"] = telemetry.theta_kalman_rad;
-        payload["theta_int"] = telemetry.theta_int_rad;
+        payload["simple_rot"] = telemetry.orientation.quat;
         std::string serialized = payload.dump();
         publish_telemetry_payload(std::move(serialized));
     }
