@@ -47,6 +47,8 @@ extern "C" void app_main(void)
     {
         imu.receive_sample(sample, portMAX_DELAY);
         Quaternion orientation = attitude_filter.process(sample);
+        led_strip.set_tilt(attitude_filter.pitch_filter_.angle() * -180 / M_PI);
+        led_strip.update();
         web_server.queue_imu_data(WebServer::TelemetryData{sample, orientation});
     }
 }

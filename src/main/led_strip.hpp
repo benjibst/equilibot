@@ -41,6 +41,7 @@ public:
     void set_battery_level(int level_percent);
     void set_motor_speed(float speed1, float speed2);
     void set_connection_status(bool connected);
+    void update();
 
     EquilibotLedStrip(const EquilibotLedStrip &) = delete;
     EquilibotLedStrip &operator=(const EquilibotLedStrip &) = delete;
@@ -49,8 +50,7 @@ public:
 
 private:
     std::span<Pixel> segment_pixels(const LedSegment &segment);
-    void push_pixels();
-    void push_pixels_locked();
+    void update_locked();
     void set_motor_segment(std::span<Pixel> segment, float speed);
 
     LedStripConfig config{};

@@ -91,6 +91,16 @@ namespace
         std::fill(segment.begin(), segment.end(), color);
     }
 
+    Pixel scale_pixel(Pixel color, float brightness)
+    {
+        const float clamped = std::clamp(brightness, 0.0f, 1.0f);
+        return Pixel{
+            static_cast<uint8_t>(std::lround(static_cast<float>(color.r) * clamped)),
+            static_cast<uint8_t>(std::lround(static_cast<float>(color.g) * clamped)),
+            static_cast<uint8_t>(std::lround(static_cast<float>(color.b) * clamped)),
+        };
+    }
+
 } // namespace
 
 EquilibotLedStrip::EquilibotLedStrip(gpio_num_t led_gpio, const LedStripConfig &config)
@@ -128,8 +138,6 @@ EquilibotLedStrip::EquilibotLedStrip(gpio_num_t led_gpio, const LedStripConfig &
         led_strip = nullptr;
         return;
     }
-
-    led_strip_clear(led_strip);
 }
 
 EquilibotLedStrip::~EquilibotLedStrip()
@@ -152,13 +160,13 @@ std::span<Pixel> EquilibotLedStrip::segment_pixels(const LedSegment &segment)
     return {pixels.data() + segment.start_index, count};
 }
 
-void EquilibotLedStrip::push_pixels()
+void EquilibotLedStrip::update()
 {
     LockGuard lock(led_strip_mutex);
-    push_pixels_locked();
+    update_locked();
 }
 
-void EquilibotLedStrip::push_pixels_locked()
+void EquilibotLedStrip::update_locked()
 {
     if (led_strip == nullptr)
     {
@@ -238,17 +246,23 @@ void EquilibotLedStrip::set_tilt(float tilt)
 
     fill_segment(segment, kOff);
 
-    const float clamped_tilt = std::clamp(tilt, -90.0f, 90.0f);
-    size_t led_index = 0;
-    if (segment.size() > 1)
+    if (segment.size() == 1)
     {
-        const float normalized = (clamped_tilt + 90.0f) / 180.0f;
-        const float scaled = normalized * static_cast<float>(segment.size() - 1);
-        led_index = static_cast<size_t>(std::lround(scaled));
+        segment[0] = kTiltColor;
+        return;
     }
-    segment[led_index] = kTiltColor;
 
-    push_pixels_locked();
+    const float clamped_tilt = std::clamp(tilt, -90.0f, 90.0f);
+    const float normalized = (clamped_tilt + 90.0f) / 180.0f;
+    const float scaled = normalized * static_cast<float>(segment.size() - 1);
+
+    const size_t lower_index = static_cast<size_t>(std::floor(scaled));
+    const size_t upper_index = std::min(lower_index + 1, segment.size() - 1);
+    const float upper_weight = scaled - static_cast<float>(lower_index);
+    const float lower_weight = 1.0f - upper_weight;
+
+    segment[lower_index] = scale_pixel(kTiltColor, lower_weight);
+    segment[upper_index] = scale_pixel(kTiltColor, upper_weight);
 }
 
 void EquilibotLedStrip::set_battery_level(int level_percent)
@@ -274,8 +288,6 @@ void EquilibotLedStrip::set_battery_level(int level_percent)
     {
         segment[i] = kBatteryColor;
     }
-
-    push_pixels_locked();
 }
 
 void EquilibotLedStrip::set_motor_speed(float speed1, float speed2)
@@ -285,7 +297,6 @@ void EquilibotLedStrip::set_motor_speed(float speed1, float speed2)
 
     set_motor_segment(segment_pixels(config.motor1_segment), speed1);
     set_motor_segment(segment_pixels(config.motor2_segment), speed2);
-    push_pixels_locked();
 }
 
 void EquilibotLedStrip::set_connection_status(bool connected)
@@ -300,5 +311,4 @@ void EquilibotLedStrip::set_connection_status(bool connected)
     }
 
     fill_segment(segment, connected ? kConnectionColor : kOff);
-    push_pixels_locked();
 }

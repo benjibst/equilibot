@@ -6,7 +6,6 @@
 #include <numeric>
 #include <type_traits>
 #include <utility>
-#include "esp_dsp.h"
 template <size_t sz>
 struct Vec
 {

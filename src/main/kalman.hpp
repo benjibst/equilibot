@@ -2,7 +2,6 @@
 
 #include "icm42670_spi.hpp"
 #include "vectors.hpp"
-#include "esp_dsp.h"
 
 #include <cmath>
 #include <cstdint>
@@ -125,6 +124,9 @@ public:
         return orientation_;
     }
 
+    kalman::Angle1DKalman roll_filter_;
+    kalman::Angle1DKalman pitch_filter_;
+
 private:
     static Quaternion euler_to_quaternion(float roll, float pitch, float yaw)
     {
@@ -164,8 +166,6 @@ private:
     }
 
     uint64_t last_ts_us_ = 0;
-    kalman::Angle1DKalman roll_filter_;
-    kalman::Angle1DKalman pitch_filter_;
     float yaw_rad_ = 0.0f;
     Quaternion orientation_{1.0f, 0.0f, 0.0f, 0.0f};
 };
