@@ -6,6 +6,7 @@
 #include "freertos_wrappers.hpp"
 #include "icm42670_spi.hpp"
 #include "vectors.hpp"
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <string>
@@ -32,6 +33,8 @@ private:
     static constexpr size_t kTelemetryQueueLength = 8;
     static constexpr size_t kMaxSamplesPerTelemetryPayload = kTelemetryQueueLength;
     static constexpr uint32_t kTelemetryTaskStackSizeBytes = 4096;
+    static constexpr size_t kMaxPendingWsBroadcasts = 2;
+    static constexpr int64_t kTelemetryMinPublishIntervalUs = 20'000; // 50 Hz cap
 
     struct WsBroadcastContext
     {
@@ -49,6 +52,7 @@ private:
     esp_err_t handle_ws_request(httpd_req_t *request);
     esp_err_t publish_telemetry_payload(std::string &&serialized);
     void telemetry_sender_task();
+    size_t websocket_client_count() const;
 
     ICM42670Spi &imu_;
     ICM42670Config imu_config_;
@@ -56,6 +60,7 @@ private:
     httpd_handle_t server_ = nullptr;
     esp_netif_t *ap_netif_ = nullptr;
     bool started_ = false;
+    std::atomic<size_t> pending_ws_broadcasts_{0};
 
     StaticQueue<TelemetryData, kTelemetryQueueLength> telemetry_queue_;
     StaticTask<kTelemetryTaskStackSizeBytes, WebServer> telemetry_sender_task_;

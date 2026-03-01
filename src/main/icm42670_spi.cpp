@@ -96,7 +96,7 @@ esp_err_t ICM42670Spi::read_sample(ICM42670Sample &sample)
         return ESP_FAIL;
     }
 
-    for (size_t i = 0; i < sample.acc.size(); ++i)
+    for (size_t i = 0; i < sample.acc.size; ++i)
     {
         sample.acc[i] = static_cast<float>(accel_raw[i]) / acce_sensitivity_lsb_per_g;
         sample.gyro[i] = static_cast<float>(gyro_raw[i]) / gyro_sensitivity_lsb_per_dps;

@@ -7,6 +7,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 #include "freertos/task.h"
+#include "vectors.hpp"
 #include <cstddef>
 #include <array>
 #include <cstdint>
@@ -88,12 +89,11 @@ struct ICM42670Config
     ICM42670LowpassBW_t gyro_bw;
 };
 using ICM42670RawVal_t = std::array<int16_t, 3>;
-using ICM42670Val_t = std::array<float, 3>;
 
 struct ICM42670Sample
 {
-    ICM42670Val_t acc;
-    ICM42670Val_t gyro;
+    Vec<3> acc;
+    Vec<3> gyro;
     uint64_t ts_us;
 };
 

@@ -4,6 +4,7 @@
 #include "esp_log.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
+#include "esp_timer.h"
 #include <array>
 #include <cassert>
 #include <cstring>
@@ -239,13 +240,19 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
 void WebServer::ws_broadcast_work(void *arg)
 {
     WsBroadcastContext *context = static_cast<WsBroadcastContext *>(arg);
+    auto finish = [context]()
+    {
+        context->server->pending_ws_broadcasts_.fetch_sub(1, std::memory_order_release);
+        delete context;
+    };
+
     std::array<int, CONFIG_LWIP_MAX_SOCKETS> client_fds = {};
     size_t fd_count = client_fds.size();
     esp_err_t list_err = httpd_get_client_list(context->server->server_, &fd_count, client_fds.data());
     if (list_err != ESP_OK)
     {
         ESP_LOGW(__FILE__, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
-        delete context;
+        finish();
         return;
     }
 
@@ -268,8 +275,7 @@ void WebServer::ws_broadcast_work(void *arg)
             ESP_LOGW(__FILE__, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
         }
     }
-
-    delete context;
+    finish();
 }
 
 void WebServer::telemetry_sender_task_entry(WebServer &self)
@@ -279,11 +285,39 @@ void WebServer::telemetry_sender_task_entry(WebServer &self)
 
 void WebServer::telemetry_sender_task()
 {
+    int64_t last_publish_ts_us = 0;
     while (true)
     {
         TelemetryData telemetry = {};
         if (telemetry_queue_.receive(telemetry, portMAX_DELAY) != pdTRUE)
         {
+            continue;
+        }
+
+        // Keep only latest samples while no WS client is connected.
+        if (websocket_client_count() == 0)
+        {
+            while (telemetry_queue_.receive(telemetry, 0) == pdTRUE)
+            {
+            }
+            continue;
+        }
+
+        // Bound heap growth by dropping frames while older broadcasts are still pending.
+        if (pending_ws_broadcasts_.load(std::memory_order_acquire) >= kMaxPendingWsBroadcasts)
+        {
+            while (telemetry_queue_.receive(telemetry, 0) == pdTRUE)
+            {
+            }
+            continue;
+        }
+
+        const int64_t now_us = esp_timer_get_time();
+        if ((now_us - last_publish_ts_us) < kTelemetryMinPublishIntervalUs)
+        {
+            while (telemetry_queue_.receive(telemetry, 0) == pdTRUE)
+            {
+            }
             continue;
         }
 
@@ -296,13 +330,23 @@ void WebServer::telemetry_sender_task()
 
         auto append_sample = [&payload](const ICM42670Sample &telemetry_sample)
         {
+            const std::array<float, 3> acc_data = {
+                telemetry_sample.acc[0],
+                telemetry_sample.acc[1],
+                telemetry_sample.acc[2],
+            };
+            const std::array<float, 3> gyro_data = {
+                telemetry_sample.gyro[0],
+                telemetry_sample.gyro[1],
+                telemetry_sample.gyro[2],
+            };
             payload["acc"].push_back({
                 {"ts_us", telemetry_sample.ts_us},
-                {"data", telemetry_sample.acc},
+                {"data", acc_data},
             });
             payload["gyro"].push_back({
                 {"ts_us", telemetry_sample.ts_us},
-                {"data", telemetry_sample.gyro},
+                {"data", gyro_data},
             });
         };
 
@@ -314,25 +358,66 @@ void WebServer::telemetry_sender_task()
             append_sample(telemetry.sample);
             ++samples_in_payload;
         }
-        payload["simple_rot"] = telemetry.orientation.quat;
+        payload["simple_rot"] = telemetry.orientation._vec;
         std::string serialized = payload.dump();
-        publish_telemetry_payload(std::move(serialized));
+        if (publish_telemetry_payload(std::move(serialized)) == ESP_OK)
+        {
+            last_publish_ts_us = now_us;
+        }
     }
 }
 
 esp_err_t WebServer::publish_telemetry_payload(std::string &&serialized)
 {
+    const size_t prev_pending = pending_ws_broadcasts_.fetch_add(1, std::memory_order_acq_rel);
+    if (prev_pending >= kMaxPendingWsBroadcasts)
+    {
+        pending_ws_broadcasts_.fetch_sub(1, std::memory_order_release);
+        return ESP_ERR_NO_MEM;
+    }
+
     auto *context = new WsBroadcastContext{
         .server = this,
         .payload = std::move(serialized),
     };
+    if (context == nullptr)
+    {
+        pending_ws_broadcasts_.fetch_sub(1, std::memory_order_release);
+        return ESP_ERR_NO_MEM;
+    }
 
     const esp_err_t err = httpd_queue_work(server_, ws_broadcast_work, context);
     if (err != ESP_OK)
     {
+        pending_ws_broadcasts_.fetch_sub(1, std::memory_order_release);
         delete context;
     }
     return err;
+}
+
+size_t WebServer::websocket_client_count() const
+{
+    if (server_ == nullptr)
+    {
+        return 0;
+    }
+
+    std::array<int, CONFIG_LWIP_MAX_SOCKETS> client_fds = {};
+    size_t fd_count = client_fds.size();
+    if (httpd_get_client_list(server_, &fd_count, client_fds.data()) != ESP_OK)
+    {
+        return 0;
+    }
+
+    size_t ws_count = 0;
+    for (size_t i = 0; i < fd_count; ++i)
+    {
+        if (httpd_ws_get_fd_info(server_, client_fds[i]) == HTTPD_WS_CLIENT_WEBSOCKET)
+        {
+            ++ws_count;
+        }
+    }
+    return ws_count;
 }
 
 esp_err_t WebServer::init_nvs()

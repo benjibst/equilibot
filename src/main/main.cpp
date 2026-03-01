@@ -36,7 +36,7 @@ extern "C" void app_main(void)
     TMC5240 mot2(spi_bus, GPIO_NUM_10, MOT_2);
     ICM42670Sample sample{};
     imu.receive_sample(sample, portMAX_DELAY);
-    GyroIntegrator integ(sample.ts_us);
+    KalmanFilter attitude_filter(sample);
     WebServer web_server(imu, imu_config);
     esp_err_t web_server_err = web_server.start();
     if (web_server_err != ESP_OK)
@@ -46,7 +46,7 @@ extern "C" void app_main(void)
     while (true)
     {
         imu.receive_sample(sample, portMAX_DELAY);
-        Quaternion orientation = integ.process(sample);
+        Quaternion orientation = attitude_filter.process(sample);
         web_server.queue_imu_data(WebServer::TelemetryData{sample, orientation});
     }
 }
