@@ -6,6 +6,7 @@ idf_component_register(
          "web_server.cpp"
          "tmc5240.cpp"
     EMBED_TXTFILES "index.html"
+                   "motor.html"
     INCLUDE_DIRS "."
                  "../external/nlohmann_json/include"
     REQUIRES esp_driver_gpio

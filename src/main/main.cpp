@@ -32,12 +32,12 @@ extern "C" void app_main(void)
         .motor2_segment = {.start_index = 28, .led_count = 3},
     };
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
-    TMC5240 mot1(spi_bus, GPIO_NUM_12, MOT_1);
-    TMC5240 mot2(spi_bus, GPIO_NUM_10, MOT_2);
+    TMC5240 mot1(spi_bus, GPIO_NUM_11, GPIO_NUM_12, MOT_1, 13.0f, 0.24f);
+    TMC5240 mot2(spi_bus, GPIO_NUM_9, GPIO_NUM_10, MOT_2, 13.0f, 0.24f);
     ICM42670Sample sample{};
     imu.receive_sample(sample, portMAX_DELAY);
     KalmanFilter attitude_filter(sample);
-    WebServer web_server(imu, imu_config);
+    WebServer web_server(imu, imu_config, mot1, mot2);
     esp_err_t web_server_err = web_server.start();
     if (web_server_err != ESP_OK)
     {

@@ -50,6 +50,7 @@
       gap: 1rem;
       flex-wrap: wrap;
       box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+      align-items: center;
     }
 
     h1 {
@@ -73,6 +74,22 @@
 
     .status.pending {
       color: var(--pending);
+    }
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .top-right a {
+      border: 1px solid #ccd8e2;
+      border-radius: 8px;
+      padding: 0.35rem 0.65rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      background: #ffffff;
     }
 
     .panel {
@@ -271,7 +288,10 @@
   <main class="wrap">
     <section class="top">
       <h1>Equilibot Live Telemetry</h1>
-      <div class="status pending" id="wsStatus">Connecting...</div>
+      <div class="top-right">
+        <a href="/motor">Motor Control</a>
+        <div class="status pending" id="wsStatus">Connecting...</div>
+      </div>
     </section>
 
     <section class="panel">

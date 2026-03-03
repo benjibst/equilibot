@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equilibot Motor Control</title>
+  <style>
+    :root {
+      --bg-a: #f4f6f8;
+      --bg-b: #dbe8ef;
+      --panel: #ffffff;
+      --ink: #1d2a36;
+      --muted: #5c7283;
+      --line: #d3dde4;
+      --online: #1f8f5f;
+      --offline: #b04040;
+      --pending: #b67912;
+      --accent: #2c7fb3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 15% 0, #ffffff 0%, var(--bg-a) 35%, var(--bg-b) 100%);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .top {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .nav a {
+      border: 1px solid #ccd8e2;
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .status {
+      font-weight: 700;
+    }
+
+    .status.online {
+      color: var(--online);
+    }
+
+    .status.offline {
+      color: var(--offline);
+    }
+
+    .status.pending {
+      color: var(--pending);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+    }
+
+    .panel h2 {
+      margin: 0 0 0.55rem 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(160px, 1fr));
+      gap: 0.75rem;
+      align-items: end;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.25rem;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field button {
+      width: 100%;
+      border: 1px solid #ccd8e2;
+      border-radius: 10px;
+      padding: 0.42rem 0.5rem;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    .field button {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .status-line {
+      margin-top: 0.65rem;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .note {
+      color: #5c7283;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="top">
+      <div>
+        <h1>Equilibot Motor Control</h1>
+        <div class="status pending" id="wsStatus">Connecting...</div>
+      </div>
+      <div class="nav">
+        <a href="/">Telemetry</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Manual Control</h2>
+      <div class="grid">
+        <div class="field">
+          <label for="motorTarget">Motor Target</label>
+          <select id="motorTarget">
+            <option value="both">Both Motors</option>
+            <option value="mot1">Motor 1</option>
+            <option value="mot2">Motor 2</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="velocityInput">Velocity</label>
+          <input id="velocityInput" type="number" value="300" step="1" min="-8388607" max="8388607">
+        </div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <button id="setVelocityBtn" type="button">Set Velocity</button>
+        </div>
+      </div>
+      <div class="status-line" id="manualStatus">Ready</div>
+    </section>
+
+    <section class="panel">
+      <h2>SpreadCycle CHOPCONF</h2>
+      <div class="grid">
+        <div class="field">
+          <label for="toffInput">TOFF (2..15)</label>
+          <input id="toffInput" type="number" min="2" max="15" step="1" value="5">
+        </div>
+        <div class="field">
+          <label for="tblInput">TBL (0..3)</label>
+          <input id="tblInput" type="number" min="0" max="3" step="1" value="2">
+        </div>
+        <div class="field">
+          <label for="hstartInput">HSTART (0..7)</label>
+          <input id="hstartInput" type="number" min="0" max="7" step="1" value="0">
+        </div>
+        <div class="field">
+          <label for="hendInput">HEND (0..15)</label>
+          <input id="hendInput" type="number" min="0" max="15" step="1" value="0">
+        </div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <button id="applyChopperBtn" type="button">Apply CHOPCONF</button>
+        </div>
+      </div>
+      <div class="status-line" id="chopperStatus">No changes sent yet</div>
+      <div class="note">Datasheet basic start point: SpreadCycle enabled internally (en_pwm_mode=0), TOFF=5, TBL=2,
+        HSTART=0, HEND=0.</div>
+    </section>
+
+  </main>
+
+  <script>
+    const wsStatus = document.getElementById("wsStatus");
+    const manualStatus = document.getElementById("manualStatus");
+    const chopperStatus = document.getElementById("chopperStatus");
+
+    const motorTarget = document.getElementById("motorTarget");
+    const velocityInput = document.getElementById("velocityInput");
+    const setVelocityBtn = document.getElementById("setVelocityBtn");
+
+    const toffInput = document.getElementById("toffInput");
+    const tblInput = document.getElementById("tblInput");
+    const hstartInput = document.getElementById("hstartInput");
+    const hendInput = document.getElementById("hendInput");
+    const applyChopperBtn = document.getElementById("applyChopperBtn");
+
+    let ws = null;
+    let reconnectTimer = null;
+
+    function setStatus(text, mode) {
+      wsStatus.textContent = text;
+      wsStatus.className = "status " + mode;
+    }
+
+    function setManualStatus(text) {
+      manualStatus.textContent = text;
+    }
+
+    function setChopperStatus(text) {
+      chopperStatus.textContent = text;
+    }
+
+    function wsReady() {
+      return ws && ws.readyState === WebSocket.OPEN;
+    }
+
+    function sendMessage(payload) {
+      if (!wsReady()) {
+        return false;
+      }
+      ws.send(JSON.stringify(payload));
+      return true;
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function parseIntOrDefault(rawValue, defaultValue) {
+      const text = String(rawValue).trim();
+      if (text === "") {
+        return defaultValue;
+      }
+      const parsed = Number(text);
+      if (!Number.isFinite(parsed)) {
+        return defaultValue;
+      }
+      return Math.trunc(parsed);
+    }
+
+    function readSpreadcycleConfigFromForm() {
+      return {
+        toff: clamp(parseIntOrDefault(toffInput.value, 5), 2, 15),
+        tbl: clamp(parseIntOrDefault(tblInput.value, 2), 0, 3),
+        hstart: clamp(parseIntOrDefault(hstartInput.value, 0), 0, 7),
+        hend: clamp(parseIntOrDefault(hendInput.value, 0), 0, 15),
+      };
+    }
+
+    function syncSpreadcycleForm(config) {
+      toffInput.value = String(config.toff);
+      tblInput.value = String(config.tbl);
+      hstartInput.value = String(config.hstart);
+      hendInput.value = String(config.hend);
+    }
+
+    function applySpreadcycleFromForm() {
+      const config = readSpreadcycleConfigFromForm();
+      syncSpreadcycleForm(config);
+      const ok = sendMessage({
+        type: "spreadcycle_config",
+        motor: motorTarget.value,
+        config,
+      });
+      if (!ok) {
+        setChopperStatus("WebSocket is not connected");
+        return false;
+      }
+      setChopperStatus(`Sent CHOPCONF (TOFF=${config.toff}, TBL=${config.tbl}, HSTART=${config.hstart}, HEND=${config.hend})`);
+      return true;
+    }
+
+    function setVelocity(velocity) {
+      const limited = clamp(Math.trunc(velocity), -8388607, 8388607);
+      velocityInput.value = String(limited);
+      const ok = sendMessage({
+        type: "motor_velocity",
+        motor: motorTarget.value,
+        velocity: limited,
+      });
+      if (!ok) {
+        setManualStatus("WebSocket is not connected");
+        return false;
+      }
+      setManualStatus(`Sent velocity ${limited} to ${motorTarget.value}`);
+      return true;
+    }
+
+    setVelocityBtn.addEventListener("click", () => {
+      const velocity = Number(velocityInput.value) || 0;
+      setVelocity(velocity);
+    });
+
+    applyChopperBtn.addEventListener("click", () => {
+      applySpreadcycleFromForm();
+    });
+
+    function scheduleReconnect() {
+      if (reconnectTimer !== null) {
+        return;
+      }
+      reconnectTimer = setTimeout(() => {
+        reconnectTimer = null;
+        connectWebSocket();
+      }, 1200);
+    }
+
+    function connectWebSocket() {
+      setStatus("Connecting...", "pending");
+      const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+      ws = new WebSocket(protocol + "://" + window.location.host + "/ws");
+
+      ws.addEventListener("open", () => {
+        setStatus("Connected", "online");
+        setManualStatus("Connected, manual motor control ready");
+      });
+
+      ws.addEventListener("message", (_event) => {
+        // Telemetry messages may arrive here; the motor page does not need to parse them.
+      });
+
+      ws.addEventListener("close", () => {
+        setStatus("Disconnected, retrying...", "offline");
+        setManualStatus("Disconnected");
+        scheduleReconnect();
+      });
+
+      ws.addEventListener("error", () => {
+        setStatus("Socket error", "offline");
+        setManualStatus("Socket error");
+        if (ws && ws.readyState <= 1) {
+          ws.close();
+        }
+      });
+    }
+
+    connectWebSocket();
+  </script>
+</body>
+
+</html>

@@ -5,6 +5,7 @@
 #include "esp_netif.h"
 #include "freertos_wrappers.hpp"
 #include "icm42670_spi.hpp"
+#include "tmc5240.hpp"
 #include "vectors.hpp"
 #include <atomic>
 #include <cstddef>
@@ -19,7 +20,7 @@ public:
         ICM42670Sample sample;
         Quaternion orientation;
     };
-    WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config);
+    WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config, TMC5240 &motor1, TMC5240 &motor2);
 
     esp_err_t start();
     esp_err_t queue_imu_data(const TelemetryData &sample);
@@ -43,6 +44,7 @@ private:
     };
 
     static esp_err_t root_get_handler(httpd_req_t *request);
+    static esp_err_t motor_get_handler(httpd_req_t *request);
     static esp_err_t ws_get_handler(httpd_req_t *request);
     static void ws_broadcast_work(void *arg);
     static void telemetry_sender_task_entry(WebServer &self);
@@ -56,6 +58,8 @@ private:
 
     ICM42670Spi &imu_;
     ICM42670Config imu_config_;
+    TMC5240 &motor1_;
+    TMC5240 &motor2_;
 
     httpd_handle_t server_ = nullptr;
     esp_netif_t *ap_netif_ = nullptr;

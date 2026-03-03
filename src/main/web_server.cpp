@@ -20,6 +20,8 @@ namespace
 
     extern const uint8_t index_html_start[] asm("_binary_index_html_start");
     extern const uint8_t index_html_end[] asm("_binary_index_html_end");
+    extern const uint8_t motor_html_start[] asm("_binary_motor_html_start");
+    extern const uint8_t motor_html_end[] asm("_binary_motor_html_end");
 
     bool is_valid_acce_odr(int value)
     {
@@ -78,10 +80,45 @@ namespace
 
         return imu.configure_sensor(current_config);
     }
+
+    enum class MotorTarget
+    {
+        Motor1,
+        Motor2,
+        Both,
+    };
+
+    bool parse_motor_target(const nlohmann::json &message, MotorTarget &target)
+    {
+        const auto it = message.find("motor");
+        if (it == message.end() || !it->is_string())
+        {
+            target = MotorTarget::Both;
+            return true;
+        }
+
+        const std::string value = it->get<std::string>();
+        if (value == "mot1")
+        {
+            target = MotorTarget::Motor1;
+            return true;
+        }
+        if (value == "mot2")
+        {
+            target = MotorTarget::Motor2;
+            return true;
+        }
+        if (value == "both")
+        {
+            target = MotorTarget::Both;
+            return true;
+        }
+        return false;
+    }
 } // namespace
 
-WebServer::WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config)
-    : imu_(imu), imu_config_(imu_config)
+WebServer::WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config, TMC5240 &motor1, TMC5240 &motor2)
+    : imu_(imu), imu_config_(imu_config), motor1_(motor1), motor2_(motor2)
 {
 }
 
@@ -123,6 +160,23 @@ esp_err_t WebServer::start()
         .supported_subprotocol = nullptr,
     };
     err = httpd_register_uri_handler(server_, &root_uri);
+    if (err != ESP_OK)
+    {
+        httpd_stop(server_);
+        server_ = nullptr;
+        return err;
+    }
+
+    const httpd_uri_t motor_uri = {
+        .uri = "/motor",
+        .method = HTTP_GET,
+        .handler = motor_get_handler,
+        .user_ctx = this,
+        .is_websocket = false,
+        .handle_ws_control_frames = false,
+        .supported_subprotocol = nullptr,
+    };
+    err = httpd_register_uri_handler(server_, &motor_uri);
     if (err != ESP_OK)
     {
         httpd_stop(server_);
@@ -174,6 +228,13 @@ esp_err_t WebServer::root_get_handler(httpd_req_t *request)
     httpd_resp_set_type(request, "text/html; charset=utf-8");
     const size_t html_len = static_cast<size_t>(index_html_end - index_html_start);
     return httpd_resp_send(request, reinterpret_cast<const char *>(index_html_start), html_len);
+}
+
+esp_err_t WebServer::motor_get_handler(httpd_req_t *request)
+{
+    httpd_resp_set_type(request, "text/html; charset=utf-8");
+    const size_t html_len = static_cast<size_t>(motor_html_end - motor_html_start);
+    return httpd_resp_send(request, reinterpret_cast<const char *>(motor_html_start), html_len);
 }
 
 esp_err_t WebServer::ws_get_handler(httpd_req_t *request)
@@ -231,6 +292,107 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         else
         {
             ESP_LOGI(__FILE__, "Applied IMU config over websocket");
+        }
+    }
+    else if (type_it != message.end() && type_it->is_string() && type_it->get<std::string>() == "motor_velocity")
+    {
+        MotorTarget target = MotorTarget::Both;
+        if (!parse_motor_target(message, target))
+        {
+            ESP_LOGW(__FILE__, "Invalid motor target in motor_velocity command");
+            return ESP_OK;
+        }
+
+        const auto velocity_it = message.find("velocity");
+        if (velocity_it == message.end() || !velocity_it->is_number_integer())
+        {
+            ESP_LOGW(__FILE__, "Invalid velocity payload");
+            return ESP_OK;
+        }
+        const int32_t velocity = velocity_it->get<int32_t>();
+
+        if (target == MotorTarget::Motor1 || target == MotorTarget::Both)
+        {
+            const esp_err_t err_set = motor1_.set_velocity(velocity);
+            if (err_set != ESP_OK)
+            {
+                ESP_LOGW(__FILE__, "Failed setting motor1 velocity: %s", esp_err_to_name(err_set));
+            }
+        }
+        if (target == MotorTarget::Motor2 || target == MotorTarget::Both)
+        {
+            const esp_err_t err_set = motor2_.set_velocity(velocity);
+            if (err_set != ESP_OK)
+            {
+                ESP_LOGW(__FILE__, "Failed setting motor2 velocity: %s", esp_err_to_name(err_set));
+            }
+        }
+    }
+    else if (type_it != message.end() && type_it->is_string() && type_it->get<std::string>() == "spreadcycle_config")
+    {
+        MotorTarget target = MotorTarget::Both;
+        if (!parse_motor_target(message, target))
+        {
+            ESP_LOGW(__FILE__, "Invalid motor target in spreadcycle_config command");
+            return ESP_OK;
+        }
+
+        const auto config_it = message.find("config");
+        if (config_it == message.end() || !config_it->is_object())
+        {
+            ESP_LOGW(__FILE__, "Missing config object in spreadcycle_config command");
+            return ESP_OK;
+        }
+
+        const auto &config = *config_it;
+        if (!config.contains("toff") || !config.contains("tbl") ||
+            !config.contains("hstart") ||
+            !config.contains("hend"))
+        {
+            ESP_LOGW(__FILE__, "Incomplete spreadcycle_config payload");
+            return ESP_OK;
+        }
+
+        const bool type_ok =
+            config["toff"].is_number_integer() &&
+            config["tbl"].is_number_integer() &&
+            config["hstart"].is_number_integer() &&
+            config["hend"].is_number_integer();
+        if (!type_ok)
+        {
+            ESP_LOGW(__FILE__, "Invalid type in spreadcycle_config payload");
+            return ESP_OK;
+        }
+
+        const uint8_t toff = static_cast<uint8_t>(config["toff"].get<int>());
+        const uint8_t tbl = static_cast<uint8_t>(config["tbl"].get<int>());
+        const uint8_t hstart = static_cast<uint8_t>(config["hstart"].get<int>());
+        const uint8_t hend = static_cast<uint8_t>(config["hend"].get<int>());
+        const char *target_str = (target == MotorTarget::Motor1) ? "mot1" : (target == MotorTarget::Motor2) ? "mot2"
+                                                                                                               : "both";
+        ESP_LOGI(__FILE__,
+                 "Applying spreadcycle config to %s: TOFF=%u TBL=%u HSTART=%u HEND=%u",
+                 target_str,
+                 static_cast<unsigned>(toff),
+                 static_cast<unsigned>(tbl),
+                 static_cast<unsigned>(hstart),
+                 static_cast<unsigned>(hend));
+
+        if (target == MotorTarget::Motor1 || target == MotorTarget::Both)
+        {
+            const esp_err_t err_set = motor1_.set_spreadcycle_config(toff, tbl, hstart, hend);
+            if (err_set != ESP_OK)
+            {
+                ESP_LOGW(__FILE__, "Failed setting motor1 spreadcycle config: %s", esp_err_to_name(err_set));
+            }
+        }
+        if (target == MotorTarget::Motor2 || target == MotorTarget::Both)
+        {
+            const esp_err_t err_set = motor2_.set_spreadcycle_config(toff, tbl, hstart, hend);
+            if (err_set != ESP_OK)
+            {
+                ESP_LOGW(__FILE__, "Failed setting motor2 spreadcycle config: %s", esp_err_to_name(err_set));
+            }
         }
     }
 
