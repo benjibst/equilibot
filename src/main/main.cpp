@@ -32,8 +32,8 @@ extern "C" void app_main(void)
         .motor2_segment = {.start_index = 28, .led_count = 3},
     };
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
-    TMC5240 mot1(spi_bus, GPIO_NUM_11, GPIO_NUM_12, MOT_1, 13.0f, 0.24f);
-    TMC5240 mot2(spi_bus, GPIO_NUM_9, GPIO_NUM_10, MOT_2, 13.0f, 0.24f);
+    TMC5240 mot1(spi_bus, GPIO_NUM_11, GPIO_NUM_12, MOT_1, 13.0f, 1.5f);
+    TMC5240 mot2(spi_bus, GPIO_NUM_9, GPIO_NUM_10, MOT_2, 13.0f, 1.5f);
     ICM42670Sample sample{};
     imu.receive_sample(sample, portMAX_DELAY);
     KalmanFilter attitude_filter(sample);
@@ -47,8 +47,11 @@ extern "C" void app_main(void)
     {
         imu.receive_sample(sample, portMAX_DELAY);
         Quaternion orientation = attitude_filter.process(sample);
-        led_strip.set_tilt(attitude_filter.pitch_filter_.angle() * -180 / M_PI);
+        float angle_deg = attitude_filter.pitch_filter_.angle() * -180 / M_PI;
+        led_strip.set_tilt(angle_deg);
         led_strip.update();
+        mot1.set_velocity(angle_deg);
+        mot2.set_velocity(-angle_deg);
         web_server.queue_imu_data(WebServer::TelemetryData{sample, orientation});
     }
 }
