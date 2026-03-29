@@ -18,7 +18,7 @@ SpiBus::SpiBus(spi_host_device_t device, SpiBusConfig busconfig, int num_devices
     esp_err_t ret = spi_bus_initialize(device, &config, SPI_DMA_CH_AUTO);
     if (ret != ESP_OK)
     {
-        ESP_LOGE(__FILE__, "Failed initializing SPI bus");
+        LOG_E("Failed initializing SPI bus");
     }
 }
 
@@ -39,7 +39,7 @@ esp_err_t SpiBus::add_device(int device_id, SpiDeviceConfig config)
     esp_err_t ret = spi_bus_add_device(spi_host, &dev_config, &devices[device_id]);
     if (ret != ESP_OK)
     {
-        ESP_LOGE(__FILE__, "Failed adding device %d to SPI bus", device_id);
+        LOG_E("Failed adding device %d to SPI bus", device_id);
     }
     return ret;
 }
@@ -60,7 +60,7 @@ esp_err_t SpiBus::transfer(int device_id, void *tx, void *rx, size_t len_bytes)
     esp_err_t ret = spi_device_transmit(devices[device_id], &trans);
     if (ret != ESP_OK)
     {
-        ESP_LOGE(__FILE__, "Failed transferring data to device %d", device_id);
+        LOG_E("Failed transferring data to device %d", device_id);
     }
     return ret;
 }

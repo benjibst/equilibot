@@ -2,6 +2,7 @@
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 #include <vector>
+#include "util.hpp"
 #include "freertos_wrappers.hpp"
 
 struct SpiBusConfig

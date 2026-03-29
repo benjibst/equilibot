@@ -286,7 +286,7 @@ void EquilibotLedStrip::set_battery_level(int level_percent)
 
     for (size_t i = 0; i < lit_count; ++i)
     {
-        segment[i] = kBatteryColor;
+        segment[segment.size() - 1 - i] = kBatteryColor;
     }
 }
 

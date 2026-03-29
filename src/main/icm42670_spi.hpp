@@ -79,6 +79,10 @@ typedef enum
     ICM42670_UI_FILT_BW_16HZ = 0b111,
 } ICM42670LowpassBW_t;
 
+struct ICM42670InstallDirection
+{
+    int remap[3] = {0, 1, 2};
+};
 struct ICM42670Config
 {
     ICM42670AcceODR_t acce_odr;
@@ -87,6 +91,7 @@ struct ICM42670Config
     ICM42670GyroFS_t gyro_fs;
     ICM42670LowpassBW_t acce_bw;
     ICM42670LowpassBW_t gyro_bw;
+    ICM42670InstallDirection install;
 };
 using ICM42670RawVal_t = std::array<int16_t, 3>;
 
@@ -117,6 +122,7 @@ private:
     static void IRAM_ATTR gpio_isr_handler(void *arg);
     void data_ready_task();
 
+    void remap_sample(ICM42670Sample &sample);
     esp_err_t initialize(const ICM42670Config &cfg);
     esp_err_t check_device_present();
     esp_err_t configure_data_ready_interrupt();

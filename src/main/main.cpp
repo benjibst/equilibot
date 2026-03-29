@@ -1,4 +1,5 @@
 #include "spi_bus.hpp"
+#include "battery_monitor.hpp"
 #include "common.hpp"
 #include "icm42670_spi.hpp"
 #include "led_strip.hpp"
@@ -10,7 +11,14 @@
 #include "freertos/task.h"
 #include "tmc5240.hpp"
 #include "kalman.hpp"
+#include "pid_controller.hpp"
 #include <cmath>
+
+namespace
+{
+    constexpr char kTag[] = "app_main";
+
+} // namespace
 
 extern "C" void app_main(void)
 {
@@ -20,8 +28,10 @@ extern "C" void app_main(void)
         .gyro_odr = ICM42670_GYRO_ODR_400HZ,
         .acce_fs = ICM42670_ACCE_FS_2G,
         .gyro_fs = ICM42670_GYRO_FS_250DPS,
-        .acce_bw = ICM42670_UI_FILT_BW_BYPASS,
-        .gyro_bw = ICM42670_UI_FILT_BW_BYPASS};
+        .acce_bw = ICM42670_UI_FILT_BW_180HZ,
+        .gyro_bw = ICM42670_UI_FILT_BW_180HZ,
+        .install = ICM42670InstallDirection{.remap = {2, 0, 1}},
+    };
     ICM42670Spi imu(spi_bus, GPIO_NUM_41, imu_config, GPIO_NUM_40);
     LedStripConfig led_strip_config = {
         .led_count = 31,
@@ -34,24 +44,34 @@ extern "C" void app_main(void)
     EquilibotLedStrip led_strip(GPIO_NUM_38, led_strip_config);
     TMC5240 mot1(spi_bus, GPIO_NUM_11, GPIO_NUM_12, MOT_1, 13.0f, 1.5f);
     TMC5240 mot2(spi_bus, GPIO_NUM_9, GPIO_NUM_10, MOT_2, 13.0f, 1.5f);
+    BatteryMonitor battery_monitor{led_strip};
+    PIDController pitch_controller{10.0f, 0.0f, 0.0f, esp_timer_get_time()};
     ICM42670Sample sample{};
     imu.receive_sample(sample, portMAX_DELAY);
     KalmanFilter attitude_filter(sample);
     WebServer web_server(imu, imu_config, mot1, mot2);
-    esp_err_t web_server_err = web_server.start();
-    if (web_server_err != ESP_OK)
-    {
-        ESP_LOGE(__FILE__, "Failed to start web server: %s", esp_err_to_name(web_server_err));
-    }
+
     while (true)
     {
         imu.receive_sample(sample, portMAX_DELAY);
         Quaternion orientation = attitude_filter.process(sample);
-        float angle_deg = attitude_filter.pitch_filter_.angle() * -180 / M_PI;
+        float angle_deg = attitude_filter.pitch_filter_.angle() * 180 / M_PI;
         led_strip.set_tilt(angle_deg);
         led_strip.update();
-        mot1.set_velocity(angle_deg);
-        mot2.set_velocity(-angle_deg);
+
+        if (-30.0f < angle_deg && angle_deg < 30.0f)
+        {
+            float out = pitch_controller.update(0.0f, angle_deg);
+            out = std::clamp(out, -50.0f, 50.0f);
+            mot1.set_velocity(out);
+            mot2.set_velocity(out);
+        }
+        else
+        {
+            mot1.set_velocity(0);
+            mot2.set_velocity(0);
+        }
+
         web_server.queue_imu_data(WebServer::TelemetryData{sample, orientation});
     }
 }

@@ -85,6 +85,16 @@ ICM42670Spi::ICM42670Spi(SpiBus &spi_bus, gpio_num_t cs_pin, const ICM42670Confi
     initialized = true;
 }
 
+void ICM42670Spi::remap_sample(ICM42670Sample &sample)
+{
+    ICM42670Sample cp = sample;
+    for (size_t i = 0; i < 3; i++)
+    {
+        sample.acc[i] = cp.acc[config.install.remap[i]];
+        sample.gyro[i] = cp.gyro[config.install.remap[i]];
+    }
+}
+
 esp_err_t ICM42670Spi::read_sample(ICM42670Sample &sample)
 {
     ICM42670RawVal_t accel_raw{};
@@ -101,6 +111,7 @@ esp_err_t ICM42670Spi::read_sample(ICM42670Sample &sample)
         sample.acc[i] = static_cast<float>(accel_raw[i]) / acce_sensitivity_lsb_per_g;
         sample.gyro[i] = static_cast<float>(gyro_raw[i]) / gyro_sensitivity_lsb_per_dps;
     }
+    remap_sample(sample);
     return ESP_OK;
 }
 
@@ -131,18 +142,6 @@ void ICM42670Spi::data_ready_task()
     while (true)
     {
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
-        uint8_t drdy_status = 0;
-        const esp_err_t status_ret = read_register(kIntStatusDrdy, drdy_status);
-        if (status_ret != ESP_OK)
-        {
-            ESP_LOGW(kTag, "Failed to read INT_STATUS_DRDY: %s", esp_err_to_name(status_ret));
-            continue;
-        }
-        if ((drdy_status & 0x01u) == 0)
-        {
-            continue;
-        }
         if (read_sample(sample) == ESP_OK)
             xQueueSend(sample_queue, &sample, 0);
     }

@@ -8,7 +8,9 @@
 constexpr auto kTag = "tmc5240";
 namespace tmc5240
 {
-
+    static constexpr int microstep_res = 256;
+    static constexpr int steps_per_rot = 200;
+    static constexpr float microsteps_per_rpm = microstep_res * steps_per_rot / 60.0f;
     TMC5240::TMC5240(SpiBus &spi_bus, gpio_num_t en_pin, gpio_num_t cs_pin, int device_id, float rref_kohm, float motor_current_rms)
         : spi_bus(spi_bus), dev_id(device_id), rref_kohm(rref_kohm), motor_current_rms(motor_current_rms)
     {
@@ -35,28 +37,25 @@ namespace tmc5240
         ReadDatagram data;
         ESP_ERROR_CHECK(read_reg<IOIN>(data));
         uint32_t payload = data.payload();
-        ESP_LOGI(__FILE__, "TMC5240 Silicon Revision: %x", IOIN::silicon_rv.read_from(payload));
-        ESP_LOGI(__FILE__, "TMC5240 Version: %x", IOIN::version.read_from(payload));
+        LOG_I("TMC5240 Silicon Revision: %x", IOIN::silicon_rv.read_from(payload));
+        LOG_I("TMC5240 Version: %x", IOIN::version.read_from(payload));
 
         ESP_ERROR_CHECK(config_current());
         ESP_ERROR_CHECK(config_motion_ctrl_vel_mode());
         ESP_ERROR_CHECK(config_stealthchop2());
         ESP_ERROR_CHECK(stealthchop2_auto_tune());
-        // ESP_ERROR_CHECK(config_spreadcycle());
+        //  ESP_ERROR_CHECK(config_spreadcycle());
     }
 
     esp_err_t TMC5240::set_velocity(float rpm)
     {
-        constexpr int microstep_res = 256;
-        constexpr int steps_per_rot = 200;
-        constexpr float microsteps_per_rpm = microstep_res * steps_per_rot / 60.0f;
         int32_t vel = rpm * microsteps_per_rpm;
         const uint32_t vel_abs = std::clamp<uint32_t>(std::abs(vel), 0ul, (1ul << 23) - 1ul);
-        if (vel >= 0)
+        if (vel > 0)
         {
             write(RAMPMODE().set_field(RAMPMODE::rampmode, 1));
         }
-        else
+        else if (vel < 0)
         {
             write(RAMPMODE().set_field(RAMPMODE::rampmode, 2));
         }
@@ -97,9 +96,9 @@ namespace tmc5240
 
         write(GCONF().set_field(GCONF::en_pwm_mode, 0));
 
-        ESP_LOGI(__FILE__, "Current configuration parameters: Rref=%fkOhms  Irms=%fA", rref_kohm, motor_current_rms);
-        ESP_LOGI(__FILE__, "Current range: %d -> Ifs: %f", drv_conf, ifs_rms);
-        ESP_LOGI(__FILE__, "Globalscaler: %d/256", globalscaler);
+        LOG_I("Current configuration parameters: Rref=%fkOhms  Irms=%fA", rref_kohm, motor_current_rms);
+        LOG_I("Current range: %d -> Ifs: %f", drv_conf, ifs_rms);
+        LOG_I("Globalscaler: %d/256", globalscaler);
         return ESP_OK;
     }
 
@@ -139,30 +138,29 @@ namespace tmc5240
 
         read_reg<PWM_AUTO>(rx_data);
         uint32_t data = PWM_AUTO::pwm_grad_auto.read_from(rx_data.payload());
-        ESP_LOGI(__FILE__, "PWM_GRAD_AUTO Initially: %d", data);
+        LOG_I("PWM_GRAD_AUTO Initially: %d", data);
 
-        // set speed to standstill and wait 200ms (at least 130ms according to datasheet)
+        // Set speed to standstill and wait the datasheet minimum before starting AT#2.
         set_velocity(0);
 
-        vTaskDelay(pdMS_TO_TICKS(200));
+        vTaskDelay(pdMS_TO_TICKS(130));
         read_reg<PWM_AUTO>(rx_data);
         const uint32_t pwm_ofs_auto = PWM_AUTO::pwm_ofs_auto.read_from(rx_data.payload());
 
         read_reg<DRV_STATUS>(rx_data);
-        ESP_LOGI(__FILE__,
-                 "AT#1 status: STEALTH=%u CS_ACTUAL=%u PWM_OFS_AUTO=%u",
-                 DRV_STATUS::stealth.read_from(rx_data.payload()),
-                 DRV_STATUS::cs_actual.read_from(rx_data.payload()),
-                 pwm_ofs_auto);
+        LOG_I(
+            "AT#1 status: STEALTH=%u CS_ACTUAL=%u PWM_OFS_AUTO=%u",
+            DRV_STATUS::stealth.read_from(rx_data.payload()),
+            DRV_STATUS::cs_actual.read_from(rx_data.payload()),
+            pwm_ofs_auto);
 
-        // 200 rpm * 200steps/rot * 256microsteps/step / 60sec/min
-        constexpr uint32_t microsteps_per_sec = 120 * 200 * 256 / 60;
-        set_velocity(microsteps_per_sec);
+        constexpr uint32_t tune_rpm = 50.0f;
+        set_velocity(static_cast<float>(tune_rpm));
 
-        // Datasheet suggests up to 400 fullsteps; use a larger margin and keep velocity phase long enough.
-        constexpr uint64_t tune_fullsteps = 3000;
-        constexpr uint64_t tune_time_ms = (tune_fullsteps * 256ULL * 1000ULL + microsteps_per_sec - 1ULL) / microsteps_per_sec;
-        const TickType_t stop_ticks = xTaskGetTickCount() + pdMS_TO_TICKS(static_cast<uint32_t>(std::max<uint64_t>(tune_time_ms, 3000ULL)));
+        // Keep the velocity phase under one second while still traversing a few hundred fullsteps.
+        constexpr uint64_t tune_fullsteps = 300;
+        constexpr uint64_t tune_time_ms = microsteps_per_rpm * tune_fullsteps * 60000 / (steps_per_rot * tune_rpm);
+        const TickType_t stop_ticks = xTaskGetTickCount() + pdMS_TO_TICKS(static_cast<uint32_t>(std::min<uint64_t>(tune_time_ms, 900ULL)));
         TickType_t next_log = 0;
         while (xTaskGetTickCount() < stop_ticks)
         {
@@ -176,13 +174,13 @@ namespace tmc5240
             if (xTaskGetTickCount() >= next_log)
             {
                 read_reg<DRV_STATUS>(rx_data);
-                ESP_LOGI(__FILE__,
-                         "AT#2 STEALTH=%u CS=%2u PWM_GRAD_AUTO=%3u PWM_SCALE_AUTO=%3u PWM_SCALE_SUM=%4u",
-                         DRV_STATUS::stealth.read_from(rx_data.payload()),
-                         DRV_STATUS::cs_actual.read_from(rx_data.payload()),
-                         pwm_grad,
-                         pwm_scale_auto,
-                         pwm_scale_sum);
+                LOG_I(
+                    "AT#2 STEALTH=%u CS=%2u PWM_GRAD_AUTO=%3u PWM_SCALE_AUTO=%3u PWM_SCALE_SUM=%4u",
+                    DRV_STATUS::stealth.read_from(rx_data.payload()),
+                    DRV_STATUS::cs_actual.read_from(rx_data.payload()),
+                    pwm_grad,
+                    pwm_scale_auto,
+                    pwm_scale_sum);
                 next_log = xTaskGetTickCount() + pdMS_TO_TICKS(100);
             }
             vTaskDelay(pdMS_TO_TICKS(5));
@@ -192,11 +190,11 @@ namespace tmc5240
         read_reg<PWM_AUTO>(rx_data);
         const uint32_t pwm_grad_final = PWM_AUTO::pwm_grad_auto.read_from(rx_data.payload());
         const uint32_t pwm_ofs_final = PWM_AUTO::pwm_ofs_auto.read_from(rx_data.payload());
-        ESP_LOGI(__FILE__,
-                 "AT done: PWM_GRAD_AUTO %u -> %u, PWM_OFS_AUTO %u",
-                 data,
-                 pwm_grad_final,
-                 pwm_ofs_final);
+        LOG_I(
+            "AT done: PWM_GRAD_AUTO %u -> %u, PWM_OFS_AUTO %u",
+            data,
+            pwm_grad_final,
+            pwm_ofs_final);
         return ESP_OK;
     }
 
@@ -235,7 +233,7 @@ namespace tmc5240
 
     esp_err_t TMC5240::config_motion_ctrl_vel_mode()
     {
-        write(AMAX().set_field(AMAX::amax, 10000));
+        write(AMAX().set_field(AMAX::amax, 50000));
         return ESP_OK;
     }
     enum status_flags
@@ -274,7 +272,7 @@ namespace tmc5240
 
         if (status_changed && (status & kDriverErrorMask))
         {
-            ESP_LOGE(__FILE__, "SPI Status DRIVER_ERROR");
+            LOG_E("SPI Status DRIVER_ERROR");
 
             ReadDatagram rx;
             WriteDatagram<DRV_STATUS> tx{uint32_t{0}, false};
@@ -282,7 +280,7 @@ namespace tmc5240
             const esp_err_t second_ret = (first_ret == ESP_OK) ? spi_bus.transfer(dev_id, tx, rx.readbuf(), 5) : first_ret;
             if (second_ret != ESP_OK)
             {
-                ESP_LOGE(__FILE__, "Failed reading DRV_STATUS");
+                LOG_E("Failed reading DRV_STATUS");
             }
             else
             {
@@ -291,7 +289,7 @@ namespace tmc5240
                 {
                     if (field.read_from(drv_status))
                     {
-                        ESP_LOGW(__FILE__, "DRV_STATUS %s set", flag_name);
+                        LOG_W(, "DRV_STATUS %s set", flag_name);
                     }
                 };
 
@@ -310,7 +308,7 @@ namespace tmc5240
 
         if (status & kResetMask)
         {
-            ESP_LOGW(__FILE__, "SPI Status RESET_FLAG");
+            LOG_W(, "SPI Status RESET_FLAG");
 
             ReadDatagram rx;
             WriteDatagram<GSTAT> tx{uint32_t{0}};
@@ -318,7 +316,7 @@ namespace tmc5240
             const esp_err_t ret = spi_bus.transfer(dev_id, tx, rx.readbuf(), 5);
             if (ret != ESP_OK)
             {
-                ESP_LOGE(__FILE__, "Failed clearing GSTAT reset flag");
+                LOG_E("Failed clearing GSTAT reset flag");
             }
             else
             {

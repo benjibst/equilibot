@@ -9,6 +9,7 @@
 #include <cassert>
 #include <cstring>
 #include <utility>
+#include "util.hpp"
 #include <nlohmann/json.hpp>
 
 namespace
@@ -120,6 +121,11 @@ namespace
 WebServer::WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config, TMC5240 &motor1, TMC5240 &motor2)
     : imu_(imu), imu_config_(imu_config), motor1_(motor1), motor2_(motor2)
 {
+    auto web_server_err = start();
+    if (web_server_err != ESP_OK)
+    {
+        LOG_E("Failed to start web server: %s", esp_err_to_name(web_server_err));
+    }
 }
 
 esp_err_t WebServer::start()
@@ -214,7 +220,7 @@ esp_err_t WebServer::start()
     }
 
     started_ = true;
-    ESP_LOGI(__FILE__, "SoftAP started. Open http://192.168.4.1/");
+    LOG_I("SoftAP started. Open http://192.168.4.1/");
     return ESP_OK;
 }
 
@@ -247,7 +253,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
 {
     if (request->method == HTTP_GET)
     {
-        ESP_LOGI(__FILE__, "WebSocket handshake complete");
+        LOG_I("WebSocket handshake complete");
         return ESP_OK;
     }
 
@@ -255,7 +261,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
     esp_err_t err = httpd_ws_recv_frame(request, &ws_frame, 0);
     if (err != ESP_OK)
     {
-        ESP_LOGW(__FILE__, "ws recv length failed: %s", esp_err_to_name(err));
+        LOG_W(, "ws recv length failed: %s", esp_err_to_name(err));
         return err;
     }
 
@@ -277,7 +283,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
     const nlohmann::json message = nlohmann::json::parse(begin, end, nullptr, false);
     if (message.is_discarded())
     {
-        ESP_LOGW(__FILE__, "Invalid websocket JSON payload");
+        LOG_W(, "Invalid websocket JSON payload");
         return ESP_OK;
     }
 
@@ -287,11 +293,11 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         const esp_err_t apply_err = apply_imu_config_json(imu_, imu_config_, message);
         if (apply_err != ESP_OK)
         {
-            ESP_LOGW(__FILE__, "Failed applying IMU config: %s", esp_err_to_name(apply_err));
+            LOG_W(, "Failed applying IMU config: %s", esp_err_to_name(apply_err));
         }
         else
         {
-            ESP_LOGI(__FILE__, "Applied IMU config over websocket");
+            LOG_I("Applied IMU config over websocket");
         }
     }
     else if (type_it != message.end() && type_it->is_string() && type_it->get<std::string>() == "motor_velocity")
@@ -299,14 +305,14 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         MotorTarget target = MotorTarget::Both;
         if (!parse_motor_target(message, target))
         {
-            ESP_LOGW(__FILE__, "Invalid motor target in motor_velocity command");
+            LOG_W(, "Invalid motor target in motor_velocity command");
             return ESP_OK;
         }
 
         const auto velocity_it = message.find("velocity");
         if (velocity_it == message.end() || !velocity_it->is_number_integer())
         {
-            ESP_LOGW(__FILE__, "Invalid velocity payload");
+            LOG_W(, "Invalid velocity payload");
             return ESP_OK;
         }
         const int32_t velocity = velocity_it->get<int32_t>();
@@ -316,7 +322,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor1_.set_velocity(velocity);
             if (err_set != ESP_OK)
             {
-                ESP_LOGW(__FILE__, "Failed setting motor1 velocity: %s", esp_err_to_name(err_set));
+                LOG_W(, "Failed setting motor1 velocity: %s", esp_err_to_name(err_set));
             }
         }
         if (target == MotorTarget::Motor2 || target == MotorTarget::Both)
@@ -324,7 +330,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor2_.set_velocity(velocity);
             if (err_set != ESP_OK)
             {
-                ESP_LOGW(__FILE__, "Failed setting motor2 velocity: %s", esp_err_to_name(err_set));
+                LOG_W(, "Failed setting motor2 velocity: %s", esp_err_to_name(err_set));
             }
         }
     }
@@ -333,14 +339,14 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         MotorTarget target = MotorTarget::Both;
         if (!parse_motor_target(message, target))
         {
-            ESP_LOGW(__FILE__, "Invalid motor target in spreadcycle_config command");
+            LOG_W(, "Invalid motor target in spreadcycle_config command");
             return ESP_OK;
         }
 
         const auto config_it = message.find("config");
         if (config_it == message.end() || !config_it->is_object())
         {
-            ESP_LOGW(__FILE__, "Missing config object in spreadcycle_config command");
+            LOG_W(, "Missing config object in spreadcycle_config command");
             return ESP_OK;
         }
 
@@ -349,7 +355,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             !config.contains("hstart") ||
             !config.contains("hend"))
         {
-            ESP_LOGW(__FILE__, "Incomplete spreadcycle_config payload");
+            LOG_W(, "Incomplete spreadcycle_config payload");
             return ESP_OK;
         }
 
@@ -360,7 +366,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             config["hend"].is_number_integer();
         if (!type_ok)
         {
-            ESP_LOGW(__FILE__, "Invalid type in spreadcycle_config payload");
+            LOG_W(, "Invalid type in spreadcycle_config payload");
             return ESP_OK;
         }
 
@@ -369,21 +375,21 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         const uint8_t hstart = static_cast<uint8_t>(config["hstart"].get<int>());
         const uint8_t hend = static_cast<uint8_t>(config["hend"].get<int>());
         const char *target_str = (target == MotorTarget::Motor1) ? "mot1" : (target == MotorTarget::Motor2) ? "mot2"
-                                                                                                               : "both";
-        ESP_LOGI(__FILE__,
-                 "Applying spreadcycle config to %s: TOFF=%u TBL=%u HSTART=%u HEND=%u",
-                 target_str,
-                 static_cast<unsigned>(toff),
-                 static_cast<unsigned>(tbl),
-                 static_cast<unsigned>(hstart),
-                 static_cast<unsigned>(hend));
+                                                                                                            : "both";
+        LOG_I(
+            "Applying spreadcycle config to %s: TOFF=%u TBL=%u HSTART=%u HEND=%u",
+            target_str,
+            static_cast<unsigned>(toff),
+            static_cast<unsigned>(tbl),
+            static_cast<unsigned>(hstart),
+            static_cast<unsigned>(hend));
 
         if (target == MotorTarget::Motor1 || target == MotorTarget::Both)
         {
             const esp_err_t err_set = motor1_.set_spreadcycle_config(toff, tbl, hstart, hend);
             if (err_set != ESP_OK)
             {
-                ESP_LOGW(__FILE__, "Failed setting motor1 spreadcycle config: %s", esp_err_to_name(err_set));
+                LOG_W(, "Failed setting motor1 spreadcycle config: %s", esp_err_to_name(err_set));
             }
         }
         if (target == MotorTarget::Motor2 || target == MotorTarget::Both)
@@ -391,7 +397,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor2_.set_spreadcycle_config(toff, tbl, hstart, hend);
             if (err_set != ESP_OK)
             {
-                ESP_LOGW(__FILE__, "Failed setting motor2 spreadcycle config: %s", esp_err_to_name(err_set));
+                LOG_W(, "Failed setting motor2 spreadcycle config: %s", esp_err_to_name(err_set));
             }
         }
     }
@@ -413,7 +419,7 @@ void WebServer::ws_broadcast_work(void *arg)
     esp_err_t list_err = httpd_get_client_list(context->server->server_, &fd_count, client_fds.data());
     if (list_err != ESP_OK)
     {
-        ESP_LOGW(__FILE__, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
+        LOG_W(, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
         finish();
         return;
     }
@@ -434,7 +440,7 @@ void WebServer::ws_broadcast_work(void *arg)
         const esp_err_t send_err = httpd_ws_send_frame_async(context->server->server_, fd, &ws_frame);
         if (send_err != ESP_OK)
         {
-            ESP_LOGW(__FILE__, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
+            LOG_W(, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
         }
     }
     finish();

@@ -1,5 +1,6 @@
 idf_component_register(
     SRCS "main.cpp"
+         "battery_monitor.cpp"
          "led_strip.cpp"
          "spi_bus.cpp"
          "icm42670_spi.cpp"
@@ -10,6 +11,7 @@ idf_component_register(
     INCLUDE_DIRS "."
                  "../external/nlohmann_json/include"
     REQUIRES esp_driver_gpio
+             esp_adc
              esp_driver_spi
              esp_event
              esp_http_server

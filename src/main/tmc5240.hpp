@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "util.hpp"
 
 #include "spi_bus.hpp"
 #include "driver/gpio.h"
