@@ -90,8 +90,9 @@ void ICM42670Spi::remap_sample(ICM42670Sample &sample)
     ICM42670Sample cp = sample;
     for (size_t i = 0; i < 3; i++)
     {
-        sample.acc[i] = cp.acc[config.install.remap[i]];
-        sample.gyro[i] = cp.gyro[config.install.remap[i]];
+        const float axis_sign = config.install.sign[i] < 0 ? -1.0f : 1.0f;
+        sample.acc[i] = cp.acc[config.install.remap[i]] * axis_sign;
+        sample.gyro[i] = cp.gyro[config.install.remap[i]] * axis_sign;
     }
 }
 

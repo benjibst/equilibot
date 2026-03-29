@@ -1,31 +1,61 @@
-
 #pragma once
-#include "esp_timer.h"
+
+#include <cmath>
+
+struct PidGains
+{
+    float kp = 0.0f;
+    float ki = 0.0f;
+    float kd = 0.0f;
+};
+
 class PIDController
 {
 public:
-    PIDController(float p, float i, float d, int64_t time_start) : p(p), i(i), d(d), last_time(time_start) {}
-    float update(float target, float out_measured)
-    {
-        int64_t time = esp_timer_get_time();
-        float dt_s = (time - last_time) / 1000000.0f;
-        if (dt_s <= 0.0f)
-        {
-            return output;
-        }
-        float error = target - out_measured;
-        float error_change = (error - last_error) / dt_s;
+    explicit PIDController(PidGains gains = {}) : gains_(gains) {}
 
-        error_i += error * dt_s;
-        last_time = time;
-        last_error = error;
-        output = p * error + i * error_i + d * error_change;
-        return output;
+    void set_gains(const PidGains &gains)
+    {
+        gains_ = gains;
     }
-    float target{0};
-    float last_error{0};
-    float output{0};
-    float error_i{0};
-    float p{0}, i{0}, d{0};
-    int64_t last_time{0};
+
+    const PidGains &gains() const
+    {
+        return gains_;
+    }
+
+    void reset()
+    {
+        last_error_ = 0.0f;
+        output_ = 0.0f;
+        error_integral_ = 0.0f;
+        initialized_ = false;
+    }
+
+    float update(float target, float measured, float dt_s)
+    {
+        return update_from_error(target - measured, dt_s);
+    }
+
+    float update_from_error(float error, float dt_s)
+    {
+        if (!(dt_s > 0.0f) || !std::isfinite(dt_s))
+        {
+            return output_;
+        }
+
+        const float derivative = initialized_ ? (error - last_error_) / dt_s : 0.0f;
+        error_integral_ += error * dt_s;
+        last_error_ = error;
+        initialized_ = true;
+        output_ = gains_.kp * error + gains_.ki * error_integral_ + gains_.kd * derivative;
+        return output_;
+    }
+
+private:
+    PidGains gains_ = {};
+    float last_error_ = 0.0f;
+    float output_ = 0.0f;
+    float error_integral_ = 0.0f;
+    bool initialized_ = false;
 };

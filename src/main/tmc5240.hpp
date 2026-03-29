@@ -718,6 +718,7 @@ namespace tmc5240
         int device_id() { return this->dev_id; };
         esp_err_t set_velocity(float rpm);
         esp_err_t set_spreadcycle_config(uint8_t toff, uint8_t tbl, uint8_t hstart, uint8_t hend);
+        esp_err_t get_position(int32_t &position);
 
     private:
         esp_err_t config_current();

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cascaded_pid_controller.hpp"
 #include "esp_err.h"
 #include "esp_http_server.h"
 #include "esp_netif.h"
@@ -19,8 +20,13 @@ public:
     {
         ICM42670Sample sample;
         Quaternion orientation;
+        CascadedPidSnapshot controller;
     };
-    WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config, TMC5240 &motor1, TMC5240 &motor2);
+    WebServer(ICM42670Spi &imu,
+              const ICM42670Config &imu_config,
+              TMC5240 &motor1,
+              TMC5240 &motor2,
+              CascadedPidController &controller);
 
     esp_err_t start();
     esp_err_t queue_imu_data(const TelemetryData &sample);
@@ -45,6 +51,7 @@ private:
 
     static esp_err_t root_get_handler(httpd_req_t *request);
     static esp_err_t motor_get_handler(httpd_req_t *request);
+    static esp_err_t controller_get_handler(httpd_req_t *request);
     static esp_err_t ws_get_handler(httpd_req_t *request);
     static void ws_broadcast_work(void *arg);
     static void telemetry_sender_task_entry(WebServer &self);
@@ -60,6 +67,7 @@ private:
     ICM42670Config imu_config_;
     TMC5240 &motor1_;
     TMC5240 &motor2_;
+    CascadedPidController &controller_;
 
     httpd_handle_t server_ = nullptr;
     esp_netif_t *ap_netif_ = nullptr;

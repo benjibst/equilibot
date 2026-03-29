@@ -82,6 +82,7 @@ typedef enum
 struct ICM42670InstallDirection
 {
     int remap[3] = {0, 1, 2};
+    int sign[3] = {1, 1, 1};
 };
 struct ICM42670Config
 {

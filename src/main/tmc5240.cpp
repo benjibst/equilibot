@@ -195,6 +195,7 @@ namespace tmc5240
             data,
             pwm_grad_final,
             pwm_ofs_final);
+        write(XACTUAL().set_field(XACTUAL::xactual, 0));
         return ESP_OK;
     }
 
@@ -228,6 +229,14 @@ namespace tmc5240
             .set_field(CHOPCONF::hstrt_tfd210, hstart)
             .set_field(CHOPCONF::hend_offset, hend);
         ESP_RETURN_ON_ERROR(write(data), kTag, "Failed writing CHOPCONF");
+        return ESP_OK;
+    }
+
+    esp_err_t TMC5240::get_position(int32_t &position)
+    {
+        ReadDatagram rx;
+        ESP_RETURN_ON_ERROR(read_reg<XACTUAL>(rx), kTag, "Failed reading XACTUAL");
+        position = static_cast<int32_t>(rx.payload());
         return ESP_OK;
     }
 
@@ -289,7 +298,7 @@ namespace tmc5240
                 {
                     if (field.read_from(drv_status))
                     {
-                        LOG_W(, "DRV_STATUS %s set", flag_name);
+                        LOG_W("DRV_STATUS %s set", flag_name);
                     }
                 };
 
@@ -308,7 +317,7 @@ namespace tmc5240
 
         if (status & kResetMask)
         {
-            LOG_W(, "SPI Status RESET_FLAG");
+            LOG_W("SPI Status RESET_FLAG");
 
             ReadDatagram rx;
             WriteDatagram<GSTAT> tx{uint32_t{0}};

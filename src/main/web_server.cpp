@@ -2,15 +2,16 @@
 
 #include "esp_event.h"
 #include "esp_log.h"
+#include "esp_timer.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
-#include "esp_timer.h"
+#include <cmath>
 #include <array>
 #include <cassert>
 #include <cstring>
+#include <nlohmann/json.hpp>
 #include <utility>
 #include "util.hpp"
-#include <nlohmann/json.hpp>
 
 namespace
 {
@@ -23,6 +24,8 @@ namespace
     extern const uint8_t index_html_end[] asm("_binary_index_html_end");
     extern const uint8_t motor_html_start[] asm("_binary_motor_html_start");
     extern const uint8_t motor_html_end[] asm("_binary_motor_html_end");
+    extern const uint8_t controller_html_start[] asm("_binary_controller_html_start");
+    extern const uint8_t controller_html_end[] asm("_binary_controller_html_end");
 
     bool is_valid_acce_odr(int value)
     {
@@ -116,10 +119,66 @@ namespace
         }
         return false;
     }
+
+    bool json_number_to_float(const nlohmann::json &object, const char *key, float &out)
+    {
+        const auto it = object.find(key);
+        if (it == object.end() || !it->is_number())
+        {
+            return false;
+        }
+
+        const double value = it->get<double>();
+        if (!std::isfinite(value))
+        {
+            return false;
+        }
+
+        out = static_cast<float>(value);
+        return true;
+    }
+
+    bool parse_pid_gains_json(const nlohmann::json &object, PidGains &gains)
+    {
+        return json_number_to_float(object, "kp", gains.kp) &&
+               json_number_to_float(object, "ki", gains.ki) &&
+               json_number_to_float(object, "kd", gains.kd);
+    }
+
+    esp_err_t parse_cascaded_pid_parameters_json(const nlohmann::json &message,
+                                                 CascadedPidParameters &parameters)
+    {
+        const auto config_it = message.find("config");
+        if (config_it == message.end() || !config_it->is_object())
+        {
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        const auto &config = *config_it;
+        const auto position_it = config.find("position");
+        const auto pitch_it = config.find("pitch");
+        if (position_it == config.end() || !position_it->is_object() ||
+            pitch_it == config.end() || !pitch_it->is_object())
+        {
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        if (!parse_pid_gains_json(*position_it, parameters.position) ||
+            !parse_pid_gains_json(*pitch_it, parameters.pitch))
+        {
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        return ESP_OK;
+    }
 } // namespace
 
-WebServer::WebServer(ICM42670Spi &imu, const ICM42670Config &imu_config, TMC5240 &motor1, TMC5240 &motor2)
-    : imu_(imu), imu_config_(imu_config), motor1_(motor1), motor2_(motor2)
+WebServer::WebServer(ICM42670Spi &imu,
+                     const ICM42670Config &imu_config,
+                     TMC5240 &motor1,
+                     TMC5240 &motor2,
+                     CascadedPidController &controller)
+    : imu_(imu), imu_config_(imu_config), motor1_(motor1), motor2_(motor2), controller_(controller)
 {
     auto web_server_err = start();
     if (web_server_err != ESP_OK)
@@ -190,6 +249,23 @@ esp_err_t WebServer::start()
         return err;
     }
 
+    const httpd_uri_t controller_uri = {
+        .uri = "/controller",
+        .method = HTTP_GET,
+        .handler = controller_get_handler,
+        .user_ctx = this,
+        .is_websocket = false,
+        .handle_ws_control_frames = false,
+        .supported_subprotocol = nullptr,
+    };
+    err = httpd_register_uri_handler(server_, &controller_uri);
+    if (err != ESP_OK)
+    {
+        httpd_stop(server_);
+        server_ = nullptr;
+        return err;
+    }
+
     const httpd_uri_t ws_uri = {
         .uri = "/ws",
         .method = HTTP_GET,
@@ -243,6 +319,13 @@ esp_err_t WebServer::motor_get_handler(httpd_req_t *request)
     return httpd_resp_send(request, reinterpret_cast<const char *>(motor_html_start), html_len);
 }
 
+esp_err_t WebServer::controller_get_handler(httpd_req_t *request)
+{
+    httpd_resp_set_type(request, "text/html; charset=utf-8");
+    const size_t html_len = static_cast<size_t>(controller_html_end - controller_html_start);
+    return httpd_resp_send(request, reinterpret_cast<const char *>(controller_html_start), html_len);
+}
+
 esp_err_t WebServer::ws_get_handler(httpd_req_t *request)
 {
     WebServer &server = *static_cast<WebServer *>(request->user_ctx);
@@ -261,7 +344,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
     esp_err_t err = httpd_ws_recv_frame(request, &ws_frame, 0);
     if (err != ESP_OK)
     {
-        LOG_W(, "ws recv length failed: %s", esp_err_to_name(err));
+        LOG_W("ws recv length failed: %s", esp_err_to_name(err));
         return err;
     }
 
@@ -283,7 +366,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
     const nlohmann::json message = nlohmann::json::parse(begin, end, nullptr, false);
     if (message.is_discarded())
     {
-        LOG_W(, "Invalid websocket JSON payload");
+        LOG_W("Invalid websocket JSON payload");
         return ESP_OK;
     }
 
@@ -293,7 +376,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         const esp_err_t apply_err = apply_imu_config_json(imu_, imu_config_, message);
         if (apply_err != ESP_OK)
         {
-            LOG_W(, "Failed applying IMU config: %s", esp_err_to_name(apply_err));
+            LOG_W("Failed applying IMU config: %s", esp_err_to_name(apply_err));
         }
         else
         {
@@ -305,14 +388,14 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         MotorTarget target = MotorTarget::Both;
         if (!parse_motor_target(message, target))
         {
-            LOG_W(, "Invalid motor target in motor_velocity command");
+            LOG_W("Invalid motor target in motor_velocity command");
             return ESP_OK;
         }
 
         const auto velocity_it = message.find("velocity");
         if (velocity_it == message.end() || !velocity_it->is_number_integer())
         {
-            LOG_W(, "Invalid velocity payload");
+            LOG_W("Invalid velocity payload");
             return ESP_OK;
         }
         const int32_t velocity = velocity_it->get<int32_t>();
@@ -322,7 +405,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor1_.set_velocity(velocity);
             if (err_set != ESP_OK)
             {
-                LOG_W(, "Failed setting motor1 velocity: %s", esp_err_to_name(err_set));
+                LOG_W("Failed setting motor1 velocity: %s", esp_err_to_name(err_set));
             }
         }
         if (target == MotorTarget::Motor2 || target == MotorTarget::Both)
@@ -330,7 +413,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor2_.set_velocity(velocity);
             if (err_set != ESP_OK)
             {
-                LOG_W(, "Failed setting motor2 velocity: %s", esp_err_to_name(err_set));
+                LOG_W("Failed setting motor2 velocity: %s", esp_err_to_name(err_set));
             }
         }
     }
@@ -339,14 +422,14 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         MotorTarget target = MotorTarget::Both;
         if (!parse_motor_target(message, target))
         {
-            LOG_W(, "Invalid motor target in spreadcycle_config command");
+            LOG_W("Invalid motor target in spreadcycle_config command");
             return ESP_OK;
         }
 
         const auto config_it = message.find("config");
         if (config_it == message.end() || !config_it->is_object())
         {
-            LOG_W(, "Missing config object in spreadcycle_config command");
+            LOG_W("Missing config object in spreadcycle_config command");
             return ESP_OK;
         }
 
@@ -355,7 +438,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             !config.contains("hstart") ||
             !config.contains("hend"))
         {
-            LOG_W(, "Incomplete spreadcycle_config payload");
+            LOG_W("Incomplete spreadcycle_config payload");
             return ESP_OK;
         }
 
@@ -366,7 +449,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             config["hend"].is_number_integer();
         if (!type_ok)
         {
-            LOG_W(, "Invalid type in spreadcycle_config payload");
+            LOG_W("Invalid type in spreadcycle_config payload");
             return ESP_OK;
         }
 
@@ -389,7 +472,7 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor1_.set_spreadcycle_config(toff, tbl, hstart, hend);
             if (err_set != ESP_OK)
             {
-                LOG_W(, "Failed setting motor1 spreadcycle config: %s", esp_err_to_name(err_set));
+                LOG_W("Failed setting motor1 spreadcycle config: %s", esp_err_to_name(err_set));
             }
         }
         if (target == MotorTarget::Motor2 || target == MotorTarget::Both)
@@ -397,9 +480,23 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
             const esp_err_t err_set = motor2_.set_spreadcycle_config(toff, tbl, hstart, hend);
             if (err_set != ESP_OK)
             {
-                LOG_W(, "Failed setting motor2 spreadcycle config: %s", esp_err_to_name(err_set));
+                LOG_W("Failed setting motor2 spreadcycle config: %s", esp_err_to_name(err_set));
             }
         }
+    }
+    else if (type_it != message.end() && type_it->is_string() &&
+             type_it->get<std::string>() == "cascaded_pid_config")
+    {
+        CascadedPidParameters parameters = {};
+        const esp_err_t parse_err = parse_cascaded_pid_parameters_json(message, parameters);
+        if (parse_err != ESP_OK)
+        {
+            LOG_W("Invalid cascaded_pid_config payload");
+            return ESP_OK;
+        }
+
+        controller_.set_parameters(parameters);
+        LOG_I("Applied cascaded PID config over websocket");
     }
 
     return ESP_OK;
@@ -419,7 +516,7 @@ void WebServer::ws_broadcast_work(void *arg)
     esp_err_t list_err = httpd_get_client_list(context->server->server_, &fd_count, client_fds.data());
     if (list_err != ESP_OK)
     {
-        LOG_W(, "httpd_get_client_list failed: %s", esp_err_to_name(list_err));
+        LOG_W("httpd_get_client_list failed: %s", esp_err_to_name(list_err));
         finish();
         return;
     }
@@ -440,7 +537,7 @@ void WebServer::ws_broadcast_work(void *arg)
         const esp_err_t send_err = httpd_ws_send_frame_async(context->server->server_, fd, &ws_frame);
         if (send_err != ESP_OK)
         {
-            LOG_W(, "ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
+            LOG_W("ws send failed on fd=%d: %s", fd, esp_err_to_name(send_err));
         }
     }
     finish();
@@ -527,6 +624,31 @@ void WebServer::telemetry_sender_task()
             ++samples_in_payload;
         }
         payload["simple_rot"] = telemetry.orientation._vec;
+        payload["controller"] = {
+            {"type", "cascaded_pid"},
+            {"target_position", telemetry.controller.target_position},
+            {"position", telemetry.controller.position},
+            {"velocity", telemetry.controller.velocity},
+            {"pitch_deg", telemetry.controller.pitch_deg},
+            {"pitch_rate_deg_s", telemetry.controller.pitch_rate_deg_s},
+            {"target_pitch_deg", telemetry.controller.target_pitch_deg},
+            {"velocity_command", telemetry.controller.velocity_command},
+            {"parameters",
+             {
+                 {"position",
+                  {
+                      {"kp", telemetry.controller.parameters.position.kp},
+                      {"ki", telemetry.controller.parameters.position.ki},
+                      {"kd", telemetry.controller.parameters.position.kd},
+                  }},
+                 {"pitch",
+                  {
+                      {"kp", telemetry.controller.parameters.pitch.kp},
+                      {"ki", telemetry.controller.parameters.pitch.ki},
+                      {"kd", telemetry.controller.parameters.pitch.kd},
+                  }},
+             }},
+        };
         std::string serialized = payload.dump();
         if (publish_telemetry_payload(std::move(serialized)) == ESP_OK)
         {

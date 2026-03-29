@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equilibot Controller Tuning</title>
+  <style>
+    :root {
+      --bg-a: #f4f6f8;
+      --bg-b: #dbe8ef;
+      --panel: #ffffff;
+      --panel-alt: #f7fafc;
+      --ink: #1d2a36;
+      --muted: #5c7283;
+      --line: #d3dde4;
+      --online: #1f8f5f;
+      --offline: #b04040;
+      --pending: #b67912;
+      --accent: #2c7fb3;
+      --accent-soft: rgba(44, 127, 179, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 15% 0, #ffffff 0%, var(--bg-a) 35%, var(--bg-b) 100%);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .top {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .sub {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-weight: 600;
+      max-width: 50rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      border: 1px solid #ccd8e2;
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .status {
+      font-weight: 700;
+    }
+
+    .status.online {
+      color: var(--online);
+    }
+
+    .status.offline {
+      color: var(--offline);
+    }
+
+    .status.pending {
+      color: var(--pending);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid #e3e8ed;
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 8px 24px rgba(37, 74, 103, 0.08);
+    }
+
+    .panel h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .state-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem;
+      background: var(--panel-alt);
+    }
+
+    .state-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .state-value {
+      margin-top: 0.45rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: "Fira Code", "Consolas", "Monaco", monospace;
+    }
+
+    .tuning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .loop-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.9rem;
+      background: linear-gradient(180deg, #ffffff 0%, var(--accent-soft) 100%);
+    }
+
+    .loop-card h3 {
+      font-size: 0.96rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .loop-card p {
+      margin: 0 0 0.85rem 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(110px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .field input,
+    .actions button {
+      width: 100%;
+      border: 1px solid #ccd8e2;
+      border-radius: 10px;
+      padding: 0.5rem 0.55rem;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.95rem;
+    }
+
+    .actions button {
+      width: auto;
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      min-width: 10rem;
+    }
+
+    .actions button.secondary {
+      background: #fff;
+      color: var(--ink);
+      border-color: #ccd8e2;
+    }
+
+    .status-line {
+      margin-top: 0.7rem;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 920px) {
+      .state-grid {
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+      }
+
+      .tuning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="top">
+      <div>
+        <h1>Equilibot Controller Tuning</h1>
+        <div class="sub">Outer loop maps position error to target pitch. Inner loop maps pitch error to motor
+          velocity.</div>
+      </div>
+      <div class="nav">
+        <a href="/">Telemetry</a>
+        <a href="/motor">Motor Control</a>
+        <div class="status pending" id="wsStatus">Connecting...</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Live Controller State</h2>
+      <div class="state-grid">
+        <div class="state-card">
+          <div class="state-label">Position</div>
+          <div class="state-value" id="statePosition">--</div>
+        </div>
+        <div class="state-card">
+          <div class="state-label">Pitch</div>
+          <div class="state-value" id="statePitch">--</div>
+        </div>
+        <div class="state-card">
+          <div class="state-label">Target Pitch</div>
+          <div class="state-value" id="stateTargetPitch">--</div>
+        </div>
+        <div class="state-card">
+          <div class="state-label">Velocity Cmd</div>
+          <div class="state-value" id="stateVelocityCmd">--</div>
+        </div>
+      </div>
+      <div class="status-line" id="liveStatus">Waiting for controller telemetry...</div>
+    </section>
+
+    <section class="panel">
+      <h2>Cascaded PID Gains</h2>
+      <div class="tuning-grid">
+        <div class="loop-card">
+          <h3>Position Loop</h3>
+          <p>Controls target pitch so the average motor position converges to the target position.</p>
+          <div class="field-grid">
+            <div class="field">
+              <label for="positionKp">Kp</label>
+              <input id="positionKp" type="number" step="0.001" value="0.1">
+            </div>
+            <div class="field">
+              <label for="positionKi">Ki</label>
+              <input id="positionKi" type="number" step="0.001" value="0.001">
+            </div>
+            <div class="field">
+              <label for="positionKd">Kd</label>
+              <input id="positionKd" type="number" step="0.001" value="0.001">
+            </div>
+          </div>
+        </div>
+
+        <div class="loop-card">
+          <h3>Pitch Loop</h3>
+          <p>Controls motor velocity so the measured pitch tracks the target pitch from the outer loop.</p>
+          <div class="field-grid">
+            <div class="field">
+              <label for="pitchKp">Kp</label>
+              <input id="pitchKp" type="number" step="0.001" value="10">
+            </div>
+            <div class="field">
+              <label for="pitchKi">Ki</label>
+              <input id="pitchKi" type="number" step="0.001" value="0">
+            </div>
+            <div class="field">
+              <label for="pitchKd">Kd</label>
+              <input id="pitchKd" type="number" step="0.001" value="10">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="applyBtn" type="button">Apply Gains</button>
+        <button class="secondary" id="loadLiveBtn" type="button">Load Live Values</button>
+      </div>
+      <div class="status-line" id="tuneStatus">Ready</div>
+    </section>
+
+    <section class="panel">
+      <h2>Notes</h2>
+      <div class="note">Only the six PID gains are tuned here. The controller target position remains fixed in
+        firmware, and incoming telemetry will keep this page aligned with the values currently running on the device.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const wsStatus = document.getElementById("wsStatus");
+    const liveStatus = document.getElementById("liveStatus");
+    const tuneStatus = document.getElementById("tuneStatus");
+
+    const positionKp = document.getElementById("positionKp");
+    const positionKi = document.getElementById("positionKi");
+    const positionKd = document.getElementById("positionKd");
+    const pitchKp = document.getElementById("pitchKp");
+    const pitchKi = document.getElementById("pitchKi");
+    const pitchKd = document.getElementById("pitchKd");
+    const applyBtn = document.getElementById("applyBtn");
+    const loadLiveBtn = document.getElementById("loadLiveBtn");
+
+    const statePosition = document.getElementById("statePosition");
+    const statePitch = document.getElementById("statePitch");
+    const stateTargetPitch = document.getElementById("stateTargetPitch");
+    const stateVelocityCmd = document.getElementById("stateVelocityCmd");
+
+    const gainInputs = [
+      positionKp,
+      positionKi,
+      positionKd,
+      pitchKp,
+      pitchKi,
+      pitchKd,
+    ];
+
+    let ws = null;
+    let reconnectTimer = null;
+    let latestController = null;
+    let hydratedFromTelemetry = false;
+
+    function setStatus(text, mode) {
+      wsStatus.textContent = text;
+      wsStatus.className = "status " + mode;
+    }
+
+    function wsReady() {
+      return ws && ws.readyState === WebSocket.OPEN;
+    }
+
+    function setTuneStatus(text) {
+      tuneStatus.textContent = text;
+    }
+
+    function setLiveStatus(text) {
+      liveStatus.textContent = text;
+    }
+
+    function formatValue(value, digits) {
+      if (!Number.isFinite(value)) {
+        return "--";
+      }
+      return value.toFixed(digits);
+    }
+
+    function readFloatInput(input, fallbackValue) {
+      const parsed = Number(input.value);
+      if (!Number.isFinite(parsed)) {
+        return fallbackValue;
+      }
+      return parsed;
+    }
+
+    function readConfigFromForm() {
+      return {
+        position: {
+          kp: readFloatInput(positionKp, 0),
+          ki: readFloatInput(positionKi, 0),
+          kd: readFloatInput(positionKd, 0),
+        },
+        pitch: {
+          kp: readFloatInput(pitchKp, 0),
+          ki: readFloatInput(pitchKi, 0),
+          kd: readFloatInput(pitchKd, 0),
+        },
+      };
+    }
+
+    function syncFormFromConfig(config) {
+      if (!config || !config.position || !config.pitch) {
+        return;
+      }
+      positionKp.value = String(config.position.kp);
+      positionKi.value = String(config.position.ki);
+      positionKd.value = String(config.position.kd);
+      pitchKp.value = String(config.pitch.kp);
+      pitchKi.value = String(config.pitch.ki);
+      pitchKd.value = String(config.pitch.kd);
+    }
+
+    function sendMessage(payload) {
+      if (!wsReady()) {
+        return false;
+      }
+      ws.send(JSON.stringify(payload));
+      return true;
+    }
+
+    function applyGains() {
+      const config = readConfigFromForm();
+      syncFormFromConfig(config);
+      const ok = sendMessage({
+        type: "cascaded_pid_config",
+        config,
+      });
+      if (!ok) {
+        setTuneStatus("WebSocket is not connected");
+        return;
+      }
+      setTuneStatus("Sent cascaded PID gains");
+    }
+
+    function loadLiveValues() {
+      if (!latestController || !latestController.parameters) {
+        setTuneStatus("No live controller data received yet");
+        return;
+      }
+      syncFormFromConfig(latestController.parameters);
+      setTuneStatus("Loaded gains from live controller telemetry");
+    }
+
+    function updateLiveState(controller) {
+      latestController = controller;
+      statePosition.textContent = formatValue(controller.position, 2);
+      statePitch.textContent = formatValue(controller.pitch_deg, 2);
+      stateTargetPitch.textContent = formatValue(controller.target_pitch_deg, 2);
+      stateVelocityCmd.textContent = formatValue(controller.velocity_command, 2);
+      setLiveStatus("Live controller telemetry is streaming");
+
+      if (!hydratedFromTelemetry && controller.parameters) {
+        syncFormFromConfig(controller.parameters);
+        hydratedFromTelemetry = true;
+        setTuneStatus("Loaded running PID gains");
+      }
+    }
+
+    applyBtn.addEventListener("click", () => {
+      applyGains();
+    });
+
+    loadLiveBtn.addEventListener("click", () => {
+      loadLiveValues();
+    });
+
+    gainInputs.forEach((input) => {
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          applyGains();
+        }
+      });
+    });
+
+    function scheduleReconnect() {
+      if (reconnectTimer !== null) {
+        return;
+      }
+      reconnectTimer = setTimeout(() => {
+        reconnectTimer = null;
+        connectWebSocket();
+      }, 1200);
+    }
+
+    function connectWebSocket() {
+      setStatus("Connecting...", "pending");
+      const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+      ws = new WebSocket(protocol + "://" + window.location.host + "/ws");
+
+      ws.addEventListener("open", () => {
+        setStatus("Connected", "online");
+        setTuneStatus("Connected");
+      });
+
+      ws.addEventListener("message", (event) => {
+        let message = null;
+        try {
+          message = JSON.parse(event.data);
+        } catch (_error) {
+          return;
+        }
+
+        if (message && message.controller && message.controller.type === "cascaded_pid") {
+          updateLiveState(message.controller);
+        }
+      });
+
+      ws.addEventListener("close", () => {
+        setStatus("Disconnected, retrying...", "offline");
+        setLiveStatus("Controller telemetry disconnected");
+        setTuneStatus("Disconnected");
+        scheduleReconnect();
+      });
+
+      ws.addEventListener("error", () => {
+        setStatus("Socket error", "offline");
+        setTuneStatus("Socket error");
+        if (ws && ws.readyState <= 1) {
+          ws.close();
+        }
+      });
+    }
+
+    connectWebSocket();
+  </script>
+</body>
+
+</html>
