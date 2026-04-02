@@ -40,7 +40,9 @@ float CascadedPidController::update(const ControllerState &state)
     const float dt_s = static_cast<float>(state.timestamp_us - last_timestamp_us_) / 1'000'000.0f;
     last_timestamp_us_ = state.timestamp_us;
 
-    const float target_pitch_deg = std::clamp(position_controller_.update(target_position_, state.position, dt_s),
+    // The current IMU pitch sign and motor position sign require the outer-loop
+    // correction to request the opposite body lean.
+    const float target_pitch_deg = std::clamp(-position_controller_.update(target_position_, state.position, dt_s),
                                               -max_target_pitch_deg_,
                                               max_target_pitch_deg_);
     const float velocity_command = std::clamp(pitch_controller_.update(target_pitch_deg, state.pitch_deg, dt_s),

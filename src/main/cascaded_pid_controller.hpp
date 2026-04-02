@@ -27,7 +27,7 @@ class CascadedPidController : public Controller
 public:
     CascadedPidController(CascadedPidParameters parameters,
                           float max_target_pitch_deg = 12.0f,
-                          float max_velocity_command = 50.0f);
+                          float max_velocity_command = 200.0f);
 
     ControllerType type() const override;
     float update(const ControllerState &state) override;
@@ -48,7 +48,7 @@ private:
     PIDController pitch_controller_;
     float target_position_ = 0.0f;
     float max_target_pitch_deg_ = 12.0f;
-    float max_velocity_command_ = 50.0f;
+    float max_velocity_command_ = 200.0f;
     uint64_t last_timestamp_us_ = 0;
     CascadedPidSnapshot snapshot_ = {};
 };

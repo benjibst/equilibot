@@ -701,6 +701,10 @@ namespace tmc5240
                 return __builtin_bswap32(*reinterpret_cast<uint32_t *>(buf + 4));
             return *reinterpret_cast<uint32_t *>(buf + 4);
         }
+        int32_t spayload()
+        {
+            return static_cast<int32_t>(payload());
+        }
         uint8_t &status()
         {
             return buf[3];
@@ -718,7 +722,7 @@ namespace tmc5240
         int device_id() { return this->dev_id; };
         esp_err_t set_velocity(float rpm);
         esp_err_t set_spreadcycle_config(uint8_t toff, uint8_t tbl, uint8_t hstart, uint8_t hend);
-        esp_err_t get_position(int32_t &position);
+        esp_err_t get_position(float &position);
 
     private:
         esp_err_t config_current();

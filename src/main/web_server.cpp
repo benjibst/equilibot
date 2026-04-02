@@ -4,12 +4,14 @@
 #include "esp_log.h"
 #include "esp_timer.h"
 #include "esp_wifi.h"
+#include "nvs.h"
 #include "nvs_flash.h"
 #include <cmath>
 #include <array>
 #include <cassert>
 #include <cstring>
 #include <nlohmann/json.hpp>
+#include <type_traits>
 #include <utility>
 #include "util.hpp"
 
@@ -19,6 +21,8 @@ namespace
     constexpr char AP_PASSWORD[] = "equilibot123";
     constexpr uint8_t WIFI_CHANNEL = 1;
     constexpr uint8_t WIFI_MAX_CONNECTIONS = 4;
+    constexpr char kControllerNvsNamespace[] = "controller";
+    constexpr char kCascadedPidParamsKey[] = "casc_pid";
 
     extern const uint8_t index_html_start[] asm("_binary_index_html_start");
     extern const uint8_t index_html_end[] asm("_binary_index_html_end");
@@ -145,6 +149,19 @@ namespace
                json_number_to_float(object, "kd", gains.kd);
     }
 
+    bool is_valid_pid_gains(const PidGains &gains)
+    {
+        return std::isfinite(gains.kp) &&
+               std::isfinite(gains.ki) &&
+               std::isfinite(gains.kd);
+    }
+
+    bool is_valid_cascaded_pid_parameters(const CascadedPidParameters &parameters)
+    {
+        return is_valid_pid_gains(parameters.position) &&
+               is_valid_pid_gains(parameters.pitch);
+    }
+
     esp_err_t parse_cascaded_pid_parameters_json(const nlohmann::json &message,
                                                  CascadedPidParameters &parameters)
     {
@@ -170,6 +187,65 @@ namespace
         }
 
         return ESP_OK;
+    }
+
+    esp_err_t load_cascaded_pid_parameters_from_nvs(CascadedPidParameters &parameters)
+    {
+        static_assert(std::is_trivially_copyable_v<CascadedPidParameters>);
+
+        nvs_handle_t handle = 0;
+        esp_err_t err = nvs_open(kControllerNvsNamespace, NVS_READONLY, &handle);
+        if (err != ESP_OK)
+        {
+            return err;
+        }
+
+        CascadedPidParameters loaded = {};
+        size_t loaded_size = sizeof(loaded);
+        err = nvs_get_blob(handle, kCascadedPidParamsKey, &loaded, &loaded_size);
+        nvs_close(handle);
+        if (err != ESP_OK)
+        {
+            return err;
+        }
+
+        if (loaded_size != sizeof(loaded))
+        {
+            return ESP_ERR_NVS_INVALID_LENGTH;
+        }
+
+        if (!is_valid_cascaded_pid_parameters(loaded))
+        {
+            return ESP_ERR_INVALID_STATE;
+        }
+
+        parameters = loaded;
+        return ESP_OK;
+    }
+
+    esp_err_t save_cascaded_pid_parameters_to_nvs(const CascadedPidParameters &parameters)
+    {
+        static_assert(std::is_trivially_copyable_v<CascadedPidParameters>);
+
+        if (!is_valid_cascaded_pid_parameters(parameters))
+        {
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        nvs_handle_t handle = 0;
+        esp_err_t err = nvs_open(kControllerNvsNamespace, NVS_READWRITE, &handle);
+        if (err != ESP_OK)
+        {
+            return err;
+        }
+
+        err = nvs_set_blob(handle, kCascadedPidParamsKey, &parameters, sizeof(parameters));
+        if (err == ESP_OK)
+        {
+            err = nvs_commit(handle);
+        }
+        nvs_close(handle);
+        return err;
     }
 } // namespace
 
@@ -198,6 +274,18 @@ esp_err_t WebServer::start()
     if (err != ESP_OK)
     {
         return err;
+    }
+
+    CascadedPidParameters persisted_parameters = {};
+    const esp_err_t load_pid_err = load_cascaded_pid_parameters_from_nvs(persisted_parameters);
+    if (load_pid_err == ESP_OK)
+    {
+        controller_.set_parameters(persisted_parameters);
+        LOG_I("Loaded cascaded PID config from NVS");
+    }
+    else if (load_pid_err != ESP_ERR_NVS_NOT_FOUND)
+    {
+        LOG_W("Failed loading cascaded PID config from NVS: %s", esp_err_to_name(load_pid_err));
     }
 
     err = init_softap();
@@ -496,7 +584,16 @@ esp_err_t WebServer::handle_ws_request(httpd_req_t *request)
         }
 
         controller_.set_parameters(parameters);
-        LOG_I("Applied cascaded PID config over websocket");
+        const esp_err_t save_err = save_cascaded_pid_parameters_to_nvs(parameters);
+        if (save_err != ESP_OK)
+        {
+            LOG_W("Applied cascaded PID config over websocket but failed saving to NVS: %s",
+                  esp_err_to_name(save_err));
+        }
+        else
+        {
+            LOG_I("Applied cascaded PID config over websocket and saved to NVS");
+        }
     }
 
     return ESP_OK;

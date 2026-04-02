@@ -60,7 +60,7 @@ extern "C" void app_main(void)
             .pitch_rate_deg_s = sample.gyro[1],
             .timestamp_us = sample.ts_us,
         };
-        int32_t motor_positions[2] = {};
+        float motor_positions[2] = {};
         const bool have_motor_position = mot1.get_position(motor_positions[0]) == ESP_OK &&
                                          mot2.get_position(motor_positions[1]) == ESP_OK;
         if (have_motor_position)

@@ -10,6 +10,7 @@ namespace tmc5240
 {
     static constexpr int microstep_res = 256;
     static constexpr int steps_per_rot = 200;
+    static constexpr int microsteps_per_rot = microstep_res * steps_per_rot;
     static constexpr float microsteps_per_rpm = microstep_res * steps_per_rot / 60.0f;
     TMC5240::TMC5240(SpiBus &spi_bus, gpio_num_t en_pin, gpio_num_t cs_pin, int device_id, float rref_kohm, float motor_current_rms)
         : spi_bus(spi_bus), dev_id(device_id), rref_kohm(rref_kohm), motor_current_rms(motor_current_rms)
@@ -95,6 +96,11 @@ namespace tmc5240
         write(GLOBAL_SCALER().set_field(GLOBAL_SCALER::globalscaler, globalscaler));
 
         write(GCONF().set_field(GCONF::en_pwm_mode, 0));
+
+        ReadDatagram rx_data;
+        read_reg<IHOLD_IRUN>(rx_data);
+        IHOLD_IRUN ihold_irun{rx_data.payload()};
+        ihold_irun.set_field(IHOLD_IRUN::irun, 20).set_field(IHOLD_IRUN::ihold, 10);
 
         LOG_I("Current configuration parameters: Rref=%fkOhms  Irms=%fA", rref_kohm, motor_current_rms);
         LOG_I("Current range: %d -> Ifs: %f", drv_conf, ifs_rms);
@@ -201,7 +207,6 @@ namespace tmc5240
 
     esp_err_t TMC5240::config_spreadcycle()
     {
-
         update_field<GCONF>(GCONF::en_pwm_mode, 0);
         return set_spreadcycle_config(5, 2, 0, 0);
     }
@@ -232,11 +237,12 @@ namespace tmc5240
         return ESP_OK;
     }
 
-    esp_err_t TMC5240::get_position(int32_t &position)
+    esp_err_t TMC5240::get_position(float &position)
     {
         ReadDatagram rx;
         ESP_RETURN_ON_ERROR(read_reg<XACTUAL>(rx), kTag, "Failed reading XACTUAL");
-        position = static_cast<int32_t>(rx.payload());
+        int32_t xactual = static_cast<int32_t>(XACTUAL::xactual.read_from(rx.payload()));
+        position = static_cast<float>(xactual) / static_cast<float>(steps_per_rot);
         return ESP_OK;
     }
 
